@@ -1,0 +1,922 @@
+# 基础通用配置
+mixed-port: 7890
+allow-lan: true
+mode: rule
+log-level: info
+ipv6: false
+
+# ---------------------------------------------------
+# 1. 定义代理供应商（自动拉取你的两个订阅链接）
+# ---------------------------------------------------
+proxy-providers:
+  Provider_A:
+    type: http
+    url: "https://sub.iplcsub20241025.top/qC8zV8qS1kB1lX2u/NXy2N9NFBWZrEcio?clash=1" # 对应 Clash_1765...
+    interval: 3600
+    path: ./provider_a.yaml
+    health-check:
+      enable: true
+      interval: 600
+      url: http://www.gstatic.com/generate_204
+  Provider_B:
+    type: http
+    url: "https://subscription.riolu.link/RioLU/system/api/v1/client/subscribe?token=a5dbbf3cfc45326d3f7721c095fcc0d8" # 对应 RioLU.443...
+    interval: 3600
+    path: ./provider_b.yaml
+    health-check:
+      enable: true
+      interval: 600
+      url: http://www.gstatic.com/generate_204
+      
+ dns:
+  enable: true
+  ipv6: false
+  listen: 127.0.0.1:1053
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  use-hosts: true
+
+  # 用来引导解析 DoH 域名本身（bootstrap）
+  default-nameserver:
+    - 223.5.5.5         # 阿里
+    - 119.29.29.29      # 腾讯
+
+  # **国内域名**默认用本地/国内明文 DNS
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 180.76.76.76      # 百度（可选）
+
+  # **国外域名**触发 fallback，走加密 DoH
+  fallback:
+    - https://dns.alidns.com/dns-query   # 主 DoH
+    - https://1.12.12.12/dns-query       # 备 DoH（腾讯）
+    - tls://223.6.6.6:853              # 如需 DoT 可保留
+
+  # 让 **代理服务器域名解析** 也走加密解析
+  proxy-server-nameserver:
+    - https://dns.alidns.com/dns-query
+
+  # 过滤条件：非中国 → 用 fallback（= 上面的 DoH）
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    geosite:
+      - gfw
+      - geolocation-!cn
+    ipcidr:
+      - 240.0.0.0/4
+      # 需要的话可再加一些保留段/国外段
+
+  # （可选但推荐，Mihomo支持）
+  # 明确指定：所有“非中国站点集合”都直接用 DoH 解析
+  nameserver-policy:
+    'geosite:geolocation-!cn': ['https://dns.alidns.com/dns-query']
+
+profile:
+  store-selected: true
+
+mode: rule
+
+proxy-groups:
+  - name: ?? AI节点
+    type: url-test
+    include-all: true
+    filter: "(US|美|英|UK|加拿)"
+    url: http://www.gstatic.com/generate_204
+    interval: 3000
+    tolerance: 50
+
+  - name: ?? 自动最快
+    type: url-test
+    include-all: true
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  - name: ?? 国外流量
+    type: select
+    proxies:
+      - ?? 自动最快
+      - DIRECT
+
+  - name: ??Direct
+    type: select
+    proxies:
+      - DIRECT
+ 
+rules:
+  - DOMAIN,browser-intake-datadoghq.com,?? AI节点
+  - DOMAIN,chat.openai.com.cdn.cloudflare.net,?? AI节点
+  - DOMAIN,gemini.google.com,?? AI节点
+  - DOMAIN,openai-api.arkoselabs.com,?? AI节点
+  - DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,?? AI节点
+  - DOMAIN,openaicomproductionae4b.blob.core.windows.net,?? AI节点
+  - DOMAIN,production-openaicom-storage.azureedge.net,?? AI节点
+  - DOMAIN,static.cloudflareinsights.com,?? AI节点
+  - DOMAIN-SUFFIX,?? AI节点.com,?? AI节点
+  - DOMAIN-SUFFIX,algolia.net,?? AI节点
+  - DOMAIN-SUFFIX,api.statsig.com,?? AI节点
+  - DOMAIN-SUFFIX,auth0.com,?? AI节点
+  - DOMAIN-SUFFIX,chatgpt.com,?? AI节点
+  - DOMAIN-SUFFIX,chatgpt.livekit.cloud,?? AI节点
+  - DOMAIN-SUFFIX,client-api.arkoselabs.com,?? AI节点
+  - DOMAIN-SUFFIX,events.statsigapi.net,?? AI节点
+  - DOMAIN-SUFFIX,featuregates.org,?? AI节点
+  - DOMAIN-SUFFIX,host.livekit.cloud,?? AI节点
+  - DOMAIN-SUFFIX,identrust.com,?? AI节点
+  - DOMAIN-SUFFIX,intercom.io,?? AI节点
+  - DOMAIN-SUFFIX,intercomcdn.com,?? AI节点
+  - DOMAIN-SUFFIX,launchdarkly.com,?? AI节点
+  - DOMAIN-SUFFIX,oaistatic.com,?? AI节点
+  - DOMAIN-SUFFIX,oaiusercontent.com,?? AI节点
+  - DOMAIN-SUFFIX,observeit.net,?? AI节点
+  - DOMAIN-SUFFIX,openai.com,?? AI节点
+  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net,?? AI节点
+  - DOMAIN-SUFFIX,openaicom.imgix.net,?? AI节点
+  - DOMAIN-SUFFIX,segment.io,?? AI节点
+  - DOMAIN-SUFFIX,sentry.io,?? AI节点
+  - DOMAIN-SUFFIX,stripe.com,?? AI节点
+  - DOMAIN-SUFFIX,turn.livekit.cloud,?? AI节点
+  - DOMAIN-KEYWORD,openai,?? AI节点
+  - IP-CIDR,24.199.123.28/32,?? AI节点,no-resolve
+  - IP-CIDR,64.23.132.171/32,?? AI节点,no-resolve
+  - DOMAIN,cdn.usefathom.com,?? AI节点
+  - DOMAIN-SUFFIX,anthropic.com,?? AI节点
+  - DOMAIN-SUFFIX,claude.ai,?? AI节点
+  - DOMAIN,?? AI节点.google.dev,?? AI节点
+  - DOMAIN,alkalimakersuite-pa.clients6.google.com,?? AI节点
+  - DOMAIN,generativelanguage.googleapis.com,?? AI节点
+  - DOMAIN,makersuite.google.com,?? AI节点
+  - DOMAIN-SUFFIX,bard.google.com,?? AI节点
+  - DOMAIN-SUFFIX,deepmind.com,?? AI节点
+  - DOMAIN-SUFFIX,deepmind.google,?? AI节点
+  - DOMAIN-SUFFIX,gemini.google.com,?? AI节点
+  - DOMAIN-SUFFIX,generativeai.google,?? AI节点
+  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,?? AI节点
+  - DOMAIN,?? AI节点.google.dev,?? AI节点
+  - DOMAIN,alkalimakersuite-pa.clients6.google.com,?? AI节点
+  - DOMAIN,makersuite.google.com,?? AI节点
+  - DOMAIN-SUFFIX,bard.google.com,?? AI节点
+  - DOMAIN-SUFFIX,deepmind.com,?? AI节点
+  - DOMAIN-SUFFIX,deepmind.google,?? AI节点
+  - DOMAIN-SUFFIX,gemini.google.com,?? AI节点
+  - DOMAIN-SUFFIX,generativeai.google,?? AI节点
+  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,?? AI节点
+  - DOMAIN-SUFFIX,apis.google.com,?? AI节点
+  - DOMAIN-KEYWORD,colab,?? AI节点
+  - DOMAIN-KEYWORD,developerprofiles,?? AI节点
+  - DOMAIN-KEYWORD,generativelanguage,?? AI节点
+  - DOMAIN,api.msn.com,?? AI节点
+  - DOMAIN,api.statsig.com,?? AI节点
+  - DOMAIN,assets.msn.com,?? AI节点
+  - DOMAIN,browser-intake-datadoghq.com,?? AI节点
+  - DOMAIN,chat.openai.com.cdn.cloudflare.net,?? AI节点
+  - DOMAIN,copilot.microsoft.com,?? AI节点
+  - DOMAIN,gateway.bingviz.microsoft.net,?? AI节点
+  - DOMAIN,gateway.bingviz.microsoftapp.net,?? AI节点
+  - DOMAIN,in.appcenter.ms,?? AI节点
+  - DOMAIN,location.microsoft.com,?? AI节点
+  - DOMAIN,odc.officeapps.live.com,?? AI节点
+  - DOMAIN,openai-api.arkoselabs.com,?? AI节点
+  - DOMAIN,openaicomproductionae4b.blob.core.windows.net,?? AI节点
+  - DOMAIN,production-openaicom-storage.azureedge.net,?? AI节点
+  - DOMAIN,r.bing.com,?? AI节点
+  - DOMAIN,self.events.data.microsoft.com,?? AI节点
+  - DOMAIN,services.bingapis.com,?? AI节点
+  - DOMAIN,static.cloudflareinsights.com,?? AI节点
+  - DOMAIN,sydney.bing.com,?? AI节点
+  - DOMAIN,www.bing.com,?? AI节点
+  - DOMAIN-SUFFIX,algolia.net,?? AI节点
+  - DOMAIN-SUFFIX,api.microsoftapp.net,?? AI节点
+  - DOMAIN-SUFFIX,auth0.com,?? AI节点
+  - DOMAIN-SUFFIX,bing-shopping.microsoft-falcon.io,?? AI节点
+  - DOMAIN-SUFFIX,challenges.cloudflare.com,?? AI节点
+  - DOMAIN-SUFFIX,chatgpt.com,?? AI节点
+  - DOMAIN-SUFFIX,chatgpt.livekit.cloud,?? AI节点
+  - DOMAIN-SUFFIX,client-api.arkoselabs.com,?? AI节点
+  - DOMAIN-SUFFIX,edgeservices.bing.com,?? AI节点
+  - DOMAIN-SUFFIX,events.statsigapi.net,?? AI节点
+  - DOMAIN-SUFFIX,featuregates.org,?? AI节点
+  - DOMAIN-SUFFIX,host.livekit.cloud,?? AI节点
+  - DOMAIN-SUFFIX,identrust.com,?? AI节点
+  - DOMAIN-SUFFIX,intercom.io,?? AI节点
+  - DOMAIN-SUFFIX,intercomcdn.com,?? AI节点
+  - DOMAIN-SUFFIX,launchdarkly.com,?? AI节点
+  - DOMAIN-SUFFIX,oaistatic.com,?? AI节点
+  - DOMAIN-SUFFIX,oaiusercontent.com,?? AI节点
+  - DOMAIN-SUFFIX,observeit.net,?? AI节点
+  - DOMAIN-SUFFIX,openai.com,?? AI节点
+  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net,?? AI节点
+  - DOMAIN-SUFFIX,openaicom.imgix.net,?? AI节点
+  - DOMAIN-SUFFIX,segment.io,?? AI节点
+  - DOMAIN-SUFFIX,sentry.io,?? AI节点
+  - DOMAIN-SUFFIX,stripe.com,?? AI节点
+  - DOMAIN-SUFFIX,turn.livekit.cloud,?? AI节点
+  - DOMAIN-KEYWORD,openaicom-api,?? AI节点
+  - IP-CIDR,24.199.123.28/32,?? AI节点,no-resolve
+  - IP-CIDR,64.23.132.171/32,?? AI节点,no-resolve
+    - DOMAIN-SUFFIX,ampproject.org,?? 自动最快
+  - DOMAIN-SUFFIX,appspot.com,?? 自动最快
+  - DOMAIN-SUFFIX,blogger.com,?? 自动最快
+  - DOMAIN-SUFFIX,getoutline.org,?? 自动最快
+  - DOMAIN-SUFFIX,gvt0.com,?? 自动最快
+  - DOMAIN-SUFFIX,gvt1.com,?? 自动最快
+  - DOMAIN-SUFFIX,gvt3.com,?? 自动最快
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,?? 自动最快
+  - DOMAIN-KEYWORD,google,?? 自动最快
+  - DOMAIN-KEYWORD,blogspot,?? 自动最快
+  - DOMAIN-SUFFIX,onedrive.live.com,?? 自动最快
+  - DOMAIN-SUFFIX,xboxlive.com,?? 自动最快
+  - DOMAIN-SUFFIX,cdninstagram.com,?? 自动最快
+  - DOMAIN-SUFFIX,fb.com,?? 自动最快
+  - DOMAIN-SUFFIX,fb.me,?? 自动最快
+  - DOMAIN-SUFFIX,fbaddins.com,?? 自动最快
+  - DOMAIN-SUFFIX,fbcdn.net,?? 自动最快
+  - DOMAIN-SUFFIX,fbsbx.com,?? 自动最快
+  - DOMAIN-SUFFIX,fbworkmail.com,?? 自动最快
+  - DOMAIN-SUFFIX,instagram.com,?? 自动最快
+  - DOMAIN-SUFFIX,m.me,?? 自动最快
+  - DOMAIN-SUFFIX,messenger.com,?? 自动最快
+  - DOMAIN-SUFFIX,oculus.com,?? 自动最快
+  - DOMAIN-SUFFIX,oculuscdn.com,?? 自动最快
+  - DOMAIN-SUFFIX,rocksdb.org,?? 自动最快
+  - DOMAIN-SUFFIX,whatsapp.com,?? 自动最快
+  - DOMAIN-SUFFIX,whatsapp.net,?? 自动最快
+  - DOMAIN-SUFFIX,microsoft.com,?? 自动最快
+  - DOMAIN-SUFFIX,s-microsoft.com,?? 自动最快
+  - DOMAIN,officecdn-microsoft-com.akamaized.net,?? 自动最快
+  - DOMAIN-SUFFIX,copilot.microsoft.com,?? 自动最快
+  - DOMAIN-KEYWORD,facebook,?? 自动最快
+  - IP-CIDR,3.123.36.126/32,?? 自动最快,no-resolve
+  - IP-CIDR,35.157.215.84/32,?? 自动最快,no-resolve
+  - IP-CIDR,35.157.217.255/32,?? 自动最快,no-resolve
+  - IP-CIDR,52.58.209.134/32,?? 自动最快,no-resolve
+  - IP-CIDR,54.93.124.31/32,?? 自动最快,no-resolve
+  - IP-CIDR,54.162.243.80/32,?? 自动最快,no-resolve
+  - IP-CIDR,54.173.34.141/32,?? 自动最快,no-resolve
+  - IP-CIDR,54.235.23.242/32,?? 自动最快,no-resolve
+  - IP-CIDR,169.45.248.118/32,?? 自动最快,no-resolve
+  - DOMAIN-SUFFIX,pscp.tv,?? 自动最快
+  - DOMAIN-SUFFIX,periscope.tv,?? 自动最快
+  - DOMAIN-SUFFIX,t.co,?? 自动最快
+  - DOMAIN-SUFFIX,twimg.co,?? 自动最快
+  - DOMAIN-SUFFIX,twimg.com,?? 自动最快
+  - DOMAIN-SUFFIX,twitpic.com,?? 自动最快
+  - DOMAIN-SUFFIX,vine.co,?? 自动最快
+  - DOMAIN-KEYWORD,twitter,?? 自动最快
+  - DOMAIN-SUFFIX,t.me,?? 自动最快
+  - DOMAIN-SUFFIX,tdesktop.com,?? 自动最快
+  - DOMAIN-SUFFIX,telegra.ph,?? 自动最快
+  - DOMAIN-SUFFIX,telegram.me,?? 自动最快
+  - DOMAIN-SUFFIX,telegram.org,?? 自动最快
+  - IP-CIDR,91.108.4.0/22,?? 自动最快,no-resolve
+  - IP-CIDR,91.108.8.0/22,?? 自动最快,no-resolve
+  - IP-CIDR,91.108.12.0/22,?? 自动最快,no-resolve
+  - IP-CIDR,91.108.16.0/22,?? 自动最快,no-resolve
+  - IP-CIDR,91.108.56.0/22,?? 自动最快,no-resolve
+  - IP-CIDR,149.154.160.0/20,?? 自动最快,no-resolve
+  - IP-CIDR6,2001:b28:f23d::/48,?? 自动最快,no-resolve
+  - IP-CIDR6,2001:b28:f23f::/48,?? 自动最快,no-resolve
+  - IP-CIDR6,2001:67c:4e8::/48,?? 自动最快,no-resolve
+  - DOMAIN-SUFFIX,line.me,?? 自动最快
+  - DOMAIN-SUFFIX,line-apps.com,?? 自动最快
+  - DOMAIN-SUFFIX,line-scdn.net,?? 自动最快
+  - DOMAIN-SUFFIX,naver.jp,?? 自动最快
+  - IP-CIDR,103.2.30.0/23,?? 自动最快,no-resolve
+  - IP-CIDR,125.209.208.0/20,?? 自动最快,no-resolve
+  - IP-CIDR,147.92.128.0/17,?? 自动最快,no-resolve
+  - IP-CIDR,203.104.144.0/21,?? 自动最快,no-resolve
+  - DOMAIN-SUFFIX,4shared.com,?? 自动最快
+  - DOMAIN-SUFFIX,520cc.cc,?? 自动最快
+  - DOMAIN-SUFFIX,881903.com,?? 自动最快
+  - DOMAIN-SUFFIX,9cache.com,?? 自动最快
+  - DOMAIN-SUFFIX,9gag.com,?? 自动最快
+  - DOMAIN-SUFFIX,abc.com,?? 自动最快
+  - DOMAIN-SUFFIX,abc.net.au,?? 自动最快
+  - DOMAIN-SUFFIX,abebooks.com,?? 自动最快
+  - DOMAIN-SUFFIX,amazon.co.jp,?? 自动最快
+  - DOMAIN-SUFFIX,apigee.com,?? 自动最快
+  - DOMAIN-SUFFIX,apk-dl.com,?? 自动最快
+  - DOMAIN-SUFFIX,apkfind.com,?? 自动最快
+  - DOMAIN-SUFFIX,apkmirror.com,?? 自动最快
+  - DOMAIN-SUFFIX,apkmonk.com,?? 自动最快
+  - DOMAIN-SUFFIX,apkpure.com,?? 自动最快
+  - DOMAIN-SUFFIX,aptoide.com,?? 自动最快
+  - DOMAIN-SUFFIX,archive.is,?? 自动最快
+  - DOMAIN-SUFFIX,archive.org,?? 自动最快
+  - DOMAIN-SUFFIX,arte.tv,?? 自动最快
+  - DOMAIN-SUFFIX,artstation.com,?? 自动最快
+  - DOMAIN-SUFFIX,arukas.io,?? 自动最快
+  - DOMAIN-SUFFIX,ask.com,?? 自动最快
+  - DOMAIN-SUFFIX,avg.com,?? 自动最快
+  - DOMAIN-SUFFIX,avgle.com,?? 自动最快
+  - DOMAIN-SUFFIX,badoo.com,?? 自动最快
+  - DOMAIN-SUFFIX,bandwagonhost.com,?? 自动最快
+  - DOMAIN-SUFFIX,bbc.com,?? 自动最快
+  - DOMAIN-SUFFIX,behance.net,?? 自动最快
+  - DOMAIN-SUFFIX,bibox.com,?? 自动最快
+  - DOMAIN-SUFFIX,biggo.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,binance.com,?? 自动最快
+  - DOMAIN-SUFFIX,bitcointalk.org,?? 自动最快
+  - DOMAIN-SUFFIX,bitfinex.com,?? 自动最快
+  - DOMAIN-SUFFIX,bitmex.com,?? 自动最快
+  - DOMAIN-SUFFIX,bit-z.com,?? 自动最快
+  - DOMAIN-SUFFIX,bloglovin.com,?? 自动最快
+  - DOMAIN-SUFFIX,bloomberg.cn,?? 自动最快
+  - DOMAIN-SUFFIX,bloomberg.com,?? 自动最快
+  - DOMAIN-SUFFIX,blubrry.com,?? 自动最快
+  - DOMAIN-SUFFIX,book.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,booklive.jp,?? 自动最快
+  - DOMAIN-SUFFIX,books.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,boslife.net,?? 自动最快
+  - DOMAIN-SUFFIX,box.com,?? 自动最快
+  - DOMAIN-SUFFIX,businessinsider.com,?? 自动最快
+  - DOMAIN-SUFFIX,bwh1.net,?? 自动最快
+  - DOMAIN-SUFFIX,castbox.fm,?? 自动最快
+  - DOMAIN-SUFFIX,cbc.ca,?? 自动最快
+  - DOMAIN-SUFFIX,cdw.com,?? 自动最快
+  - DOMAIN-SUFFIX,change.org,?? 自动最快
+  - DOMAIN-SUFFIX,channelnewsasia.com,?? 自动最快
+  - DOMAIN-SUFFIX,ck101.com,?? 自动最快
+  - DOMAIN-SUFFIX,clarionproject.org,?? 自动最快
+  - DOMAIN-SUFFIX,clyp.it,?? 自动最快
+  - DOMAIN-SUFFIX,cna.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,comparitech.com,?? 自动最快
+  - DOMAIN-SUFFIX,conoha.jp,?? 自动最快
+  - DOMAIN-SUFFIX,crucial.com,?? 自动最快
+  - DOMAIN-SUFFIX,cts.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,cw.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,cyberctm.com,?? 自动最快
+  - DOMAIN-SUFFIX,dailymotion.com,?? 自动最快
+  - DOMAIN-SUFFIX,dailyview.tw,?? 自动最快
+  - DOMAIN-SUFFIX,daum.net,?? 自动最快
+  - DOMAIN-SUFFIX,daumcdn.net,?? 自动最快
+  - DOMAIN-SUFFIX,dcard.tw,?? 自动最快
+  - DOMAIN-SUFFIX,deepdiscount.com,?? 自动最快
+  - DOMAIN-SUFFIX,depositphotos.com,?? 自动最快
+  - DOMAIN-SUFFIX,deviantart.com,?? 自动最快
+  - DOMAIN-SUFFIX,disconnect.me,?? 自动最快
+  - DOMAIN-SUFFIX,discordapp.com,?? 自动最快
+  - DOMAIN-SUFFIX,discordapp.net,?? 自动最快
+  - DOMAIN-SUFFIX,disqus.com,?? 自动最快
+  - DOMAIN-SUFFIX,dlercloud.com,?? 自动最快
+  - DOMAIN-SUFFIX,dns2go.com,?? 自动最快
+  - DOMAIN-SUFFIX,dowjones.com,?? 自动最快
+  - DOMAIN-SUFFIX,dropbox.com,?? 自动最快
+  - DOMAIN-SUFFIX,dropboxusercontent.com,?? 自动最快
+  - DOMAIN-SUFFIX,duckduckgo.com,?? 自动最快
+  - DOMAIN-SUFFIX,dw.com,?? 自动最快
+  - DOMAIN-SUFFIX,dynu.com,?? 自动最快
+  - DOMAIN-SUFFIX,earthcam.com,?? 自动最快
+  - DOMAIN-SUFFIX,ebookservice.tw,?? 自动最快
+  - DOMAIN-SUFFIX,economist.com,?? 自动最快
+  - DOMAIN-SUFFIX,edgecastcdn.net,?? 自动最快
+  - DOMAIN-SUFFIX,edu,?? 自动最快
+  - DOMAIN-SUFFIX,elpais.com,?? 自动最快
+  - DOMAIN-SUFFIX,enanyang.my,?? 自动最快
+  - DOMAIN-SUFFIX,encyclopedia.com,?? 自动最快
+  - DOMAIN-SUFFIX,esoir.be,?? 自动最快
+  - DOMAIN-SUFFIX,etherscan.io,?? 自动最快
+  - DOMAIN-SUFFIX,euronews.com,?? 自动最快
+  - DOMAIN-SUFFIX,evozi.com,?? 自动最快
+  - DOMAIN-SUFFIX,feedly.com,?? 自动最快
+  - DOMAIN-SUFFIX,firech.at,?? 自动最快
+  - DOMAIN-SUFFIX,flickr.com,?? 自动最快
+  - DOMAIN-SUFFIX,flitto.com,?? 自动最快
+  - DOMAIN-SUFFIX,foreignpolicy.com,?? 自动最快
+  - DOMAIN-SUFFIX,freebrowser.org,?? 自动最快
+  - DOMAIN-SUFFIX,freewechat.com,?? 自动最快
+  - DOMAIN-SUFFIX,freeweibo.com,?? 自动最快
+  - DOMAIN-SUFFIX,friday.tw,?? 自动最快
+  - DOMAIN-SUFFIX,ftchinese.com,?? 自动最快
+  - DOMAIN-SUFFIX,ftimg.net,?? 自动最快
+  - DOMAIN-SUFFIX,gate.io,?? 自动最快
+  - DOMAIN-SUFFIX,getlantern.org,?? 自动最快
+  - DOMAIN-SUFFIX,getsync.com,?? 自动最快
+  - DOMAIN-SUFFIX,globalvoices.org,?? 自动最快
+  - DOMAIN-SUFFIX,goo.ne.jp,?? 自动最快
+  - DOMAIN-SUFFIX,goodreads.com,?? 自动最快
+  - DOMAIN-SUFFIX,gov,?? 自动最快
+  - DOMAIN-SUFFIX,gov.tw,?? 自动最快
+  - DOMAIN-SUFFIX,greatfire.org,?? 自动最快
+  - DOMAIN-SUFFIX,gumroad.com,?? 自动最快
+  - DOMAIN-SUFFIX,hbg.com,?? 自动最快
+  - DOMAIN-SUFFIX,heroku.com,?? 自动最快
+  - DOMAIN-SUFFIX,hightail.com,?? 自动最快
+  - DOMAIN-SUFFIX,hk01.com,?? 自动最快
+  - DOMAIN-SUFFIX,hkbf.org,?? 自动最快
+  - DOMAIN-SUFFIX,hkbookcity.com,?? 自动最快
+  - DOMAIN-SUFFIX,hkej.com,?? 自动最快
+  - DOMAIN-SUFFIX,hket.com,?? 自动最快
+  - DOMAIN-SUFFIX,hkgolden.com,?? 自动最快
+  - DOMAIN-SUFFIX,hootsuite.com,?? 自动最快
+  - DOMAIN-SUFFIX,hudson.org,?? 自动最快
+  - DOMAIN-SUFFIX,hyread.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,ibtimes.com,?? 自动最快
+  - DOMAIN-SUFFIX,i-cable.com,?? 自动最快
+  - DOMAIN-SUFFIX,icij.org,?? 自动最快
+  - DOMAIN-SUFFIX,icoco.com,?? 自动最快
+  - DOMAIN-SUFFIX,imgur.com,?? 自动最快
+  - DOMAIN-SUFFIX,initiummall.com,?? 自动最快
+  - DOMAIN-SUFFIX,insecam.org,?? 自动最快
+  - DOMAIN-SUFFIX,ipfs.io,?? 自动最快
+  - DOMAIN-SUFFIX,issuu.com,?? 自动最快
+  - DOMAIN-SUFFIX,istockphoto.com,?? 自动最快
+  - DOMAIN-SUFFIX,japantimes.co.jp,?? 自动最快
+  - DOMAIN-SUFFIX,jiji.com,?? 自动最快
+  - DOMAIN-SUFFIX,jinx.com,?? 自动最快
+  - DOMAIN-SUFFIX,jkforum.net,?? 自动最快
+  - DOMAIN-SUFFIX,joinmastodon.org,?? 自动最快
+  - DOMAIN-SUFFIX,justmysocks.net,?? 自动最快
+  - DOMAIN-SUFFIX,justpaste.it,?? 自动最快
+  - DOMAIN-SUFFIX,kakao.com,?? 自动最快
+  - DOMAIN-SUFFIX,kakaocorp.com,?? 自动最快
+  - DOMAIN-SUFFIX,kik.com,?? 自动最快
+  - DOMAIN-SUFFIX,kobo.com,?? 自动最快
+  - DOMAIN-SUFFIX,kobobooks.com,?? 自动最快
+  - DOMAIN-SUFFIX,kodingen.com,?? 自动最快
+  - DOMAIN-SUFFIX,lemonde.fr,?? 自动最快
+  - DOMAIN-SUFFIX,lepoint.fr,?? 自动最快
+  - DOMAIN-SUFFIX,lihkg.com,?? 自动最快
+  - DOMAIN-SUFFIX,listennotes.com,?? 自动最快
+  - DOMAIN-SUFFIX,livestream.com,?? 自动最快
+  - DOMAIN-SUFFIX,logmein.com,?? 自动最快
+  - DOMAIN-SUFFIX,mail.ru,?? 自动最快
+  - DOMAIN-SUFFIX,mailchimp.com,?? 自动最快
+  - DOMAIN-SUFFIX,marc.info,?? 自动最快
+  - DOMAIN-SUFFIX,matters.news,?? 自动最快
+  - DOMAIN-SUFFIX,maying.co,?? 自动最快
+  - DOMAIN-SUFFIX,medium.com,?? 自动最快
+  - DOMAIN-SUFFIX,mega.nz,?? 自动最快
+  - DOMAIN-SUFFIX,mil,?? 自动最快
+  - DOMAIN-SUFFIX,mingpao.com,?? 自动最快
+  - DOMAIN-SUFFIX,mobile01.com,?? 自动最快
+  - DOMAIN-SUFFIX,myspace.com,?? 自动最快
+  - DOMAIN-SUFFIX,myspacecdn.com,?? 自动最快
+  - DOMAIN-SUFFIX,nanyang.com,?? 自动最快
+  - DOMAIN-SUFFIX,naver.com,?? 自动最快
+  - DOMAIN-SUFFIX,neowin.net,?? 自动最快
+  - DOMAIN-SUFFIX,newstapa.org,?? 自动最快
+  - DOMAIN-SUFFIX,nexitally.com,?? 自动最快
+  - DOMAIN-SUFFIX,nhk.or.jp,?? 自动最快
+  - DOMAIN-SUFFIX,nicovideo.jp,?? 自动最快
+  - DOMAIN-SUFFIX,nii.ac.jp,?? 自动最快
+  - DOMAIN-SUFFIX,nikkei.com,?? 自动最快
+  - DOMAIN-SUFFIX,nofile.io,?? 自动最快
+  - DOMAIN-SUFFIX,now.com,?? 自动最快
+  - DOMAIN-SUFFIX,nrk.no,?? 自动最快
+  - DOMAIN-SUFFIX,nyt.com,?? 自动最快
+  - DOMAIN-SUFFIX,nytchina.com,?? 自动最快
+  - DOMAIN-SUFFIX,nytcn.me,?? 自动最快
+  - DOMAIN-SUFFIX,nytco.com,?? 自动最快
+  - DOMAIN-SUFFIX,nytimes.com,?? 自动最快
+  - DOMAIN-SUFFIX,nytimg.com,?? 自动最快
+  - DOMAIN-SUFFIX,nytlog.com,?? 自动最快
+  - DOMAIN-SUFFIX,nytstyle.com,?? 自动最快
+  - DOMAIN-SUFFIX,ok.ru,?? 自动最快
+  - DOMAIN-SUFFIX,okex.com,?? 自动最快
+  - DOMAIN-SUFFIX,on.cc,?? 自动最快
+  - DOMAIN-SUFFIX,orientaldaily.com.my,?? 自动最快
+  - DOMAIN-SUFFIX,overcast.fm,?? 自动最快
+  - DOMAIN-SUFFIX,paltalk.com,?? 自动最快
+  - DOMAIN-SUFFIX,pao-pao.net,?? 自动最快
+  - DOMAIN-SUFFIX,parsevideo.com,?? 自动最快
+  - DOMAIN-SUFFIX,pbxes.com,?? 自动最快
+  - DOMAIN-SUFFIX,pcdvd.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,pchome.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,pcloud.com,?? 自动最快
+  - DOMAIN-SUFFIX,picacomic.com,?? 自动最快
+  - DOMAIN-SUFFIX,pinimg.com,?? 自动最快
+  - DOMAIN-SUFFIX,pixiv.net,?? 自动最快
+  - DOMAIN-SUFFIX,player.fm,?? 自动最快
+  - DOMAIN-SUFFIX,plurk.com,?? 自动最快
+  - DOMAIN-SUFFIX,po18.tw,?? 自动最快
+  - DOMAIN-SUFFIX,potato.im,?? 自动最快
+  - DOMAIN-SUFFIX,potatso.com,?? 自动最快
+  - DOMAIN-SUFFIX,prism-break.org,?? 自动最快
+  - DOMAIN-SUFFIX,proxifier.com,?? 自动最快
+  - DOMAIN-SUFFIX,pt.im,?? 自动最快
+  - DOMAIN-SUFFIX,pts.org.tw,?? 自动最快
+  - DOMAIN-SUFFIX,pubu.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,pubu.tw,?? 自动最快
+  - DOMAIN-SUFFIX,pureapk.com,?? 自动最快
+  - DOMAIN-SUFFIX,quora.com,?? 自动最快
+  - DOMAIN-SUFFIX,quoracdn.net,?? 自动最快
+  - DOMAIN-SUFFIX,rakuten.co.jp,?? 自动最快
+  - DOMAIN-SUFFIX,readingtimes.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,readmoo.com,?? 自动最快
+  - DOMAIN-SUFFIX,redbubble.com,?? 自动最快
+  - DOMAIN-SUFFIX,reddit.com,?? 自动最快
+  - DOMAIN-SUFFIX,redditmedia.com,?? 自动最快
+  - DOMAIN-SUFFIX,resilio.com,?? 自动最快
+  - DOMAIN-SUFFIX,reuters.com,?? 自动最快
+  - DOMAIN-SUFFIX,reutersmedia.net,?? 自动最快
+  - DOMAIN-SUFFIX,rfi.fr,?? 自动最快
+  - DOMAIN-SUFFIX,rixcloud.com,?? 自动最快
+  - DOMAIN-SUFFIX,roadshow.hk,?? 自动最快
+  - DOMAIN-SUFFIX,scmp.com,?? 自动最快
+  - DOMAIN-SUFFIX,scribd.com,?? 自动最快
+  - DOMAIN-SUFFIX,seatguru.com,?? 自动最快
+  - DOMAIN-SUFFIX,shadowsocks.org,?? 自动最快
+  - DOMAIN-SUFFIX,shopee.tw,?? 自动最快
+  - DOMAIN-SUFFIX,slideshare.net,?? 自动最快
+  - DOMAIN-SUFFIX,softfamous.com,?? 自动最快
+  - DOMAIN-SUFFIX,soundcloud.com,?? 自动最快
+  - DOMAIN-SUFFIX,ssrcloud.org,?? 自动最快
+  - DOMAIN-SUFFIX,startpage.com,?? 自动最快
+  - DOMAIN-SUFFIX,steamcommunity.com,?? 自动最快
+  - DOMAIN-SUFFIX,steemit.com,?? 自动最快
+  - DOMAIN-SUFFIX,steemitwallet.com,?? 自动最快
+  - DOMAIN-SUFFIX,t66y.com,?? 自动最快
+  - DOMAIN-SUFFIX,tapatalk.com,?? 自动最快
+  - DOMAIN-SUFFIX,teco-hk.org,?? 自动最快
+  - DOMAIN-SUFFIX,teco-mo.org,?? 自动最快
+  - DOMAIN-SUFFIX,teddysun.com,?? 自动最快
+  - DOMAIN-SUFFIX,textnow.me,?? 自动最快
+  - DOMAIN-SUFFIX,theguardian.com,?? 自动最快
+  - DOMAIN-SUFFIX,theinitium.com,?? 自动最快
+  - DOMAIN-SUFFIX,thetvdb.com,?? 自动最快
+  - DOMAIN-SUFFIX,tineye.com,?? 自动最快
+  - DOMAIN-SUFFIX,torproject.org,?? 自动最快
+  - DOMAIN-SUFFIX,tumblr.com,?? 自动最快
+  - DOMAIN-SUFFIX,turbobit.net,?? 自动最快
+  - DOMAIN-SUFFIX,tutanota.com,?? 自动最快
+  - DOMAIN-SUFFIX,tvboxnow.com,?? 自动最快
+  - DOMAIN-SUFFIX,udn.com,?? 自动最快
+  - DOMAIN-SUFFIX,unseen.is,?? 自动最快
+  - DOMAIN-SUFFIX,upmedia.mg,?? 自动最快
+  - DOMAIN-SUFFIX,uptodown.com,?? 自动最快
+  - DOMAIN-SUFFIX,urbandictionary.com,?? 自动最快
+  - DOMAIN-SUFFIX,ustream.tv,?? 自动最快
+  - DOMAIN-SUFFIX,uwants.com,?? 自动最快
+  - DOMAIN-SUFFIX,v2ray.com,?? 自动最快
+  - DOMAIN-SUFFIX,viber.com,?? 自动最快
+  - DOMAIN-SUFFIX,videopress.com,?? 自动最快
+  - DOMAIN-SUFFIX,vimeo.com,?? 自动最快
+  - DOMAIN-SUFFIX,voachinese.com,?? 自动最快
+  - DOMAIN-SUFFIX,voanews.com,?? 自动最快
+  - DOMAIN-SUFFIX,voxer.com,?? 自动最快
+  - DOMAIN-SUFFIX,vzw.com,?? 自动最快
+  - DOMAIN-SUFFIX,w3schools.com,?? 自动最快
+  - DOMAIN-SUFFIX,washingtonpost.com,?? 自动最快
+  - DOMAIN-SUFFIX,wattpad.com,?? 自动最快
+  - DOMAIN-SUFFIX,whoer.net,?? 自动最快
+  - DOMAIN-SUFFIX,wikimapia.org,?? 自动最快
+  - DOMAIN-SUFFIX,wikipedia.org,?? 自动最快
+  - DOMAIN-SUFFIX,wikiquote.org,?? 自动最快
+  - DOMAIN-SUFFIX,wikiwand.com,?? 自动最快
+  - DOMAIN-SUFFIX,winudf.com,?? 自动最快
+  - DOMAIN-SUFFIX,wire.com,?? 自动最快
+  - DOMAIN-SUFFIX,wordpress.com,?? 自动最快
+  - DOMAIN-SUFFIX,workflow.is,?? 自动最快
+  - DOMAIN-SUFFIX,worldcat.org,?? 自动最快
+  - DOMAIN-SUFFIX,wsj.com,?? 自动最快
+  - DOMAIN-SUFFIX,wsj.net,?? 自动最快
+  - DOMAIN-SUFFIX,xhamster.com,?? 自动最快
+  - DOMAIN-SUFFIX,xn--90wwvt03e.com,?? 自动最快
+  - DOMAIN-SUFFIX,xn--i2ru8q2qg.com,?? 自动最快
+  - DOMAIN-SUFFIX,xnxx.com,?? 自动最快
+  - DOMAIN-SUFFIX,xvideos.com,?? 自动最快
+  - DOMAIN-SUFFIX,yahoo.com,?? 自动最快
+  - DOMAIN-SUFFIX,yandex.ru,?? 自动最快
+  - DOMAIN-SUFFIX,ycombinator.com,?? 自动最快
+  - DOMAIN-SUFFIX,yesasia.com,?? 自动最快
+  - DOMAIN-SUFFIX,yes-news.com,?? 自动最快
+  - DOMAIN-SUFFIX,yomiuri.co.jp,?? 自动最快
+  - DOMAIN-SUFFIX,you-get.org,?? 自动最快
+  - DOMAIN-SUFFIX,zaobao.com,?? 自动最快
+  - DOMAIN-SUFFIX,zb.com,?? 自动最快
+  - DOMAIN-SUFFIX,zello.com,?? 自动最快
+  - DOMAIN-SUFFIX,zeronet.io,?? 自动最快
+  - DOMAIN-SUFFIX,zoom.us,?? 自动最快
+  - DOMAIN,github.global.ssl.fastly.net,?? 自动最快
+  - DOMAIN-SUFFIX,github.blog,?? 自动最快
+  - DOMAIN-SUFFIX,github.com,?? 自动最快
+  - DOMAIN-SUFFIX,github.io,?? 自动最快
+  - DOMAIN-SUFFIX,githubassets.com,?? 自动最快
+  - DOMAIN-SUFFIX,githubusercontent.com,?? 自动最快
+  - DOMAIN-KEYWORD,jav,?? 自动最快
+  - DOMAIN-KEYWORD,pinterest,?? 自动最快
+  - DOMAIN-KEYWORD,porn,?? 自动最快
+  - DOMAIN-KEYWORD,wikileaks,?? 自动最快
+  - DOMAIN-SUFFIX,apartmentratings.com,?? 自动最快
+  - DOMAIN-SUFFIX,apartments.com,?? 自动最快
+  - DOMAIN-SUFFIX,bankmobilevibe.com,?? 自动最快
+  - DOMAIN-SUFFIX,bing.com,?? 自动最快
+  - DOMAIN-SUFFIX,booktopia.com.au,?? 自动最快
+  - DOMAIN-SUFFIX,cccat.io,?? 自动最快
+  - DOMAIN-SUFFIX,centauro.com.br,?? 自动最快
+  - DOMAIN-SUFFIX,clearsurance.com,?? 自动最快
+  - DOMAIN-SUFFIX,costco.com,?? 自动最快
+  - DOMAIN-SUFFIX,crackle.com,?? 自动最快
+  - DOMAIN-SUFFIX,depositphotos.cn,?? 自动最快
+  - DOMAIN-SUFFIX,dish.com,?? 自动最快
+  - DOMAIN-SUFFIX,dmm.co.jp,?? 自动最快
+  - DOMAIN-SUFFIX,dmm.com,?? 自动最快
+  - DOMAIN-SUFFIX,dnvod.tv,?? 自动最快
+  - DOMAIN-SUFFIX,esurance.com,?? 自动最快
+  - DOMAIN-SUFFIX,extmatrix.com,?? 自动最快
+  - DOMAIN-SUFFIX,fastpic.ru,?? 自动最快
+  - DOMAIN-SUFFIX,flipboard.com,?? 自动最快
+  - DOMAIN-SUFFIX,fnac.be,?? 自动最快
+  - DOMAIN-SUFFIX,fnac.com,?? 自动最快
+  - DOMAIN-SUFFIX,funkyimg.com,?? 自动最快
+  - DOMAIN-SUFFIX,fxnetworks.com,?? 自动最快
+  - DOMAIN-SUFFIX,gettyimages.com,?? 自动最快
+  - DOMAIN-SUFFIX,go.com,?? 自动最快
+  - DOMAIN-SUFFIX,here.com,?? 自动最快
+  - DOMAIN-SUFFIX,jcpenney.com,?? 自动最快
+  - DOMAIN-SUFFIX,jiehua.tv,?? 自动最快
+  - DOMAIN-SUFFIX,mailfence.com,?? 自动最快
+  - DOMAIN-SUFFIX,nationwide.com,?? 自动最快
+  - DOMAIN-SUFFIX,nbc.com,?? 自动最快
+  - DOMAIN-SUFFIX,nexon.com,?? 自动最快
+  - DOMAIN-SUFFIX,nordstrom.com,?? 自动最快
+  - DOMAIN-SUFFIX,nordstromimage.com,?? 自动最快
+  - DOMAIN-SUFFIX,nordstromrack.com,?? 自动最快
+  - DOMAIN-SUFFIX,superpages.com,?? 自动最快
+  - DOMAIN-SUFFIX,target.com,?? 自动最快
+  - DOMAIN-SUFFIX,thinkgeek.com,?? 自动最快
+  - DOMAIN-SUFFIX,tracfone.com,?? 自动最快
+  - DOMAIN-SUFFIX,unity3d.com,?? 自动最快
+  - DOMAIN-SUFFIX,uploader.jp,?? 自动最快
+  - DOMAIN-SUFFIX,vevo.com,?? 自动最快
+  - DOMAIN-SUFFIX,viu.tv,?? 自动最快
+  - DOMAIN-SUFFIX,vk.com,?? 自动最快
+  - DOMAIN-SUFFIX,vsco.co,?? 自动最快
+  - DOMAIN-SUFFIX,xfinity.com,?? 自动最快
+  - DOMAIN-SUFFIX,zattoo.com,?? 自动最快
+  - DOMAIN,testflight.apple.com,?? 自动最快
+  - DOMAIN-SUFFIX,appsto.re,?? 自动最快
+  - DOMAIN,books.itunes.apple.com,?? 自动最快
+  - DOMAIN,hls.itunes.apple.com,?? 自动最快
+  - DOMAIN,apps.apple.com,?? 自动最快
+  - DOMAIN,itunes.apple.com,?? 自动最快
+  - DOMAIN,api-glb-sea.smoot.apple.com,?? 自动最快
+  - DOMAIN,lookup-api.apple.com,?? 自动最快
+  - DOMAIN-SUFFIX,abc.xyz,?? 自动最快
+  - DOMAIN-SUFFIX,android.com,?? 自动最快
+  - DOMAIN-SUFFIX,androidify.com,?? 自动最快
+  - DOMAIN-SUFFIX,dialogflow.com,?? 自动最快
+  - DOMAIN-SUFFIX,autodraw.com,?? 自动最快
+  - DOMAIN-SUFFIX,capitalg.com,?? 自动最快
+  - DOMAIN-SUFFIX,certificate-transparency.org,?? 自动最快
+  - DOMAIN-SUFFIX,chrome.com,?? 自动最快
+  - DOMAIN-SUFFIX,chromeexperiments.com,?? 自动最快
+  - DOMAIN-SUFFIX,chromestatus.com,?? 自动最快
+  - DOMAIN-SUFFIX,chromium.org,?? 自动最快
+  - DOMAIN-SUFFIX,creativelab5.com,?? 自动最快
+  - DOMAIN-SUFFIX,debug.com,?? 自动最快
+  - DOMAIN-SUFFIX,deepmind.com,?? 自动最快
+  - DOMAIN-SUFFIX,firebaseio.com,?? 自动最快
+  - DOMAIN-SUFFIX,getmdl.io,?? 自动最快
+  - DOMAIN-SUFFIX,ggpht.com,?? 自动最快
+  - DOMAIN-SUFFIX,gmail.com,?? 自动最快
+  - DOMAIN-SUFFIX,gmodules.com,?? 自动最快
+  - DOMAIN-SUFFIX,godoc.org,?? 自动最快
+  - DOMAIN-SUFFIX,golang.org,?? 自动最快
+  - DOMAIN-SUFFIX,gstatic.com,?? 自动最快
+  - DOMAIN-SUFFIX,gv.com,?? 自动最快
+  - DOMAIN-SUFFIX,gwtproject.org,?? 自动最快
+  - DOMAIN-SUFFIX,itasoftware.com,?? 自动最快
+  - DOMAIN-SUFFIX,madewithcode.com,?? 自动最快
+  - DOMAIN-SUFFIX,material.io,?? 自动最快
+  - DOMAIN-SUFFIX,polymer-project.org,?? 自动最快
+  - DOMAIN-SUFFIX,admin.recaptcha.net,?? 自动最快
+  - DOMAIN-SUFFIX,recaptcha.net,?? 自动最快
+  - DOMAIN-SUFFIX,shattered.io,?? 自动最快
+  - DOMAIN-SUFFIX,synergyse.com,?? 自动最快
+  - DOMAIN-SUFFIX,tensorflow.org,?? 自动最快
+  - DOMAIN-SUFFIX,tfhub.dev,?? 自动最快
+  - DOMAIN-SUFFIX,tiltbrush.com,?? 自动最快
+  - DOMAIN-SUFFIX,waveprotocol.org,?? 自动最快
+  - DOMAIN-SUFFIX,waymo.com,?? 自动最快
+  - DOMAIN-SUFFIX,webmproject.org,?? 自动最快
+  - DOMAIN-SUFFIX,webrtc.org,?? 自动最快
+  - DOMAIN-SUFFIX,whatbrowser.org,?? 自动最快
+  - DOMAIN-SUFFIX,widevine.com,?? 自动最快
+  - DOMAIN-SUFFIX,x.company,?? 自动最快
+  - DOMAIN-SUFFIX,youtu.be,?? 自动最快
+  - DOMAIN-SUFFIX,yt.be,?? 自动最快
+  - DOMAIN-SUFFIX,ytimg.com,?? 自动最快
+  - DOMAIN-SUFFIX,1drv.com,?? 自动最快
+  - DOMAIN-SUFFIX,1drv.ms,?? 自动最快
+  - DOMAIN-SUFFIX,blob.core.windows.net,?? 自动最快
+  - DOMAIN-SUFFIX,livefilestore.com,?? 自动最快
+  - DOMAIN-SUFFIX,onedrive.com,?? 自动最快
+  - DOMAIN-SUFFIX,storage.live.com,?? 自动最快
+  - DOMAIN-SUFFIX,storage.msn.com,?? 自动最快
+  - DOMAIN,oneclient.sfx.ms,?? 自动最快
+  - DOMAIN-SUFFIX,0rz.tw,?? 自动最快
+  - DOMAIN-SUFFIX,4bluestones.biz,?? 自动最快
+  - DOMAIN-SUFFIX,9bis.net,?? 自动最快
+  - DOMAIN-SUFFIX,allconnected.co,?? 自动最快
+  - DOMAIN-SUFFIX,aol.com,?? 自动最快
+  - DOMAIN-SUFFIX,bcc.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,bit.ly,?? 自动最快
+  - DOMAIN-SUFFIX,bitshare.com,?? 自动最快
+  - DOMAIN-SUFFIX,blog.jp,?? 自动最快
+  - DOMAIN-SUFFIX,blogimg.jp,?? 自动最快
+  - DOMAIN-SUFFIX,blogtd.org,?? 自动最快
+  - DOMAIN-SUFFIX,broadcast.co.nz,?? 自动最快
+  - DOMAIN-SUFFIX,camfrog.com,?? 自动最快
+  - DOMAIN-SUFFIX,cfos.de,?? 自动最快
+  - DOMAIN-SUFFIX,citypopulation.de,?? 自动最快
+  - DOMAIN-SUFFIX,cloudfront.net,?? 自动最快
+  - DOMAIN-SUFFIX,ctitv.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,cuhk.edu.hk,?? 自动最快
+  - DOMAIN-SUFFIX,cusu.hk,?? 自动最快
+  - DOMAIN-SUFFIX,discord.gg,?? 自动最快
+  - DOMAIN-SUFFIX,discuss.com.hk,?? 自动最快
+  - DOMAIN-SUFFIX,dropboxapi.com,?? 自动最快
+  - DOMAIN-SUFFIX,duolingo.cn,?? 自动最快
+  - DOMAIN-SUFFIX,edditstatic.com,?? 自动最快
+  - DOMAIN-SUFFIX,flickriver.com,?? 自动最快
+  - DOMAIN-SUFFIX,focustaiwan.tw,?? 自动最快
+  - DOMAIN-SUFFIX,free.fr,?? 自动最快
+  - DOMAIN-SUFFIX,gigacircle.com,?? 自动最快
+  - DOMAIN-SUFFIX,hk-pub.com,?? 自动最快
+  - DOMAIN-SUFFIX,hosting.co.uk,?? 自动最快
+  - DOMAIN-SUFFIX,hwcdn.net,?? 自动最快
+  - DOMAIN-SUFFIX,ifixit.com,?? 自动最快
+  - DOMAIN-SUFFIX,iphone4hongkong.com,?? 自动最快
+  - DOMAIN-SUFFIX,iphonetaiwan.org,?? 自动最快
+  - DOMAIN-SUFFIX,iptvbin.com,?? 自动最快
+  - DOMAIN-SUFFIX,linksalpha.com,?? 自动最快
+  - DOMAIN-SUFFIX,manyvids.com,?? 自动最快
+  - DOMAIN-SUFFIX,myactimes.com,?? 自动最快
+  - DOMAIN-SUFFIX,newsblur.com,?? 自动最快
+  - DOMAIN-SUFFIX,now.im,?? 自动最快
+  - DOMAIN-SUFFIX,nowe.com,?? 自动最快
+  - DOMAIN-SUFFIX,redditlist.com,?? 自动最快
+  - DOMAIN-SUFFIX,s3.amazonaws.com,?? 自动最快
+  - DOMAIN-SUFFIX,signal.org,?? 自动最快
+  - DOMAIN-SUFFIX,smartmailcloud.com,?? 自动最快
+  - DOMAIN-SUFFIX,sparknotes.com,?? 自动最快
+  - DOMAIN-SUFFIX,streetvoice.com,?? 自动最快
+  - DOMAIN-SUFFIX,supertop.co,?? 自动最快
+  - DOMAIN-SUFFIX,tv.com,?? 自动最快
+  - DOMAIN-SUFFIX,typepad.com,?? 自动最快
+  - DOMAIN-SUFFIX,udnbkk.com,?? 自动最快
+  - DOMAIN-SUFFIX,urbanairship.com,?? 自动最快
+  - DOMAIN-SUFFIX,whispersystems.org,?? 自动最快
+  - DOMAIN-SUFFIX,wikia.com,?? 自动最快
+  - DOMAIN-SUFFIX,wn.com,?? 自动最快
+  - DOMAIN-SUFFIX,wolframalpha.com,?? 自动最快
+  - DOMAIN-SUFFIX,x-art.com,?? 自动最快
+  - DOMAIN-SUFFIX,yimg.com,?? 自动最快
+  - DOMAIN,api.steampowered.com,?? 自动最快
+  - DOMAIN,store.steampowered.com,?? 自动最快
+  - DOMAIN-SUFFIX,linkedin.com,?? 自动最快
+  - DOMAIN-SUFFIX,deezer.com,?? 自动最快
+  - DOMAIN-SUFFIX,dzcdn.net,?? 自动最快
+  - DOMAIN-SUFFIX,kkbox.com,?? 自动最快
+  - DOMAIN-SUFFIX,kkbox.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,kfs.io,?? 自动最快
+  - DOMAIN-SUFFIX,joox.com,?? 自动最快
+  - DOMAIN-SUFFIX,pandora.com,?? 自动最快
+  - DOMAIN-SUFFIX,p-cdn.us,?? 自动最快
+  - DOMAIN-SUFFIX,sndcdn.com,?? 自动最快
+  - DOMAIN-SUFFIX,soundcloud.com,?? 自动最快
+  - DOMAIN-SUFFIX,pscdn.co,?? 自动最快
+  - DOMAIN-SUFFIX,scdn.co,?? 自动最快
+  - DOMAIN-SUFFIX,spotify.com,?? 自动最快
+  - DOMAIN-SUFFIX,spoti.fi,?? 自动最快
+  - DOMAIN-KEYWORD,spotify.com,?? 自动最快
+  - DOMAIN-KEYWORD,-spotify-com,?? 自动最快
+  - DOMAIN-SUFFIX,tidal.com,?? 自动最快
+  - DOMAIN-SUFFIX,c4assets.com,?? 自动最快
+  - DOMAIN-SUFFIX,channel4.com,?? 自动最快
+  - DOMAIN-SUFFIX,abema.io,?? 自动最快
+  - DOMAIN-SUFFIX,ameba.jp,?? 自动最快
+  - DOMAIN-SUFFIX,abema.tv,?? 自动最快
+  - DOMAIN-SUFFIX,hayabusa.io,?? 自动最快
+  - DOMAIN,abematv.akamaized.net,?? 自动最快
+  - DOMAIN,ds-linear-abematv.akamaized.net,?? 自动最快
+  - DOMAIN,ds-vod-abematv.akamaized.net,?? 自动最快
+  - DOMAIN,linear-abematv.akamaized.net,?? 自动最快
+  - DOMAIN-SUFFIX,aiv-cdn.net,?? 自动最快
+  - DOMAIN-SUFFIX,aiv-delivery.net,?? 自动最快
+  - DOMAIN-SUFFIX,amazonvideo.com,?? 自动最快
+  - DOMAIN-SUFFIX,primevideo.com,?? 自动最快
+  - DOMAIN,avodmp4s3ww-a.akamaihd.net,?? 自动最快
+  - DOMAIN,d25xi40x97liuc.cloudfront.net,?? 自动最快
+  - DOMAIN,dmqdd6hw24ucf.cloudfront.net,?? 自动最快
+  - DOMAIN,d22qjgkvxw22r6.cloudfront.net,?? 自动最快
+  - DOMAIN,d1v5ir2lpwr8os.cloudfront.net,?? 自动最快
+  - DOMAIN-KEYWORD,avoddashs,?? 自动最快
+  - DOMAIN-SUFFIX,bahamut.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,gamer.com.tw,?? 自动最快
+  - DOMAIN,gamer-cds.cdn.hinet.net,?? 自动最快
+  - DOMAIN,gamer2-cds.cdn.hinet.net,?? 自动最快
+  - DOMAIN-SUFFIX,bbc.co.uk,?? 自动最快
+  - DOMAIN-SUFFIX,bbci.co.uk,?? 自动最快
+  - DOMAIN-KEYWORD,bbcfmt,?? 自动最快
+  - DOMAIN-KEYWORD,uk-live,?? 自动最快
+  - DOMAIN-SUFFIX,dazn.com,?? 自动最快
+  - DOMAIN-SUFFIX,dazn-api.com,?? 自动最快
+  - DOMAIN,d151l6v8er5bdm.cloudfront.net,?? 自动最快
+  - DOMAIN-KEYWORD,voddazn,?? 自动最快
+  - DOMAIN-SUFFIX,bamgrid.com,?? 自动最快
+  - DOMAIN-SUFFIX,disney-plus.net,?? 自动最快
+  - DOMAIN-SUFFIX,disneyplus.com,?? 自动最快
+  - DOMAIN-SUFFIX,dssott.com,?? 自动最快
+  - DOMAIN,cdn.registerdisney.go.com,?? 自动最快
+  - DOMAIN-SUFFIX,encoretvb.com,?? 自动最快
+  - DOMAIN,edge.api.brightcove.com,?? 自动最快
+  - DOMAIN,bcbolt446c5271-a.akamaihd.net,?? 自动最快
+  - DOMAIN-SUFFIX,fox.com,?? 自动最快
+  - DOMAIN-SUFFIX,foxdcg.com,?? 自动最快
+  - DOMAIN-SUFFIX,theplatform.com,?? 自动最快
+  - DOMAIN-SUFFIX,uplynk.com,?? 自动最快
+  - DOMAIN-SUFFIX,hbo.com,?? 自动最快
+  - DOMAIN-SUFFIX,hbogo.com,?? 自动最快
+  - DOMAIN-SUFFIX,hbonow.com,?? 自动最快
+  - DOMAIN-SUFFIX,hbogoasia.com,?? 自动最快
+  - DOMAIN-SUFFIX,hbogoasia.hk,?? 自动最快
+  - DOMAIN,bcbolthboa-a.akamaihd.net,?? 自动最快
+  - DOMAIN,players.brightcove.net,?? 自动最快
+  - DOMAIN,s3-ap-southeast-1.amazonaws.com,?? 自动最快
+  - DOMAIN,dai3fd1oh325y.cloudfront.net,?? 自动最快
+  - DOMAIN,44wilhpljf.execute-api.ap-southeast-1.amazonaws.com,?? 自动最快
+  - DOMAIN,hboasia1-i.akamaihd.net,?? 自动最快
+  - DOMAIN,hboasia2-i.akamaihd.net,?? 自动最快
+  - DOMAIN,hboasia3-i.akamaihd.net,?? 自动最快
+  - DOMAIN,hboasia4-i.akamaihd.net,?? 自动最快
+  - DOMAIN,hboasia5-i.akamaihd.net,?? 自动最快
+  - DOMAIN,cf-images.ap-southeast-1.prod.boltdns.net,?? 自动最快
+  - DOMAIN-SUFFIX,5itv.tv,?? 自动最快
+  - DOMAIN-SUFFIX,ocnttv.com,?? 自动最快
+  - DOMAIN-SUFFIX,hulu.com,?? 自动最快
+  - DOMAIN-SUFFIX,huluim.com,?? 自动最快
+  - DOMAIN-SUFFIX,hulustream.com,?? 自动最快
+  - DOMAIN-SUFFIX,happyon.jp,?? 自动最快
+  - DOMAIN-SUFFIX,hulu.jp,?? 自动最快
+  - DOMAIN-SUFFIX,itv.com,?? 自动最快
+  - DOMAIN-SUFFIX,itvstatic.com,?? 自动最快
+  - DOMAIN,itvpnpmobile-a.akamaihd.net,?? 自动最快
+  - DOMAIN-SUFFIX,kktv.com.tw,?? 自动最快
+  - DOMAIN-SUFFIX,kktv.me,?? 自动最快
+  - DOMAIN,kktv-theater.kk.stream,?? 自动最快
+  - DOMAIN-SUFFIX,linetv.tw,?? 自动最快
+  - DOMAIN,d3c7rimkq79yfu.cloudfront.net,?? 自动最快
+  - DOMAIN-SUFFIX,litv.tv,?? 自动最快
+  - DOMAIN,litvfreemobile-hichannel.cdn.hinet.net,?? 自动最快
+  - DOMAIN-SUFFIX,channel5.com,?? 自动最快
+  - DOMAIN-SUFFIX,my5.tv,?? 自动最快
+  - DOMAIN,d349g9zuie06uo.cloudfront.net,?? 自动最快
+  - DOMAIN-SUFFIX,mytvsuper.com,?? 自动最快
+  - DOMAIN-SUFFIX,tvb.com,?? 自动最快
+  - DOMAIN-SUFFIX,netflix.com,?? 自动最快
+  - DOMAIN-SUFFIX,netflix.net,?? 自动最快
+  - DOMAIN-SUFFIX,nflxext.com,?? 自动最快
+  - DOMAIN-SUFFIX,nflximg.com,?? 自动最快
+  - DOMAIN-SUFFIX,nflximg.net,?? 自动最快
+  - DOMAIN-SUFFIX,nflxso.net,?? 自动最快
+  - DOMAIN-SUFFIX,nflxvideo.net,?? 自动最快
+  - DOMAIN-SUFFIX,netflixdnstest0.com,?? 自动最快
+  - DOMAIN-SUFFIX,netflixdnstest1.com,?? 自动最快
+  - DOMAIN-SUFFIX,netflixdnstest2.com,?? 自动最快
+  - DOMAIN-SUFFIX,netflixdnstest3.com,?? 自动最快
+  - DOMAIN-SUFFIX,netflixdnstest4.com,?? 自动最快
+  - DOMAIN-SUFFIX,netflixdnstest5.com,?? 自动最快
+  - DOMAIN-SUFFIX,netflixdnstest6.com,?? 自动最快
+  - DOMAIN-SUFFIX,netflixdnstest7.com,?? 自动最快
+  - DOMAIN-SUFFIX,netflixdnstest8.com,?? 自动最快
+  - DOMAIN-SUFFIX,netflixdnstest9.com,?? 自动最快
+  - IP-CIDR,23.246.0.0/18,?? 自动最快,no-resolve
+  - IP-CIDR,37.77.184.0/21,?? 自动最快,no-resolve
+  - IP-CIDR,45.57.0.0/17,?? 自动最快,no-resolve
+  - IP-CIDR,64.120.128.0/17,?? 自动最快,no-resolve
+  - IP-CIDR,66.197.128.0/17,?? 自动最快,no-resolve
+  - IP-CIDR,108.175.32.0/20,?? 自动最快,no-resolve
+  - IP-CIDR,192.173.64.0/18,?? 自动最快,no-resolve
+  - IP-CIDR,198.38.96.0/19,?? 自动最快,no-resolve
+  - IP-CIDR,198.45.48.0/20,?? 自动最快,no-resolve
+  - DOMAIN-SUFFIX,dmc.nico,?? 自动最快
+  - DOMAIN-SUFFIX,nicovideo.jp,?? 自动最快
+  - DOMAIN-SUFFIX,nimg.jp,?? 自动最快
+  - DOMAIN-SUFFIX,socdm.com,?? 自动最快
+  - DOMAIN-SUFFIX,pbs.org,?? 自动最快
+  - DOMAIN-SUFFIX,phncdn.com,?? 自动最快
+  - DOMAIN-SUFFIX,pornhub.com,?? 自动最快
+  - DOMAIN-SUFFIX,pornhubpremium.com,?? 自动最快
+  - DOMAIN-SUFFIX,skyking.com.tw,?? 自动最快
+  - DOMAIN,hamifans.emome.net,?? 自动最快
+  - DOMAIN-SUFFIX,twitch.tv,?? 自动最快
+  - DOMAIN-SUFFIX,twitchcdn.net,?? 自动最快
+  - DOMAIN-SUFFIX,ttvnw.net,?? 自动最快
+  - DOMAIN-SUFFIX,jtvnw.net,?? 自动最快
+  - DOMAIN-SUFFIX,viu.com,?? 自动最快
+  - DOMAIN-SUFFIX,viu.tv,?? 自动最快
+  - DOMAIN,api.viu.now.com,?? 自动最快
+  - DOMAIN,d1k2us671qcoau.cloudfront.net,?? 自动最快
+  - DOMAIN,d2anahhhmp1ffz.cloudfront.net,?? 自动最快
+  - DOMAIN,dfp6rglgjqszk.cloudfront.net,?? 自动最快
+  - DOMAIN-SUFFIX,googlevideo.com,?? 自动最快
+  - DOMAIN-SUFFIX,youtube.com,?? 自动最快
+  - DOMAIN,youtubei.googleapis.com,?? 自动最快
+  - GEOIP,CN,??Direct
+  - MATCH,?? 国外流量
+ 
