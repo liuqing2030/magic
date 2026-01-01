@@ -1,0 +1,47 @@
+# 分流规则配置片段包含若干条分流规则；可通过资源引用的方式使用。
+# 片段文件将保存在 Quantumult X 目录下的 Profiles 子目录中。
+# 样例可参见 https://raw.githubusercontent.com/crossutility/Quantumult-X/master/filter.snippet
+host-suffix, infura.io, 自动优选
+host-suffix, metamask.io, 自动优选
+host-suffix, 1inch.io, 自动优选
+host-suffix, uniswap.org, 自动优选
+host-suffix, amazonaws.com, 自动优选
+host-suffix, nordaccount.com, 自动优选
+host-suffix, nordcdn.com, 自动优选
+
+host-keyword,www5,direct
+host-keyword,www2,direct
+host-keyword,www4,direct
+host-suffix, 356893.net,direct
+host-suffix, wadidowe.net,direct
+host-suffix, es6886.co,direct
+host-keyword, andy,direct
+host-keyword,hicloud,direct
+host-keyword,smarthome,direct
+host-suffix,fenqile.com,direct
+ip-cidr, 192.168.0.0/16, direct
+ip-cidr, 10.0.0.0/8, direct
+ip-cidr, 172.16.0.0/12, direct
+
+# 苹果推送和部分服务直连（保守一点写）
+host-suffix, push.apple.com, direct
+host-suffix, icloud.com, direct
+host-suffix, apple.com, direct
+
+host-suffix, hawkingparty.com, direct
+host, fm.fenqile.com, direct
+host-suffix, onenote.com, 自动优选
+#host-suffix, apple.com, direct
+host-suffix, 2x4tpob6.com, direct
+host-suffix, pornlulu.com, 自动优选
+host-suffix, yahoosandbox.net, 自动优选
+host-suffix, yahoo.com, 自动优选
+#host-suffix, pinnacle888.com, 自动优选
+#host-suffix, pinnacle.com, 自动优选
+ip-cidr, 10.0.0.0/8, direct
+ip-cidr, 127.0.0.0/8, direct
+ip-cidr, 172.16.0.0/12, direct
+ip-cidr, 192.168.0.0/16, direct
+ip-cidr, 224.0.0.0/24, direct
+ip-cidr, 182.254.116.0/24, direct
+;host, www.example.com, direct
