@@ -34,9 +34,8 @@ dns:
   use-hosts: true
   # 国外流量 DoH
   default-nameserver:
-    - 223.5.5.5         # ����
-    - 119.29.29.29      # ��Ѷ
-  # 国外流量 DNS
+    - 223.5.5.5        
+    - 119.29.29.29     
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
@@ -905,4 +904,5 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,国外流量
  
+
 
