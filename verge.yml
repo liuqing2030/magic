@@ -27,7 +27,6 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
 dns:
   enable: true
-  ipv6: false
   listen: 127.0.0.1:1053
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
@@ -45,7 +44,7 @@ dns:
     - https://dns.alidns.com/dns-query 
     - https://1.12.12.12/dns-query       
     - tls://223.6.6.6:853              
-  # �� **国外流量国外流量
+  # **国外流量国外流量
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
   # 国外流量fallbackDoH
@@ -903,6 +902,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,国外流量
  
+
 
 
 
