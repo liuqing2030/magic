@@ -1,17 +1,15 @@
-# ╩Ы╢║м╗сцеДжц
 mixed-port: 7890
 allow-lan: true
 mode: rule
 log-level: info
 ipv6: false
-
 # ---------------------------------------------------
-# 1. ╤╗рЕ╢ЗюМ╧╘с╕илё╗вт╤╞ю╜х║дЦ╣да╫╦Ж╤╘тда╢╫сё╘
+
 # ---------------------------------------------------
 proxy-providers:
   Provider_A:
     type: http
-    url: "https://sub.iplcsub20241025.top/qC8zV8qS1kB1lX2u/NXy2N9NFBWZrEcio?clash=1" # ╤тс╕ Clash_1765...
+    url: "https://sub.iplcsub20241025.top/qC8zV8qS1kB1lX2u/NXy2N9NFBWZrEcio?clash=1" # iplcsub.
     interval: 3600
     path: ./provider_a.yaml
     health-check:
@@ -20,44 +18,38 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
   Provider_B:
     type: http
-    url: "https://subscription.riolu.link/RioLU/system/api/v1/client/subscribe?token=a5dbbf3cfc45326d3f7721c095fcc0d8" # ╤тс╕ RioLU.443...
+    url: "https://subscription.riolu.link/RioLU/system/api/v1/client/subscribe?token=a5dbbf3cfc45326d3f7721c095fcc0d8" # RioLU
     interval: 3600
     path: ./provider_b.yaml
     health-check:
       enable: true
       interval: 600
       url: http://www.gstatic.com/generate_204
-      
- dns:
+dns:
   enable: true
   ipv6: false
   listen: 127.0.0.1:1053
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   use-hosts: true
-
-  # сцю╢рЩ╣╪╫БнЖ DoH сРцШ╠╬иМё╗bootstrapё╘
+  # Е⌡╫Е╓√Ф╣│И┤▐ DoH
   default-nameserver:
-    - 223.5.5.5         # ╟╒юО
-    - 119.29.29.29      # лзя╤
-
-  # **╧ЗдзсРцШ**д╛хосц╠╬╣ь/╧ЗдзцВнд DNS
+    - 223.5.5.5         # О©╫О©╫О©╫О©╫
+    - 119.29.29.29      # О©╫О©╫я╤
+  # Е⌡╫Е╓√Ф╣│И┤▐ DNS
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
-    - 180.76.76.76      # ╟ы╤хё╗©ия║ё╘
-
-  # **╧ЗмБсРцШ**╢╔╥╒ fallbackё╛въ╪сцэ DoH
+    - 180.76.76.76     
+  # **Е⌡╫Е╓√Ф╣│И┤▐** fallback DoH
   fallback:
-    - https://dns.alidns.com/dns-query   # жВ DoH
-    - https://1.12.12.12/dns-query       # ╠╦ DoHё╗лзя╤ё╘
-    - tls://223.6.6.6:853              # хГпХ DoT ©и╠ёаТ
-
-  # хц **╢ЗюМ╥ЧнЯфВсРцШ╫БнЖ** р╡въ╪сцэ╫БнЖ
+    - https://dns.alidns.com/dns-query 
+    - https://1.12.12.12/dns-query       
+    - tls://223.6.6.6:853              
+  # О©╫О©╫ **Е⌡╫Е╓√Ф╣│И┤▐Е⌡╫Е╓√Ф╣│И┤▐
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
-
-  # ╧ЩбклУ╪Чё╨╥гжп╧З ║З сц fallbackё╗= иоцФ╣д DoHё╘
+  # Е⌡╫Е╓√Ф╣│И┤▐fallbackDoH
   fallback-filter:
     geoip: true
     geoip-code: CN
@@ -66,857 +58,850 @@ proxy-providers:
       - geolocation-!cn
     ipcidr:
       - 240.0.0.0/4
-      # пХр╙╣д╩╟©иты╪ср╩п╘╠ёаТ╤н/╧ЗмБ╤н
-
-  # ё╗©ия║╣╚мф╪Жё╛Mihomoж╖Ёжё╘
-  # цВх╥ж╦╤╗ё╨кЫсп║╟╥гжп╧Зу╬╣Ц╪╞╨о║╠╤╪ж╠╫ссц DoH ╫БнЖ
+      # О©╫О©╫р╙О©╫д╩О©╫О©╫О©╫О©╫ы╪О©╫р╩п╘О©╫О©╫О©╫О©╫О©╫О©╫/О©╫О©╫О©╫О©╫О©╫
+  # О©╫О©╫О©╫О©╫я║О©╫О©╫О©╫ф╪О©╫О©╫О©╫Mihomoж╖О©╫жёО©╫
+  # О©╫О©╫х╥ж╦О©╫О©╫О©╫О©╫О©╫О©╫О©╫п║О©╫О©╫О©╫О©╫п╧О©╫у╬О©╫Ц╪╞О©╫о║О©╫О©╫О©╫ж╠О©╫О©╫О©╫О©╫ DoH О©╫О©╫О©╫О©╫
   nameserver-policy:
     'geosite:geolocation-!cn': ['https://dns.alidns.com/dns-query']
-
 profile:
   store-selected: true
-
 mode: rule
-
 proxy-groups:
-  - name: ?? AI╫з╣Ц
+  - name: AI
     type: url-test
     include-all: true
-    filter: "(US|цю|с╒|UK|╪сдц)"
+    filter: "(US|Г╬▌|Х▀╠|UK|Е┼═Ф▀©)"
     url: http://www.gstatic.com/generate_204
     interval: 3000
     tolerance: 50
-
-  - name: ?? вт╤╞вН©Л
+  - name: Х┤╙Е┼╗Ф°─Е©╚
     type: url-test
     include-all: true
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
-
-  - name: ?? ╧ЗмБаВа©
+  - name: Е⌡╫Е╓√Ф╣│И┤▐
     type: select
     proxies:
-      - ?? вт╤╞вН©Л
+      - Х┤╙Е┼╗Ф°─Е©╚
       - DIRECT
-
-  - name: ??Direct
+  - name: Direct
     type: select
     proxies:
       - DIRECT
  
 rules:
-  - DOMAIN,browser-intake-datadoghq.com,?? AI╫з╣Ц
-  - DOMAIN,chat.openai.com.cdn.cloudflare.net,?? AI╫з╣Ц
-  - DOMAIN,gemini.google.com,?? AI╫з╣Ц
-  - DOMAIN,openai-api.arkoselabs.com,?? AI╫з╣Ц
-  - DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,?? AI╫з╣Ц
-  - DOMAIN,openaicomproductionae4b.blob.core.windows.net,?? AI╫з╣Ц
-  - DOMAIN,production-openaicom-storage.azureedge.net,?? AI╫з╣Ц
-  - DOMAIN,static.cloudflareinsights.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,?? AI╫з╣Ц.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,algolia.net,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,api.statsig.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,auth0.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,chatgpt.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,chatgpt.livekit.cloud,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,client-api.arkoselabs.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,events.statsigapi.net,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,featuregates.org,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,host.livekit.cloud,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,identrust.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,intercom.io,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,intercomcdn.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,launchdarkly.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,oaistatic.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,oaiusercontent.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,observeit.net,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,openai.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,openaicom.imgix.net,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,segment.io,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,sentry.io,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,stripe.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,turn.livekit.cloud,?? AI╫з╣Ц
-  - DOMAIN-KEYWORD,openai,?? AI╫з╣Ц
-  - IP-CIDR,24.199.123.28/32,?? AI╫з╣Ц,no-resolve
-  - IP-CIDR,64.23.132.171/32,?? AI╫з╣Ц,no-resolve
-  - DOMAIN,cdn.usefathom.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,anthropic.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,claude.ai,?? AI╫з╣Ц
-  - DOMAIN,?? AI╫з╣Ц.google.dev,?? AI╫з╣Ц
-  - DOMAIN,alkalimakersuite-pa.clients6.google.com,?? AI╫з╣Ц
-  - DOMAIN,generativelanguage.googleapis.com,?? AI╫з╣Ц
-  - DOMAIN,makersuite.google.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,bard.google.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,deepmind.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,deepmind.google,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,gemini.google.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,generativeai.google,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,?? AI╫з╣Ц
-  - DOMAIN,?? AI╫з╣Ц.google.dev,?? AI╫з╣Ц
-  - DOMAIN,alkalimakersuite-pa.clients6.google.com,?? AI╫з╣Ц
-  - DOMAIN,makersuite.google.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,bard.google.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,deepmind.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,deepmind.google,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,gemini.google.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,generativeai.google,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,apis.google.com,?? AI╫з╣Ц
-  - DOMAIN-KEYWORD,colab,?? AI╫з╣Ц
-  - DOMAIN-KEYWORD,developerprofiles,?? AI╫з╣Ц
-  - DOMAIN-KEYWORD,generativelanguage,?? AI╫з╣Ц
-  - DOMAIN,api.msn.com,?? AI╫з╣Ц
-  - DOMAIN,api.statsig.com,?? AI╫з╣Ц
-  - DOMAIN,assets.msn.com,?? AI╫з╣Ц
-  - DOMAIN,browser-intake-datadoghq.com,?? AI╫з╣Ц
-  - DOMAIN,chat.openai.com.cdn.cloudflare.net,?? AI╫з╣Ц
-  - DOMAIN,copilot.microsoft.com,?? AI╫з╣Ц
-  - DOMAIN,gateway.bingviz.microsoft.net,?? AI╫з╣Ц
-  - DOMAIN,gateway.bingviz.microsoftapp.net,?? AI╫з╣Ц
-  - DOMAIN,in.appcenter.ms,?? AI╫з╣Ц
-  - DOMAIN,location.microsoft.com,?? AI╫з╣Ц
-  - DOMAIN,odc.officeapps.live.com,?? AI╫з╣Ц
-  - DOMAIN,openai-api.arkoselabs.com,?? AI╫з╣Ц
-  - DOMAIN,openaicomproductionae4b.blob.core.windows.net,?? AI╫з╣Ц
-  - DOMAIN,production-openaicom-storage.azureedge.net,?? AI╫з╣Ц
-  - DOMAIN,r.bing.com,?? AI╫з╣Ц
-  - DOMAIN,self.events.data.microsoft.com,?? AI╫з╣Ц
-  - DOMAIN,services.bingapis.com,?? AI╫з╣Ц
-  - DOMAIN,static.cloudflareinsights.com,?? AI╫з╣Ц
-  - DOMAIN,sydney.bing.com,?? AI╫з╣Ц
-  - DOMAIN,www.bing.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,algolia.net,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,api.microsoftapp.net,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,auth0.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,bing-shopping.microsoft-falcon.io,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,challenges.cloudflare.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,chatgpt.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,chatgpt.livekit.cloud,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,client-api.arkoselabs.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,edgeservices.bing.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,events.statsigapi.net,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,featuregates.org,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,host.livekit.cloud,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,identrust.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,intercom.io,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,intercomcdn.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,launchdarkly.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,oaistatic.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,oaiusercontent.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,observeit.net,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,openai.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,openaicom.imgix.net,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,segment.io,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,sentry.io,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,stripe.com,?? AI╫з╣Ц
-  - DOMAIN-SUFFIX,turn.livekit.cloud,?? AI╫з╣Ц
-  - DOMAIN-KEYWORD,openaicom-api,?? AI╫з╣Ц
-  - IP-CIDR,24.199.123.28/32,?? AI╫з╣Ц,no-resolve
-  - IP-CIDR,64.23.132.171/32,?? AI╫з╣Ц,no-resolve
-    - DOMAIN-SUFFIX,ampproject.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,appspot.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,blogger.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,getoutline.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gvt0.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gvt1.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gvt3.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,google,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,blogspot,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,onedrive.live.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,xboxlive.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,cdninstagram.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,fb.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,fb.me,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,fbaddins.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,fbcdn.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,fbsbx.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,fbworkmail.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,instagram.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,m.me,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,messenger.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,oculus.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,oculuscdn.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,rocksdb.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,whatsapp.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,whatsapp.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,microsoft.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,s-microsoft.com,?? вт╤╞вН©Л
-  - DOMAIN,officecdn-microsoft-com.akamaized.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,copilot.microsoft.com,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,facebook,?? вт╤╞вН©Л
-  - IP-CIDR,3.123.36.126/32,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,35.157.215.84/32,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,35.157.217.255/32,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,52.58.209.134/32,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,54.93.124.31/32,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,54.162.243.80/32,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,54.173.34.141/32,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,54.235.23.242/32,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,169.45.248.118/32,?? вт╤╞вН©Л,no-resolve
-  - DOMAIN-SUFFIX,pscp.tv,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,periscope.tv,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,t.co,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,twimg.co,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,twimg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,twitpic.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,vine.co,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,twitter,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,t.me,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tdesktop.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,telegra.ph,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,telegram.me,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,telegram.org,?? вт╤╞вН©Л
-  - IP-CIDR,91.108.4.0/22,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,91.108.8.0/22,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,91.108.12.0/22,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,91.108.16.0/22,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,91.108.56.0/22,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,149.154.160.0/20,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR6,2001:b28:f23d::/48,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR6,2001:b28:f23f::/48,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR6,2001:67c:4e8::/48,?? вт╤╞вН©Л,no-resolve
-  - DOMAIN-SUFFIX,line.me,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,line-apps.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,line-scdn.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,naver.jp,?? вт╤╞вН©Л
-  - IP-CIDR,103.2.30.0/23,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,125.209.208.0/20,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,147.92.128.0/17,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,203.104.144.0/21,?? вт╤╞вН©Л,no-resolve
-  - DOMAIN-SUFFIX,4shared.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,520cc.cc,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,881903.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,9cache.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,9gag.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,abc.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,abc.net.au,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,abebooks.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,amazon.co.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,apigee.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,apk-dl.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,apkfind.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,apkmirror.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,apkmonk.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,apkpure.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,aptoide.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,archive.is,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,archive.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,arte.tv,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,artstation.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,arukas.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ask.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,avg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,avgle.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,badoo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bandwagonhost.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bbc.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,behance.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bibox.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,biggo.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,binance.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bitcointalk.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bitfinex.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bitmex.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bit-z.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bloglovin.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bloomberg.cn,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bloomberg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,blubrry.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,book.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,booklive.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,books.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,boslife.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,box.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,businessinsider.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bwh1.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,castbox.fm,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,cbc.ca,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,cdw.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,change.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,channelnewsasia.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ck101.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,clarionproject.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,clyp.it,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,cna.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,comparitech.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,conoha.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,crucial.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,cts.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,cw.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,cyberctm.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dailymotion.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dailyview.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,daum.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,daumcdn.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dcard.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,deepdiscount.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,depositphotos.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,deviantart.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,disconnect.me,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,discordapp.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,discordapp.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,disqus.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dlercloud.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dns2go.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dowjones.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dropbox.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dropboxusercontent.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,duckduckgo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dw.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dynu.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,earthcam.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ebookservice.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,economist.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,edgecastcdn.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,edu,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,elpais.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,enanyang.my,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,encyclopedia.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,esoir.be,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,etherscan.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,euronews.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,evozi.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,feedly.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,firech.at,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,flickr.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,flitto.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,foreignpolicy.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,freebrowser.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,freewechat.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,freeweibo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,friday.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ftchinese.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ftimg.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gate.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,getlantern.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,getsync.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,globalvoices.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,goo.ne.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,goodreads.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gov,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gov.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,greatfire.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gumroad.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hbg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,heroku.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hightail.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hk01.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hkbf.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hkbookcity.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hkej.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hket.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hkgolden.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hootsuite.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hudson.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hyread.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ibtimes.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,i-cable.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,icij.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,icoco.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,imgur.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,initiummall.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,insecam.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ipfs.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,issuu.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,istockphoto.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,japantimes.co.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,jiji.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,jinx.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,jkforum.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,joinmastodon.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,justmysocks.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,justpaste.it,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,kakao.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,kakaocorp.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,kik.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,kobo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,kobobooks.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,kodingen.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,lemonde.fr,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,lepoint.fr,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,lihkg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,listennotes.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,livestream.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,logmein.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,mail.ru,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,mailchimp.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,marc.info,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,matters.news,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,maying.co,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,medium.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,mega.nz,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,mil,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,mingpao.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,mobile01.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,myspace.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,myspacecdn.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nanyang.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,naver.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,neowin.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,newstapa.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nexitally.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nhk.or.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nicovideo.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nii.ac.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nikkei.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nofile.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,now.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nrk.no,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nyt.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nytchina.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nytcn.me,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nytco.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nytimes.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nytimg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nytlog.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nytstyle.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ok.ru,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,okex.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,on.cc,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,orientaldaily.com.my,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,overcast.fm,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,paltalk.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pao-pao.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,parsevideo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pbxes.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pcdvd.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pchome.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pcloud.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,picacomic.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pinimg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pixiv.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,player.fm,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,plurk.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,po18.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,potato.im,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,potatso.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,prism-break.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,proxifier.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pt.im,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pts.org.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pubu.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pubu.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pureapk.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,quora.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,quoracdn.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,rakuten.co.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,readingtimes.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,readmoo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,redbubble.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,reddit.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,redditmedia.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,resilio.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,reuters.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,reutersmedia.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,rfi.fr,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,rixcloud.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,roadshow.hk,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,scmp.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,scribd.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,seatguru.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,shadowsocks.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,shopee.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,slideshare.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,softfamous.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,soundcloud.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ssrcloud.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,startpage.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,steamcommunity.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,steemit.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,steemitwallet.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,t66y.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tapatalk.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,teco-hk.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,teco-mo.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,teddysun.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,textnow.me,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,theguardian.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,theinitium.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,thetvdb.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tineye.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,torproject.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tumblr.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,turbobit.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tutanota.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tvboxnow.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,udn.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,unseen.is,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,upmedia.mg,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,uptodown.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,urbandictionary.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ustream.tv,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,uwants.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,v2ray.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,viber.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,videopress.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,vimeo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,voachinese.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,voanews.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,voxer.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,vzw.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,w3schools.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,washingtonpost.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,wattpad.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,whoer.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,wikimapia.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,wikipedia.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,wikiquote.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,wikiwand.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,winudf.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,wire.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,wordpress.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,workflow.is,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,worldcat.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,wsj.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,wsj.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,xhamster.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,xn--90wwvt03e.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,xn--i2ru8q2qg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,xnxx.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,xvideos.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,yahoo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,yandex.ru,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ycombinator.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,yesasia.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,yes-news.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,yomiuri.co.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,you-get.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,zaobao.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,zb.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,zello.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,zeronet.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,zoom.us,?? вт╤╞вН©Л
-  - DOMAIN,github.global.ssl.fastly.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,github.blog,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,github.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,github.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,githubassets.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,githubusercontent.com,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,jav,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,pinterest,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,porn,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,wikileaks,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,apartmentratings.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,apartments.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bankmobilevibe.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bing.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,booktopia.com.au,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,cccat.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,centauro.com.br,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,clearsurance.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,costco.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,crackle.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,depositphotos.cn,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dish.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dmm.co.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dmm.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dnvod.tv,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,esurance.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,extmatrix.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,fastpic.ru,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,flipboard.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,fnac.be,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,fnac.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,funkyimg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,fxnetworks.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gettyimages.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,go.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,here.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,jcpenney.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,jiehua.tv,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,mailfence.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nationwide.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nbc.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nexon.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nordstrom.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nordstromimage.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nordstromrack.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,superpages.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,target.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,thinkgeek.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tracfone.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,unity3d.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,uploader.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,vevo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,viu.tv,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,vk.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,vsco.co,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,xfinity.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,zattoo.com,?? вт╤╞вН©Л
-  - DOMAIN,testflight.apple.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,appsto.re,?? вт╤╞вН©Л
-  - DOMAIN,books.itunes.apple.com,?? вт╤╞вН©Л
-  - DOMAIN,hls.itunes.apple.com,?? вт╤╞вН©Л
-  - DOMAIN,apps.apple.com,?? вт╤╞вН©Л
-  - DOMAIN,itunes.apple.com,?? вт╤╞вН©Л
-  - DOMAIN,api-glb-sea.smoot.apple.com,?? вт╤╞вН©Л
-  - DOMAIN,lookup-api.apple.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,abc.xyz,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,android.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,androidify.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dialogflow.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,autodraw.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,capitalg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,certificate-transparency.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,chrome.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,chromeexperiments.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,chromestatus.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,chromium.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,creativelab5.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,debug.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,deepmind.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,firebaseio.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,getmdl.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ggpht.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gmail.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gmodules.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,godoc.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,golang.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gstatic.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gv.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gwtproject.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,itasoftware.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,madewithcode.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,material.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,polymer-project.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,admin.recaptcha.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,recaptcha.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,shattered.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,synergyse.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tensorflow.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tfhub.dev,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tiltbrush.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,waveprotocol.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,waymo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,webmproject.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,webrtc.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,whatbrowser.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,widevine.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,x.company,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,youtu.be,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,yt.be,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ytimg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,1drv.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,1drv.ms,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,blob.core.windows.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,livefilestore.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,onedrive.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,storage.live.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,storage.msn.com,?? вт╤╞вН©Л
-  - DOMAIN,oneclient.sfx.ms,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,0rz.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,4bluestones.biz,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,9bis.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,allconnected.co,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,aol.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bcc.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bit.ly,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bitshare.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,blog.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,blogimg.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,blogtd.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,broadcast.co.nz,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,camfrog.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,cfos.de,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,citypopulation.de,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,cloudfront.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ctitv.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,cuhk.edu.hk,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,cusu.hk,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,discord.gg,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,discuss.com.hk,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dropboxapi.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,duolingo.cn,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,edditstatic.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,flickriver.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,focustaiwan.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,free.fr,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gigacircle.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hk-pub.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hosting.co.uk,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hwcdn.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ifixit.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,iphone4hongkong.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,iphonetaiwan.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,iptvbin.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,linksalpha.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,manyvids.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,myactimes.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,newsblur.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,now.im,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nowe.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,redditlist.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,s3.amazonaws.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,signal.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,smartmailcloud.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,sparknotes.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,streetvoice.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,supertop.co,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tv.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,typepad.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,udnbkk.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,urbanairship.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,whispersystems.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,wikia.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,wn.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,wolframalpha.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,x-art.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,yimg.com,?? вт╤╞вН©Л
-  - DOMAIN,api.steampowered.com,?? вт╤╞вН©Л
-  - DOMAIN,store.steampowered.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,linkedin.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,deezer.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dzcdn.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,kkbox.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,kkbox.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,kfs.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,joox.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pandora.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,p-cdn.us,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,sndcdn.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,soundcloud.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pscdn.co,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,scdn.co,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,spotify.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,spoti.fi,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,spotify.com,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,-spotify-com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tidal.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,c4assets.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,channel4.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,abema.io,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ameba.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,abema.tv,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hayabusa.io,?? вт╤╞вН©Л
-  - DOMAIN,abematv.akamaized.net,?? вт╤╞вН©Л
-  - DOMAIN,ds-linear-abematv.akamaized.net,?? вт╤╞вН©Л
-  - DOMAIN,ds-vod-abematv.akamaized.net,?? вт╤╞вН©Л
-  - DOMAIN,linear-abematv.akamaized.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,aiv-cdn.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,aiv-delivery.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,amazonvideo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,primevideo.com,?? вт╤╞вН©Л
-  - DOMAIN,avodmp4s3ww-a.akamaihd.net,?? вт╤╞вН©Л
-  - DOMAIN,d25xi40x97liuc.cloudfront.net,?? вт╤╞вН©Л
-  - DOMAIN,dmqdd6hw24ucf.cloudfront.net,?? вт╤╞вН©Л
-  - DOMAIN,d22qjgkvxw22r6.cloudfront.net,?? вт╤╞вН©Л
-  - DOMAIN,d1v5ir2lpwr8os.cloudfront.net,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,avoddashs,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bahamut.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,gamer.com.tw,?? вт╤╞вН©Л
-  - DOMAIN,gamer-cds.cdn.hinet.net,?? вт╤╞вН©Л
-  - DOMAIN,gamer2-cds.cdn.hinet.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bbc.co.uk,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bbci.co.uk,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,bbcfmt,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,uk-live,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dazn.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dazn-api.com,?? вт╤╞вН©Л
-  - DOMAIN,d151l6v8er5bdm.cloudfront.net,?? вт╤╞вН©Л
-  - DOMAIN-KEYWORD,voddazn,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,bamgrid.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,disney-plus.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,disneyplus.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,dssott.com,?? вт╤╞вН©Л
-  - DOMAIN,cdn.registerdisney.go.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,encoretvb.com,?? вт╤╞вН©Л
-  - DOMAIN,edge.api.brightcove.com,?? вт╤╞вН©Л
-  - DOMAIN,bcbolt446c5271-a.akamaihd.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,fox.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,foxdcg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,theplatform.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,uplynk.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hbo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hbogo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hbonow.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hbogoasia.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hbogoasia.hk,?? вт╤╞вН©Л
-  - DOMAIN,bcbolthboa-a.akamaihd.net,?? вт╤╞вН©Л
-  - DOMAIN,players.brightcove.net,?? вт╤╞вН©Л
-  - DOMAIN,s3-ap-southeast-1.amazonaws.com,?? вт╤╞вН©Л
-  - DOMAIN,dai3fd1oh325y.cloudfront.net,?? вт╤╞вН©Л
-  - DOMAIN,44wilhpljf.execute-api.ap-southeast-1.amazonaws.com,?? вт╤╞вН©Л
-  - DOMAIN,hboasia1-i.akamaihd.net,?? вт╤╞вН©Л
-  - DOMAIN,hboasia2-i.akamaihd.net,?? вт╤╞вН©Л
-  - DOMAIN,hboasia3-i.akamaihd.net,?? вт╤╞вН©Л
-  - DOMAIN,hboasia4-i.akamaihd.net,?? вт╤╞вН©Л
-  - DOMAIN,hboasia5-i.akamaihd.net,?? вт╤╞вН©Л
-  - DOMAIN,cf-images.ap-southeast-1.prod.boltdns.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,5itv.tv,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ocnttv.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hulu.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,huluim.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hulustream.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,happyon.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,hulu.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,itv.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,itvstatic.com,?? вт╤╞вН©Л
-  - DOMAIN,itvpnpmobile-a.akamaihd.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,kktv.com.tw,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,kktv.me,?? вт╤╞вН©Л
-  - DOMAIN,kktv-theater.kk.stream,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,linetv.tw,?? вт╤╞вН©Л
-  - DOMAIN,d3c7rimkq79yfu.cloudfront.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,litv.tv,?? вт╤╞вН©Л
-  - DOMAIN,litvfreemobile-hichannel.cdn.hinet.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,channel5.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,my5.tv,?? вт╤╞вН©Л
-  - DOMAIN,d349g9zuie06uo.cloudfront.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,mytvsuper.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,tvb.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,netflix.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,netflix.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nflxext.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nflximg.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nflximg.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nflxso.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nflxvideo.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,netflixdnstest0.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,netflixdnstest1.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,netflixdnstest2.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,netflixdnstest3.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,netflixdnstest4.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,netflixdnstest5.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,netflixdnstest6.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,netflixdnstest7.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,netflixdnstest8.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,netflixdnstest9.com,?? вт╤╞вН©Л
-  - IP-CIDR,23.246.0.0/18,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,37.77.184.0/21,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,45.57.0.0/17,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,64.120.128.0/17,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,66.197.128.0/17,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,108.175.32.0/20,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,192.173.64.0/18,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,198.38.96.0/19,?? вт╤╞вН©Л,no-resolve
-  - IP-CIDR,198.45.48.0/20,?? вт╤╞вН©Л,no-resolve
-  - DOMAIN-SUFFIX,dmc.nico,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nicovideo.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,nimg.jp,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,socdm.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pbs.org,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,phncdn.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pornhub.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,pornhubpremium.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,skyking.com.tw,?? вт╤╞вН©Л
-  - DOMAIN,hamifans.emome.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,twitch.tv,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,twitchcdn.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,ttvnw.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,jtvnw.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,viu.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,viu.tv,?? вт╤╞вН©Л
-  - DOMAIN,api.viu.now.com,?? вт╤╞вН©Л
-  - DOMAIN,d1k2us671qcoau.cloudfront.net,?? вт╤╞вН©Л
-  - DOMAIN,d2anahhhmp1ffz.cloudfront.net,?? вт╤╞вН©Л
-  - DOMAIN,dfp6rglgjqszk.cloudfront.net,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,googlevideo.com,?? вт╤╞вН©Л
-  - DOMAIN-SUFFIX,youtube.com,?? вт╤╞вН©Л
-  - DOMAIN,youtubei.googleapis.com,?? вт╤╞вН©Л
-  - GEOIP,CN,??Direct
-  - MATCH,?? ╧ЗмБаВа©
+  - DOMAIN,browser-intake-datadoghq.com,AI
+  - DOMAIN,chat.openai.com.cdn.cloudflare.net,AI
+  - DOMAIN,gemini.google.com,AI
+  - DOMAIN,openai-api.arkoselabs.com,AI
+  - DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,AI
+  - DOMAIN,openaicomproductionae4b.blob.core.windows.net,AI
+  - DOMAIN,production-openaicom-storage.azureedge.net,AI
+  - DOMAIN,static.cloudflareinsights.com,AI
+  - DOMAIN-SUFFIX,AI.com,AI
+  - DOMAIN-SUFFIX,algolia.net,AI
+  - DOMAIN-SUFFIX,api.statsig.com,AI
+  - DOMAIN-SUFFIX,auth0.com,AI
+  - DOMAIN-SUFFIX,chatgpt.com,AI
+  - DOMAIN-SUFFIX,chatgpt.livekit.cloud,AI
+  - DOMAIN-SUFFIX,client-api.arkoselabs.com,AI
+  - DOMAIN-SUFFIX,events.statsigapi.net,AI
+  - DOMAIN-SUFFIX,featuregates.org,AI
+  - DOMAIN-SUFFIX,host.livekit.cloud,AI
+  - DOMAIN-SUFFIX,identrust.com,AI
+  - DOMAIN-SUFFIX,intercom.io,AI
+  - DOMAIN-SUFFIX,intercomcdn.com,AI
+  - DOMAIN-SUFFIX,launchdarkly.com,AI
+  - DOMAIN-SUFFIX,oaistatic.com,AI
+  - DOMAIN-SUFFIX,oaiusercontent.com,AI
+  - DOMAIN-SUFFIX,observeit.net,AI
+  - DOMAIN-SUFFIX,openai.com,AI
+  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net,AI
+  - DOMAIN-SUFFIX,openaicom.imgix.net,AI
+  - DOMAIN-SUFFIX,segment.io,AI
+  - DOMAIN-SUFFIX,sentry.io,AI
+  - DOMAIN-SUFFIX,stripe.com,AI
+  - DOMAIN-SUFFIX,turn.livekit.cloud,AI
+  - DOMAIN-KEYWORD,openai,AI
+  - IP-CIDR,24.199.123.28/32,AI,no-resolve
+  - IP-CIDR,64.23.132.171/32,AI,no-resolve
+  - DOMAIN,cdn.usefathom.com,AI
+  - DOMAIN-SUFFIX,anthropic.com,AI
+  - DOMAIN-SUFFIX,claude.ai,AI
+  - DOMAIN,AI.google.dev,AI
+  - DOMAIN,alkalimakersuite-pa.clients6.google.com,AI
+  - DOMAIN,generativelanguage.googleapis.com,AI
+  - DOMAIN,makersuite.google.com,AI
+  - DOMAIN-SUFFIX,bard.google.com,AI
+  - DOMAIN-SUFFIX,deepmind.com,AI
+  - DOMAIN-SUFFIX,deepmind.google,AI
+  - DOMAIN-SUFFIX,gemini.google.com,AI
+  - DOMAIN-SUFFIX,generativeai.google,AI
+  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,AI
+  - DOMAIN,AI.google.dev,AI
+  - DOMAIN,alkalimakersuite-pa.clients6.google.com,AI
+  - DOMAIN,makersuite.google.com,AI
+  - DOMAIN-SUFFIX,bard.google.com,AI
+  - DOMAIN-SUFFIX,deepmind.com,AI
+  - DOMAIN-SUFFIX,deepmind.google,AI
+  - DOMAIN-SUFFIX,gemini.google.com,AI
+  - DOMAIN-SUFFIX,generativeai.google,AI
+  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,AI
+  - DOMAIN-SUFFIX,apis.google.com,AI
+  - DOMAIN-KEYWORD,colab,AI
+  - DOMAIN-KEYWORD,developerprofiles,AI
+  - DOMAIN-KEYWORD,generativelanguage,AI
+  - DOMAIN,api.msn.com,AI
+  - DOMAIN,api.statsig.com,AI
+  - DOMAIN,assets.msn.com,AI
+  - DOMAIN,browser-intake-datadoghq.com,AI
+  - DOMAIN,chat.openai.com.cdn.cloudflare.net,AI
+  - DOMAIN,copilot.microsoft.com,AI
+  - DOMAIN,gateway.bingviz.microsoft.net,AI
+  - DOMAIN,gateway.bingviz.microsoftapp.net,AI
+  - DOMAIN,in.appcenter.ms,AI
+  - DOMAIN,location.microsoft.com,AI
+  - DOMAIN,odc.officeapps.live.com,AI
+  - DOMAIN,openai-api.arkoselabs.com,AI
+  - DOMAIN,openaicomproductionae4b.blob.core.windows.net,AI
+  - DOMAIN,production-openaicom-storage.azureedge.net,AI
+  - DOMAIN,r.bing.com,AI
+  - DOMAIN,self.events.data.microsoft.com,AI
+  - DOMAIN,services.bingapis.com,AI
+  - DOMAIN,static.cloudflareinsights.com,AI
+  - DOMAIN,sydney.bing.com,AI
+  - DOMAIN,www.bing.com,AI
+  - DOMAIN-SUFFIX,algolia.net,AI
+  - DOMAIN-SUFFIX,api.microsoftapp.net,AI
+  - DOMAIN-SUFFIX,auth0.com,AI
+  - DOMAIN-SUFFIX,bing-shopping.microsoft-falcon.io,AI
+  - DOMAIN-SUFFIX,challenges.cloudflare.com,AI
+  - DOMAIN-SUFFIX,chatgpt.com,AI
+  - DOMAIN-SUFFIX,chatgpt.livekit.cloud,AI
+  - DOMAIN-SUFFIX,client-api.arkoselabs.com,AI
+  - DOMAIN-SUFFIX,edgeservices.bing.com,AI
+  - DOMAIN-SUFFIX,events.statsigapi.net,AI
+  - DOMAIN-SUFFIX,featuregates.org,AI
+  - DOMAIN-SUFFIX,host.livekit.cloud,AI
+  - DOMAIN-SUFFIX,identrust.com,AI
+  - DOMAIN-SUFFIX,intercom.io,AI
+  - DOMAIN-SUFFIX,intercomcdn.com,AI
+  - DOMAIN-SUFFIX,launchdarkly.com,AI
+  - DOMAIN-SUFFIX,oaistatic.com,AI
+  - DOMAIN-SUFFIX,oaiusercontent.com,AI
+  - DOMAIN-SUFFIX,observeit.net,AI
+  - DOMAIN-SUFFIX,openai.com,AI
+  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net,AI
+  - DOMAIN-SUFFIX,openaicom.imgix.net,AI
+  - DOMAIN-SUFFIX,segment.io,AI
+  - DOMAIN-SUFFIX,sentry.io,AI
+  - DOMAIN-SUFFIX,stripe.com,AI
+  - DOMAIN-SUFFIX,turn.livekit.cloud,AI
+  - DOMAIN-KEYWORD,openaicom-api,AI
+  - IP-CIDR,24.199.123.28/32,AI,no-resolve
+  - IP-CIDR,64.23.132.171/32,AI,no-resolve
+    - DOMAIN-SUFFIX,ampproject.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,appspot.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,blogger.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,getoutline.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gvt0.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gvt1.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gvt3.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,google,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,blogspot,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,onedrive.live.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,xboxlive.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,cdninstagram.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,fb.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,fb.me,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,fbaddins.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,fbcdn.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,fbsbx.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,fbworkmail.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,instagram.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,m.me,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,messenger.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,oculus.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,oculuscdn.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,rocksdb.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,whatsapp.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,whatsapp.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,microsoft.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,s-microsoft.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,officecdn-microsoft-com.akamaized.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,copilot.microsoft.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,facebook,Х┤╙Е┼╗Ф°─Е©╚
+  - IP-CIDR,3.123.36.126/32,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,35.157.215.84/32,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,35.157.217.255/32,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,52.58.209.134/32,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,54.93.124.31/32,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,54.162.243.80/32,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,54.173.34.141/32,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,54.235.23.242/32,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,169.45.248.118/32,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - DOMAIN-SUFFIX,pscp.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,periscope.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,t.co,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,twimg.co,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,twimg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,twitpic.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,vine.co,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,twitter,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,t.me,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tdesktop.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,telegra.ph,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,telegram.me,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,telegram.org,Х┤╙Е┼╗Ф°─Е©╚
+  - IP-CIDR,91.108.4.0/22,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,91.108.8.0/22,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,91.108.12.0/22,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,91.108.16.0/22,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,91.108.56.0/22,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,149.154.160.0/20,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR6,2001:b28:f23d::/48,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR6,2001:b28:f23f::/48,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR6,2001:67c:4e8::/48,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - DOMAIN-SUFFIX,line.me,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,line-apps.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,line-scdn.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,naver.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - IP-CIDR,103.2.30.0/23,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,125.209.208.0/20,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,147.92.128.0/17,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,203.104.144.0/21,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - DOMAIN-SUFFIX,4shared.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,520cc.cc,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,881903.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,9cache.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,9gag.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,abc.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,abc.net.au,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,abebooks.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,amazon.co.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,apigee.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,apk-dl.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,apkfind.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,apkmirror.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,apkmonk.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,apkpure.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,aptoide.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,archive.is,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,archive.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,arte.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,artstation.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,arukas.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ask.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,avg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,avgle.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,badoo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bandwagonhost.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bbc.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,behance.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bibox.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,biggo.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,binance.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bitcointalk.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bitfinex.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bitmex.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bit-z.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bloglovin.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bloomberg.cn,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bloomberg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,blubrry.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,book.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,booklive.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,books.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,boslife.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,box.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,businessinsider.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bwh1.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,castbox.fm,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,cbc.ca,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,cdw.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,change.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,channelnewsasia.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ck101.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,clarionproject.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,clyp.it,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,cna.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,comparitech.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,conoha.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,crucial.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,cts.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,cw.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,cyberctm.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dailymotion.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dailyview.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,daum.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,daumcdn.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dcard.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,deepdiscount.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,depositphotos.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,deviantart.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,disconnect.me,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,discordapp.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,discordapp.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,disqus.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dlercloud.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dns2go.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dowjones.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dropbox.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dropboxusercontent.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,duckduckgo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dw.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dynu.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,earthcam.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ebookservice.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,economist.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,edgecastcdn.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,edu,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,elpais.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,enanyang.my,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,encyclopedia.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,esoir.be,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,etherscan.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,euronews.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,evozi.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,feedly.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,firech.at,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,flickr.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,flitto.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,foreignpolicy.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,freebrowser.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,freewechat.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,freeweibo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,friday.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ftchinese.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ftimg.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gate.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,getlantern.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,getsync.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,globalvoices.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,goo.ne.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,goodreads.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gov,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gov.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,greatfire.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gumroad.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hbg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,heroku.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hightail.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hk01.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hkbf.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hkbookcity.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hkej.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hket.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hkgolden.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hootsuite.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hudson.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hyread.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ibtimes.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,i-cable.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,icij.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,icoco.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,imgur.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,initiummall.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,insecam.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ipfs.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,issuu.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,istockphoto.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,japantimes.co.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,jiji.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,jinx.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,jkforum.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,joinmastodon.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,justmysocks.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,justpaste.it,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,kakao.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,kakaocorp.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,kik.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,kobo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,kobobooks.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,kodingen.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,lemonde.fr,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,lepoint.fr,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,lihkg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,listennotes.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,livestream.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,logmein.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,mail.ru,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,mailchimp.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,marc.info,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,matters.news,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,maying.co,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,medium.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,mega.nz,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,mil,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,mingpao.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,mobile01.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,myspace.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,myspacecdn.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nanyang.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,naver.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,neowin.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,newstapa.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nexitally.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nhk.or.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nicovideo.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nii.ac.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nikkei.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nofile.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,now.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nrk.no,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nyt.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nytchina.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nytcn.me,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nytco.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nytimes.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nytimg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nytlog.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nytstyle.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ok.ru,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,okex.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,on.cc,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,orientaldaily.com.my,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,overcast.fm,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,paltalk.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pao-pao.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,parsevideo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pbxes.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pcdvd.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pchome.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pcloud.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,picacomic.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pinimg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pixiv.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,player.fm,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,plurk.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,po18.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,potato.im,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,potatso.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,prism-break.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,proxifier.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pt.im,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pts.org.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pubu.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pubu.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pureapk.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,quora.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,quoracdn.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,rakuten.co.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,readingtimes.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,readmoo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,redbubble.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,reddit.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,redditmedia.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,resilio.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,reuters.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,reutersmedia.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,rfi.fr,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,rixcloud.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,roadshow.hk,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,scmp.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,scribd.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,seatguru.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,shadowsocks.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,shopee.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,slideshare.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,softfamous.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,soundcloud.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ssrcloud.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,startpage.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,steamcommunity.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,steemit.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,steemitwallet.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,t66y.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tapatalk.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,teco-hk.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,teco-mo.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,teddysun.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,textnow.me,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,theguardian.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,theinitium.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,thetvdb.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tineye.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,torproject.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tumblr.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,turbobit.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tutanota.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tvboxnow.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,udn.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,unseen.is,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,upmedia.mg,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,uptodown.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,urbandictionary.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ustream.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,uwants.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,v2ray.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,viber.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,videopress.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,vimeo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,voachinese.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,voanews.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,voxer.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,vzw.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,w3schools.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,washingtonpost.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,wattpad.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,whoer.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,wikimapia.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,wikipedia.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,wikiquote.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,wikiwand.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,winudf.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,wire.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,wordpress.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,workflow.is,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,worldcat.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,wsj.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,wsj.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,xhamster.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,xn--90wwvt03e.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,xn--i2ru8q2qg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,xnxx.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,xvideos.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,yahoo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,yandex.ru,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ycombinator.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,yesasia.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,yes-news.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,yomiuri.co.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,you-get.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,zaobao.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,zb.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,zello.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,zeronet.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,zoom.us,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,github.global.ssl.fastly.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,github.blog,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,github.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,github.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,githubassets.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,githubusercontent.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,jav,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,pinterest,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,porn,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,wikileaks,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,apartmentratings.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,apartments.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bankmobilevibe.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bing.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,booktopia.com.au,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,cccat.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,centauro.com.br,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,clearsurance.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,costco.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,crackle.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,depositphotos.cn,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dish.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dmm.co.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dmm.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dnvod.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,esurance.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,extmatrix.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,fastpic.ru,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,flipboard.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,fnac.be,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,fnac.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,funkyimg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,fxnetworks.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gettyimages.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,go.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,here.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,jcpenney.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,jiehua.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,mailfence.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nationwide.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nbc.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nexon.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nordstrom.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nordstromimage.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nordstromrack.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,superpages.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,target.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,thinkgeek.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tracfone.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,unity3d.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,uploader.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,vevo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,viu.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,vk.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,vsco.co,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,xfinity.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,zattoo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,testflight.apple.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,appsto.re,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,books.itunes.apple.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,hls.itunes.apple.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,apps.apple.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,itunes.apple.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,api-glb-sea.smoot.apple.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,lookup-api.apple.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,abc.xyz,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,android.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,androidify.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dialogflow.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,autodraw.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,capitalg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,certificate-transparency.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,chrome.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,chromeexperiments.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,chromestatus.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,chromium.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,creativelab5.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,debug.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,deepmind.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,firebaseio.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,getmdl.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ggpht.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gmail.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gmodules.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,godoc.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,golang.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gstatic.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gv.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gwtproject.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,itasoftware.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,madewithcode.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,material.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,polymer-project.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,admin.recaptcha.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,recaptcha.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,shattered.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,synergyse.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tensorflow.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tfhub.dev,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tiltbrush.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,waveprotocol.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,waymo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,webmproject.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,webrtc.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,whatbrowser.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,widevine.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,x.company,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,youtu.be,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,yt.be,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ytimg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,1drv.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,1drv.ms,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,blob.core.windows.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,livefilestore.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,onedrive.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,storage.live.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,storage.msn.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,oneclient.sfx.ms,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,0rz.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,4bluestones.biz,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,9bis.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,allconnected.co,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,aol.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bcc.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bit.ly,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bitshare.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,blog.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,blogimg.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,blogtd.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,broadcast.co.nz,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,camfrog.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,cfos.de,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,citypopulation.de,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,cloudfront.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ctitv.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,cuhk.edu.hk,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,cusu.hk,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,discord.gg,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,discuss.com.hk,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dropboxapi.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,duolingo.cn,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,edditstatic.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,flickriver.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,focustaiwan.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,free.fr,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gigacircle.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hk-pub.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hosting.co.uk,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hwcdn.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ifixit.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,iphone4hongkong.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,iphonetaiwan.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,iptvbin.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,linksalpha.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,manyvids.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,myactimes.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,newsblur.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,now.im,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nowe.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,redditlist.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,s3.amazonaws.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,signal.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,smartmailcloud.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,sparknotes.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,streetvoice.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,supertop.co,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tv.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,typepad.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,udnbkk.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,urbanairship.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,whispersystems.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,wikia.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,wn.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,wolframalpha.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,x-art.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,yimg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,api.steampowered.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,store.steampowered.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,linkedin.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,deezer.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dzcdn.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,kkbox.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,kkbox.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,kfs.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,joox.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pandora.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,p-cdn.us,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,sndcdn.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,soundcloud.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pscdn.co,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,scdn.co,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,spotify.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,spoti.fi,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,spotify.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,-spotify-com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tidal.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,c4assets.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,channel4.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,abema.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ameba.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,abema.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hayabusa.io,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,abematv.akamaized.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,ds-linear-abematv.akamaized.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,ds-vod-abematv.akamaized.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,linear-abematv.akamaized.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,aiv-cdn.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,aiv-delivery.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,amazonvideo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,primevideo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,avodmp4s3ww-a.akamaihd.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,d25xi40x97liuc.cloudfront.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,dmqdd6hw24ucf.cloudfront.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,d22qjgkvxw22r6.cloudfront.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,d1v5ir2lpwr8os.cloudfront.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,avoddashs,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bahamut.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,gamer.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,gamer-cds.cdn.hinet.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,gamer2-cds.cdn.hinet.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bbc.co.uk,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bbci.co.uk,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,bbcfmt,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,uk-live,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dazn.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dazn-api.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,d151l6v8er5bdm.cloudfront.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-KEYWORD,voddazn,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,bamgrid.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,disney-plus.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,disneyplus.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,dssott.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,cdn.registerdisney.go.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,encoretvb.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,edge.api.brightcove.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,bcbolt446c5271-a.akamaihd.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,fox.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,foxdcg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,theplatform.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,uplynk.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hbo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hbogo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hbonow.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hbogoasia.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hbogoasia.hk,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,bcbolthboa-a.akamaihd.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,players.brightcove.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,s3-ap-southeast-1.amazonaws.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,dai3fd1oh325y.cloudfront.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,44wilhpljf.execute-api.ap-southeast-1.amazonaws.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,hboasia1-i.akamaihd.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,hboasia2-i.akamaihd.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,hboasia3-i.akamaihd.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,hboasia4-i.akamaihd.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,hboasia5-i.akamaihd.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,cf-images.ap-southeast-1.prod.boltdns.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,5itv.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ocnttv.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hulu.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,huluim.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hulustream.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,happyon.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,hulu.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,itv.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,itvstatic.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,itvpnpmobile-a.akamaihd.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,kktv.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,kktv.me,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,kktv-theater.kk.stream,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,linetv.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,d3c7rimkq79yfu.cloudfront.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,litv.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,litvfreemobile-hichannel.cdn.hinet.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,channel5.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,my5.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,d349g9zuie06uo.cloudfront.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,mytvsuper.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,tvb.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,netflix.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,netflix.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nflxext.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nflximg.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nflximg.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nflxso.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nflxvideo.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,netflixdnstest0.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,netflixdnstest1.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,netflixdnstest2.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,netflixdnstest3.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,netflixdnstest4.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,netflixdnstest5.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,netflixdnstest6.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,netflixdnstest7.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,netflixdnstest8.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,netflixdnstest9.com,Х┤╙Е┼╗Ф°─Е©╚
+  - IP-CIDR,23.246.0.0/18,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,37.77.184.0/21,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,45.57.0.0/17,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,64.120.128.0/17,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,66.197.128.0/17,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,108.175.32.0/20,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,192.173.64.0/18,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,198.38.96.0/19,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - IP-CIDR,198.45.48.0/20,Х┤╙Е┼╗Ф°─Е©╚,no-resolve
+  - DOMAIN-SUFFIX,dmc.nico,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nicovideo.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,nimg.jp,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,socdm.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pbs.org,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,phncdn.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pornhub.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,pornhubpremium.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,skyking.com.tw,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,hamifans.emome.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,twitch.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,twitchcdn.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,ttvnw.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,jtvnw.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,viu.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,viu.tv,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,api.viu.now.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,d1k2us671qcoau.cloudfront.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,d2anahhhmp1ffz.cloudfront.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,dfp6rglgjqszk.cloudfront.net,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,googlevideo.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN-SUFFIX,youtube.com,Х┤╙Е┼╗Ф°─Е©╚
+  - DOMAIN,youtubei.googleapis.com,Х┤╙Е┼╗Ф°─Е©╚
+  - GEOIP,CN,Direct
+  - MATCH,Е⌡╫Е╓√Ф╣│И┤▐
  
