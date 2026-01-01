@@ -56,9 +56,6 @@ dns:
       - geolocation-!cn
     ipcidr:
       - 240.0.0.0/4
-      # ��Ҫ�Ļ����ټ�һЩ������/�����
-  # ����ѡ���Ƽ���Mihomo֧�֣�
-  # ��ȷָ�������С����й�վ�㼯�ϡ���ֱ���� DoH ����
   nameserver-policy:
     'geosite:geolocation-!cn': ['https://dns.alidns.com/dns-query']
 profile:
@@ -902,6 +899,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,国外流量
  
+
 
 
 
