@@ -64,7 +64,6 @@ dns:
     'geosite:geolocation-!cn': ['https://dns.alidns.com/dns-query']
 profile:
   store-selected: true
-mode: rule
 proxy-groups:
   - name: AI
     type: url-test
@@ -904,5 +903,6 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,国外流量
  
+
 
 
