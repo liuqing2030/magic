@@ -25,11 +25,11 @@ proxy-providers:
       enable: true
       interval: 600
       url: http://www.gstatic.com/generate_204
-  Provider_B:
+  Provider_C:
     type: http
     url: "https://dler.cloud/api/v3/download.getFile/80615782-a0f9-4dd6-9767-e1fca7decd6b?clash=smart&lv=2.png" # RioLU
     interval: 3600
-    path: ./provider_b.yaml
+    path: ./provider_c.yaml
     health-check:
       enable: true
       interval: 600
