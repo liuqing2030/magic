@@ -27,7 +27,7 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
   Provider_C:
     type: http
-    url: "https://dler.cloud/api/v3/download.getFile/80615782-a0f9-4dd6-9767-e1fca7decd6b?clash=smart&lv=2.png" # RioLU
+    url: "https://dler.cloud/api/v3/download.getFile/80615782-a0f9-4dd6-9767-e1fca7decd6b?clash=smart&lv=2.png" # Delr cloud
     interval: 3600
     path: ./provider_c.yaml
     health-check:
@@ -908,6 +908,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,国外流量
  
+
 
 
 
