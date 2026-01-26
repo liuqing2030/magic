@@ -68,9 +68,9 @@ dns:
   fallback-filter:
     geoip: true
     geoip-code: CN
-    geosite:
-      - gfw
-      - geolocation-!cn
+    #geosite:
+    #  - gfw
+    #  - geolocation-!cn
 
   nameserver-policy:
     'geosite:geolocation-!cn': ['https://223.5.5.5/dns-query']
@@ -818,6 +818,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
