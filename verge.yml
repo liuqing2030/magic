@@ -4,7 +4,12 @@ mode: rule
 log-level: info
 ipv6: false
 # ---------------------------------------------------
-
+tun:
+  enable: true
+  stack: system
+  auto-route: true
+  # 强制让 10.x.x.x 的流量根本不经过 Clash 虚拟网卡
+  bypass-lan-addresses: true
 # ---------------------------------------------------
 proxy-providers:
   Provider_A:
@@ -813,6 +818,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
