@@ -40,33 +40,36 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   use-hosts: true
-  # 国外流量 DoH
+
   default-nameserver:
     - 223.5.5.5        
-    - 119.29.29.29     
+    - 119.29.29.29    
+    - 180.76.76.76  
+    
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
     - 180.76.76.76     
+    
   # **国外流量** fallback DoH
   fallback:
     - https://dns.alidns.com/dns-query 
-    - https://1.12.12.12/dns-query       
-    - tls://223.6.6.6:853              
-  # **国外流量国外流量
+    - https://1.12.12.12/dns-query 
+    
+# 关键：指定解析 DoH 域名时使用的服务器，防止死循环
   proxy-server-nameserver:
-    - https://dns.alidns.com/dns-query
-  # 国外流量fallbackDoH
+    - 223.5.5.5
+    
   fallback-filter:
     geoip: true
     geoip-code: CN
     geosite:
       - gfw
       - geolocation-!cn
-    ipcidr:
-      - 240.0.0.0/4
+
   nameserver-policy:
     'geosite:geolocation-!cn': ['https://dns.alidns.com/dns-query']
+    
 profile:
   store-selected: true
 proxy-groups:
@@ -96,7 +99,10 @@ rule-providers:
  
 rules:
   - IP-CIDR,10.227.245.82/32,DIRECT
-  - IP-CIDR,10.0.0.0/8,DIRECT 
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - PROCESS-NAME,iCloudDrive.exe,自动最快
   - PROCESS-NAME,iCloudCKKS.exe,自动最快
   - RULE-SET,Apple,自动最快
@@ -800,6 +806,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
