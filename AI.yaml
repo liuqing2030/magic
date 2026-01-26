@@ -37,7 +37,7 @@ payload:
   - DOMAIN,cdn.usefathom.com
   - DOMAIN-SUFFIX,anthropic.com
   - DOMAIN-SUFFIX,claude.ai
-  - DOMAIN.google.dev
+  - DOMAIN,google.dev
   - DOMAIN,alkalimakersuite-pa.clients6.google.com
   - DOMAIN,generativelanguage.googleapis.com
   - DOMAIN,makersuite.google.com
@@ -47,7 +47,7 @@ payload:
   - DOMAIN-SUFFIX,gemini.google.com
   - DOMAIN-SUFFIX,generativeai.google
   - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
-  - DOMAIN.google.dev
+  - DOMAIN,google.dev
   - DOMAIN,alkalimakersuite-pa.clients6.google.com
   - DOMAIN,makersuite.google.com
   - DOMAIN-SUFFIX,bard.google.com
