@@ -93,6 +93,7 @@ proxy-groups:
       - 自动最快
 
 rule-providers:
+    AdBlock: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AdBlock.yaml', path: ./Rules/AdBlock, interval: 86400 }
     Apple: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Apple.yaml', path: ./Rules/Apple, interval: 86400 }
     AI: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AI.yaml', path: ./Rules/AI, interval: 86400 }
     Microsoft: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Microsoft.yaml', path: ./Rules/Microsoft, interval: 86400 }
@@ -108,6 +109,7 @@ rules:
   - RULE-SET,Apple,自动最快
   - RULE-SET,Microsoft,DIRECT
   - RULE-SET,AI,AI
+  - RULE-SET,AdBlock,REJECT
   - DOMAIN-SUFFIX,ampproject.org,自动最快
   - DOMAIN-SUFFIX,appspot.com,自动最快
   - DOMAIN-SUFFIX,blogger.com,自动最快
@@ -806,6 +808,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
