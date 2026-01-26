@@ -94,6 +94,10 @@ rule-providers:
     AI: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AI.yaml', path: ./Rules/AI, interval: 86400 }
  
 rules:
+  - IP-CIDR,10.227.245.82/32,DIRECT
+  - IP-CIDR,10.0.0.0/8,DIRECT 
+  - PROCESS-NAME,iCloudDrive.exe,自动最快
+  - PROCESS-NAME,iCloudCKKS.exe,自动最快
   - RULE-SET,Apple,自动最快
   - RULE-SET,AI,AI
   - DOMAIN-SUFFIX,ampproject.org,自动最快
@@ -800,6 +804,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
