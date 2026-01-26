@@ -93,7 +93,7 @@ rule-providers:
     Apple: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Apple.yaml', path: ./Rules/Apple, interval: 86400 }
  
 rules:
-  - 'RULE-SET,Apple,自动最快'
+  - RULE-SET,Apple,自动最快
   - DOMAIN,browser-intake-datadoghq.com,AI
   - DOMAIN,chat.openai.com.cdn.cloudflare.net,AI
   - DOMAIN,gemini.google.com,AI
@@ -908,6 +908,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
