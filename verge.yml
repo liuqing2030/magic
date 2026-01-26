@@ -92,6 +92,7 @@ proxy-groups:
 rule-providers:
     Apple: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Apple.yaml', path: ./Rules/Apple, interval: 86400 }
     AI: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AI.yaml', path: ./Rules/AI, interval: 86400 }
+    Microsoft: { type: http, behavior: classical, url: 'https://raw.dler.io/dler-io/Rules/main/Clash/Provider/Microsoft.yaml', path: ./Rules/Microsoft, interval: 86400 }
  
 rules:
   - IP-CIDR,10.227.245.82/32,DIRECT
@@ -99,6 +100,7 @@ rules:
   - PROCESS-NAME,iCloudDrive.exe,自动最快
   - PROCESS-NAME,iCloudCKKS.exe,自动最快
   - RULE-SET,Apple,自动最快
+  - RULE-SET,Microsoft,DIRECT
   - RULE-SET,AI,AI
   - DOMAIN-SUFFIX,ampproject.org,自动最快
   - DOMAIN-SUFFIX,appspot.com,自动最快
@@ -110,8 +112,6 @@ rules:
   - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,自动最快
   - DOMAIN-KEYWORD,google,自动最快
   - DOMAIN-KEYWORD,blogspot,自动最快
-  - DOMAIN-SUFFIX,onedrive.live.com,自动最快
-  - DOMAIN-SUFFIX,xboxlive.com,自动最快
   - DOMAIN-SUFFIX,cdninstagram.com,自动最快
   - DOMAIN-SUFFIX,fb.com,自动最快
   - DOMAIN-SUFFIX,fb.me,自动最快
@@ -127,10 +127,6 @@ rules:
   - DOMAIN-SUFFIX,rocksdb.org,自动最快
   - DOMAIN-SUFFIX,whatsapp.com,自动最快
   - DOMAIN-SUFFIX,whatsapp.net,自动最快
-  - DOMAIN-SUFFIX,microsoft.com,自动最快
-  - DOMAIN-SUFFIX,s-microsoft.com,自动最快
-  - DOMAIN,officecdn-microsoft-com.akamaized.net,自动最快
-  - DOMAIN-SUFFIX,copilot.microsoft.com,自动最快
   - DOMAIN-KEYWORD,facebook,自动最快
   - IP-CIDR,3.123.36.126/32,自动最快,no-resolve
   - IP-CIDR,35.157.215.84/32,自动最快,no-resolve
@@ -804,6 +800,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
