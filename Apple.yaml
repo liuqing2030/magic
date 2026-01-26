@@ -32,6 +32,6 @@ payload:
 
   # > Apple Maps
   - PROCESS-NAME,com.apple.geod
-  - PROCESS-NAME,iCloudDrive.exe,你的代理组名
-  - PROCESS-NAME,iCloudServices.exe,你的代理组名
-  - PROCESS-NAME,ApplePhotoStreams.exe,你的代理组名
+  - PROCESS-NAME,iCloudDrive.exe
+  - PROCESS-NAME,iCloudServices.exe
+  - PROCESS-NAME,ApplePhotoStreams.exe
