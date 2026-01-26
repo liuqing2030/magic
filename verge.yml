@@ -83,11 +83,6 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
-  - name: 国外流量
-    type: select
-    proxies:
-      - 自动最快
-      - DIRECT
   - name: Direct
     type: select
     proxies:
@@ -204,7 +199,7 @@ rules:
   - DOMAIN-KEYWORD,openaicom-api,AI
   - IP-CIDR,24.199.123.28/32,AI,no-resolve
   - IP-CIDR,64.23.132.171/32,AI,no-resolve
-    - DOMAIN-SUFFIX,ampproject.org,自动最快
+  - DOMAIN-SUFFIX,ampproject.org,自动最快
   - DOMAIN-SUFFIX,appspot.com,自动最快
   - DOMAIN-SUFFIX,blogger.com,自动最快
   - DOMAIN-SUFFIX,getoutline.org,自动最快
@@ -906,8 +901,9 @@ rules:
   - DOMAIN-SUFFIX,youtube.com,自动最快
   - DOMAIN,youtubei.googleapis.com,自动最快
   - GEOIP,CN,Direct
-  - MATCH,国外流量
+  - MATCH,自动最快
  
+
 
 
 
