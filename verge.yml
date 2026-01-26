@@ -87,6 +87,7 @@ proxy-groups:
     type: select
     proxies:
       - DIRECT
+      - 自动最快
  
 rules:
   - DOMAIN,browser-intake-datadoghq.com,AI
@@ -903,6 +904,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
