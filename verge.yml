@@ -10,8 +10,11 @@ tun:
   auto-route: true
   # 强制让 10.x.x.x 的流量根本不经过 Clash 虚拟网卡
   bypass-lan-addresses: true
+  routing-mark: 666
+  strict-route: true
   process-name-filter:
     - XFRHTX.exe
+    - XFRHTXEx.exe
 # ---------------------------------------------------
 proxy-providers:
   Provider_A:
@@ -820,6 +823,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
