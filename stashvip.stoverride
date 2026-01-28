@@ -11,6 +11,7 @@ http:
     # --- Spotify 域名 ---
     - "spclient.wg.spotify.com"
     - "*-spclient.spotify.com"
+    - "ap*.intsig.net"
 
 script:
     # --- 白描脚本逻辑 ---
@@ -32,6 +33,12 @@ script:
       type: request
       timeout: 10
 
+    - match: https:\/\/(api|api-cs)\.intsig\.net\/purchase\/cs\/query_property\?
+      name: saomiaoquannengwang1
+      type: response
+      require-body: true
+      timeout: 10
+
 script-providers:
     # --- 白描 资源 ---
     baimiao1:
@@ -45,3 +52,7 @@ script-providers:
     smile_spotify_json:
       url: https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
       interval: 86400
+
+  saomiaoquannengwang1:
+    url: https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/CamScanner.js
+    interval: 86400
