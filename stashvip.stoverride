@@ -12,7 +12,7 @@ http:
     - "spclient.wg.spotify.com"
     - "*-spclient.spotify.com"
 
-  script:
+script:
     # --- 白描脚本逻辑 ---
     - match: ^https?:\/\/baimiao\.uzero\.cn\/api\/v\d\.user\/appLaunchWithUser$
       name: baimiao1
@@ -33,15 +33,15 @@ http:
       timeout: 10
 
 script-providers:
-  # --- 白描 资源 ---
-  baimiao1:
-    url: https://raw.githubusercontent.com/iEwha/Profiles/master/Script/baimiao.js
-    interval: 86400
-  
-  # --- Spotify 资源 ---
-  smile_spotify:
-    url: https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js
-    interval: 86400
-  smile_spotify_json:
-    url: https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
-    interval: 86400
+    # --- 白描 资源 ---
+    baimiao1:
+      url: https://raw.githubusercontent.com/iEwha/Profiles/master/Script/baimiao.js
+      interval: 86400
+    
+    # --- Spotify 资源 ---
+    smile_spotify:
+      url: https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js
+      interval: 86400
+    smile_spotify_json:
+      url: https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
+      interval: 86400
