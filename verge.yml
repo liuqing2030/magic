@@ -125,6 +125,8 @@ rules:
   - RULE-SET,Microsoft,DIRECT
   - RULE-SET,AI,AI
   - RULE-SET,AdBlock,REJECT
+  - DOMAIN-SUFFIX,clarity.ms,DIRECT
+  - DOMAIN-SUFFIX,hawkingparty.com,DIRECT
   - DOMAIN-SUFFIX,ampproject.org,自动最快
   - DOMAIN-SUFFIX,appspot.com,自动最快
   - DOMAIN-SUFFIX,blogger.com,自动最快
@@ -823,6 +825,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
