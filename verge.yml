@@ -50,6 +50,16 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   use-hosts: true
+  fake-ip-filter:
+    - "*.ccb.com"
+    - "*.icbc.com.cn"
+    - "*.abchina.com"
+    - "*.bankofchina.com"
+    - "*.95559.com.cn"
+    - "*.cebbank.com"
+    - "localhost"
+    - "+.lan"
+    - "+.local"
   fallback-filter:
     geoip: true
     geoip-code: CN
@@ -823,6 +833,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
