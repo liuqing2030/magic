@@ -53,7 +53,7 @@ dns:
   fake-ip-filter:
     - "*.ccb.com"
     - "*.icbc.com.cn"
-    - "*.abchina.com"
+    - "*.abchina.com.cn"
     - "*.bankofchina.com"
     - "*.95559.com.cn"
     - "*.cebbank.com"
@@ -833,6 +833,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
