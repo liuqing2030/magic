@@ -9,7 +9,7 @@
 # IP-CIDR6: 4
 # TOTAL: 3728
 payload:
-  - DOMAIN-KEYWORD,.tmall.com
+  - DOMAIN-KEYWORD,tmall.com
   - DOMAIN-KEYWORD,alicdn
   - DOMAIN-KEYWORD,alipay
   - DOMAIN-KEYWORD,aliyun
@@ -367,7 +367,6 @@ payload:
   - DOMAIN-SUFFIX,videojj.com
   - DOMAIN-SUFFIX,wenyupages.com
   - DOMAIN-SUFFIX,wingsmobiletek.cn
-  - DOMAIN-SUFFIX,wwc.alicdn.com
   - DOMAIN-SUFFIX,xiami.com
   - DOMAIN-SUFFIX,xiami.net
   - DOMAIN-SUFFIX,y.qq.com
