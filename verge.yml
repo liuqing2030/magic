@@ -52,9 +52,12 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
 
+
+
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
+    
   nameserver-policy:
     "geosite:cn,private,douyin": [223.5.5.5, 119.29.29.29]
     "geosite:geolocation-!cn": ["https://1.1.1.1/dns-query", "https://8.8.8.8/dns-query", "https://dns.google/dns-query"]
@@ -115,5 +118,6 @@ rules:
   - RULE-SET,Apple,自动最快
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
+
 
 
