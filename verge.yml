@@ -50,7 +50,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   use-hosts: true
-fake-ip-filter:
+  fake-ip-filter:
     - "geosite:cn"
     - "geosite:douyin"
     - "*.lan"
@@ -165,6 +165,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
