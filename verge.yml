@@ -108,7 +108,8 @@ dns:
     '+.byteimg.com': 223.5.5.5
     '+.toutiao.com': 223.5.5.5
     '+.ixigua.com': 223.5.5.5
-    
+    '+.zijieapi.com': 223.5.5.5
+
     # 淘宝/阿里系
     '+.taobao.com': 223.5.5.5
     '+.tmall.com': 223.5.5.5
