@@ -9,6 +9,7 @@
 # IP-CIDR6: 4
 # TOTAL: 3728
 payload:
+  - DOMAIN-KEYWORD,zijieapi
   - DOMAIN-KEYWORD,tmall
   - DOMAIN-KEYWORD,alicdn
   - DOMAIN-KEYWORD,alipay
