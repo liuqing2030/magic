@@ -4,7 +4,6 @@ mode: rule
 log-level: info
 ipv6: false
 
-# ---------------------------------------------------
 tun:
   enable: true
   stack: gvisor
@@ -12,7 +11,6 @@ tun:
   bypass-lan-addresses: true
   routing-mark: 666
   strict-route: true
-# ---------------------------------------------------
 
 proxy-providers:
   Provider_A:
@@ -39,26 +37,23 @@ dns:
   listen: 127.0.0.1:1053
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
-  use-hosts: true
   fake-ip-filter:
     - "geosite:cn"
     - "geosite:douyin"
     - "*.lan"
     - "*.local"
     - "localhost"
-    - "+.nba.com"
-
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
-
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
-    
   nameserver-policy:
-    "geosite:cn,private,douyin": [223.5.5.5, 119.29.29.29]
-    "geosite:geolocation-!cn": ["https://1.1.1.1/dns-query", "https://8.8.8.8/dns-query", "https://dns.google/dns-query"]
+    "geosite:cn": [223.5.5.5, 119.29.29.29]
+    "geosite:douyin": [223.5.5.5, 119.29.29.29]
+    "geosite:private": [223.5.5.5, 119.29.29.29]
+    "geosite:geolocation-!cn": ["https://dns.cloudflare.com/dns-query", "https://dns.google/dns-query"]
   proxy-server-nameserver:
     - 223.5.5.5
 
@@ -91,10 +86,7 @@ rule-providers:
   China: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/China.yaml', path: ./Rules/China, interval: 86400 }
 
 rules:
-  # 广告拦截
   - RULE-SET,AdBlock,REJECT
-
-  # 抖音关键字直连（解决卡顿的核心）
   - DOMAIN-KEYWORD,douyin,DIRECT
   - DOMAIN-KEYWORD,snssdk,DIRECT
   - DOMAIN-KEYWORD,amemv,DIRECT
@@ -104,19 +96,9 @@ rules:
   - DOMAIN-KEYWORD,volcwsccb,DIRECT
   - DOMAIN-KEYWORD,douyinvod,DIRECT
   - DOMAIN-KEYWORD,zijieapi,DIRECT
-
-  # 国内服务/软件
   - RULE-SET,China,DIRECT
   - RULE-SET,Microsoft,DIRECT
-  - DOMAIN-SUFFIX,clarity.ms,DIRECT
-  - DOMAIN-SUFFIX,hawkingparty.com,DIRECT
-
-  # 代理规则
   - RULE-SET,AI,AI
   - RULE-SET,Apple,自动最快
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
-
-
-
-
