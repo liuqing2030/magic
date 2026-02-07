@@ -6,7 +6,7 @@ ipv6: false
 # ---------------------------------------------------
 tun:
   enable: true
-  stack: system
+  stack: gvisor
   auto-route: true
   # 强制让 10.x.x.x 的流量根本不经过 Clash 虚拟网卡
   bypass-lan-addresses: true
@@ -65,6 +65,12 @@ dns:
     - "*.qpic.cn"
     - "short.weixin.qq.com"
     - "dns.weixin.qq.com"
+    - "*.douyin.com"
+    - "*.snssdk.com"
+    - "*.amemv.com"
+    - "*.ixigua.com"
+    - "*.douyinvod.com"
+    - "*.zijieapi.com"
 
 
   # 用于解析 DoH 域名本身（必须用明文DNS）
@@ -171,6 +177,15 @@ rule-providers:
   
 
 rules:
+  - DOMAIN-KEYWORD,douyin,DIRECT
+  - DOMAIN-KEYWORD,snssdk,DIRECT
+  - DOMAIN-KEYWORD,amemv,DIRECT
+  - DOMAIN-KEYWORD,pstatp,DIRECT
+  - DOMAIN-KEYWORD,byteimg,DIRECT
+  - DOMAIN-KEYWORD,bytegecko,DIRECT
+  - DOMAIN-KEYWORD,volcwsccb,DIRECT
+  - DOMAIN-KEYWORD,douyinvod,DIRECT
+  - DOMAIN-KEYWORD,zijieapi,DIRECT
 
   # 国内服务直连
   - RULE-SET,China,DIRECT
@@ -880,6 +895,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
