@@ -72,21 +72,19 @@ dns:
     - 180.76.76.76  
 
   nameserver-policy:
-    # 国内域名解析：使用阿里云和腾讯明文 DNS
-    "geosite:cn,private":
-      - 223.5.5.5
-      - 119.29.29.29
-    
-    # 抖音专项加速（解决你提到的卡顿问题）
-    "geosite:douyin":
-      - 223.5.5.5
-      - 119.29.29.29
-
-    # 国外/代理网站解析：使用加密的 DoH（防污染、防泄露）
-    "geosite:geolocation-!cn":
-      - https://1.1.1.1/dns-query
-      - https://8.8.8.8/dns-query
-      - https://dns.google/dns-query
+      # 把国内、私有网络、抖音全放在一起，解析到国内 DNS
+      "geosite:cn,private,douyin":
+        - 223.5.5.5
+        - 119.29.29.29
+      
+      # 国外走加密 DoH
+      "geosite:geolocation-!cn":
+        - https://1.1.1.1/dns-query
+        - https://8.8.8.8/dns-query
+        - https://dns.google/dns-query
+  # 关键：指定解析 DoH 域名时使用的服务器，防止死循环
+  proxy-server-nameserver:
+    - 223.5.5.5
     
   # 国外域名：加密DoH（防污染）
 #  fallback:
@@ -100,9 +98,7 @@ dns:
 #    geoip: true
 #    geoip-code: CN  # 当解析结果IP不在CN时，使用fallback    
     
-# 关键：指定解析 DoH 域名时使用的服务器，防止死循环
-  proxy-server-nameserver:
-    - 223.5.5.5
+
     
 
 
@@ -165,6 +161,7 @@ rules:
   - GEOIP,CN,Direct
   - MATCH,自动最快
  
+
 
 
 
