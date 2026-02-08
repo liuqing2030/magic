@@ -60,7 +60,7 @@ proxy-groups:
   - name: AI
     type: url-test
     include-all: true
-    filter: "(US|英|UK|加拿|美|日|JP|香港0|(支持AI))"
+    filter: "(US|英|UK|加拿|美|日|JP|)"
     url: http://www.gstatic.com/generate_204
     interval: 300
   - name: Gemini
@@ -106,6 +106,7 @@ rules:
   - RULE-SET,Apple,自动最快
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
+
 
 
 
