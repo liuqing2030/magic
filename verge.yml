@@ -60,7 +60,13 @@ proxy-groups:
   - name: AI
     type: url-test
     include-all: true
-    filter: "(US|美|英|UK|加拿)"
+    filter: "(US|英|UK|加拿|美|日|JP)"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+  - name: Gemini
+    type: url-test
+    include-all: true
+    filter: "(US|英|UK|加拿)"
     url: http://www.gstatic.com/generate_204
     interval: 300
   - name: 自动最快
@@ -80,6 +86,7 @@ rule-providers:
   AI: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AI.yaml', path: ./Rules/AI, interval: 86400 }
   Microsoft: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Microsoft.yaml', path: ./Rules/Microsoft, interval: 86400 }
   China: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/China.yaml', path: ./Rules/China, interval: 86400 }
+  Gemini: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Gemini', path: ./Rules/Gemini, interval: 86400 }
 
 rules:
   - RULE-SET,AdBlock,REJECT
@@ -94,7 +101,9 @@ rules:
   - DOMAIN-KEYWORD,zijieapi,DIRECT
   - RULE-SET,China,DIRECT
   - RULE-SET,Microsoft,DIRECT
+  - RULE-SET,Gemini,Gemini
   - RULE-SET,AI,AI
   - RULE-SET,Apple,自动最快
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
+
