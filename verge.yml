@@ -66,7 +66,7 @@ proxy-groups:
   - name: Gemini
     type: url-test
     include-all: true
-    filter: "(US|英|UK|加拿)"
+    filter: "(US|英|UK|日)"
     url: http://www.gstatic.com/generate_204
     interval: 300
   - name: 自动最快
@@ -106,4 +106,5 @@ rules:
   - RULE-SET,Apple,自动最快
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
+
 
