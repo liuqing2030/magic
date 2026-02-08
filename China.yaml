@@ -9,6 +9,8 @@
 # IP-CIDR6: 4
 # TOTAL: 3728
 payload:
+
+  - DOMAIN-SUFFIX,hawkingparty.com
   - DOMAIN-KEYWORD,zijieapi
   - DOMAIN-KEYWORD,tmall
   - DOMAIN-KEYWORD,alicdn
