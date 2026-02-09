@@ -68,14 +68,14 @@ profile:
 proxy-groups:
   - name: AI
     type: url-test
+    filter: "(US|英|UK|加拿|美|日|JP)"
     include-all: true
-    filter: "(US|英|UK|加拿|美|日|JP|)"
     url: http://www.gstatic.com/generate_204
     interval: 300
   - name: Gemini
     type: url-test
+    filter: "(105 日本|211 日本|316 英国|325 台湾|326 台湾|327 台湾|328 台湾|329 日本|香港0|支持AI)"
     include-all: true
-    filter: "(105 日本|211 日本|316 英国|325 台湾|326 台湾|327 台湾|328 台湾|329 日本|香港0|(支持AI))"
     url: http://www.gstatic.com/generate_204
     interval: 300
   - name: 自动最快
@@ -115,6 +115,7 @@ rules:
   - RULE-SET,Apple,自动最快
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
+
 
 
 
