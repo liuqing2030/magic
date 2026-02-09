@@ -38,22 +38,19 @@ dns:
   fake-ip-range: 198.18.0.1/16
   ipv6: false
   
-  # 默认 DNS：这里只放加密 DNS，确保国外流量默认加密
-  nameserver:
-    - https://dns.cloudflare.com/dns-query
-    - https://dns.google/dns-query
-
-  # 关键配置：指定国内域名走明文 DNS
-  nameserver-policy:
-    "geosite:cn":
-      - 223.5.5.5
-      - 119.29.29.29
-    "geosite:category-ads-all": rcode://name_error # 屏蔽广告域名解析
-
   # 辅助解析（用于解析 DoH 域名 IP）
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
+
+  nameserver:
+    - https://dns.cloudflare.com/dns-query
+    - https://dns.google/dns-query
+
+  # 修正后的 nameserver-policy 格式
+  nameserver-policy:
+    "geosite:cn": [223.5.5.5, 119.29.29.29]
+    "geosite:category-ads-all": "rcode://name_error"
 
   fake-ip-filter:
     - "*.lan"
@@ -115,6 +112,7 @@ rules:
   - RULE-SET,Apple,自动最快
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
+
 
 
 
