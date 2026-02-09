@@ -1,4 +1,4 @@
-rules:
+payload:
   # Gemini 相关域名
   - DOMAIN-SUFFIX,gemini.google.com
   - DOMAIN-SUFFIX,generativelanguage.googleapis.com
