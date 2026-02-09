@@ -39,11 +39,9 @@ dns:
   ipv6: false
   
   # 辅助解析（用于解析 DoH 域名 IP）
-  default-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
+  default-nameserver: [223.5.5.5, 119.29.29.29]
 
-nameserver:
+  nameserver:
     - https://dns.cloudflare.com/dns-query
     - https://223.5.5.5/dns-query
 
@@ -112,6 +110,7 @@ rules:
   - RULE-SET,Apple,自动最快
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
+
 
 
 
