@@ -43,8 +43,7 @@ dns:
   # 这里的并发竞速确保了国外域名的解析安全。
   nameserver:
     - 'https://sky.rethinkdns.com/dns-query'
-    - 'https://1.1.1.1/dns-query'
-    - 'https://dns.google/dns-query'
+    - 'https://dns.alidns.com/dns-query'
 
   # 2. 分流策略：强制国内域名走明文
   # 这里的优先级最高，能够覆盖上面的 nameserver。
@@ -125,6 +124,7 @@ rules:
   - RULE-SET,Apple,自动最快
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
+
 
 
 
