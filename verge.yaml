@@ -38,28 +38,38 @@ dns:
   fake-ip-range: 198.18.0.1/16
   ipv6: false
   
-  # 辅助解析（用于解析 DoH 域名 IP）
-  default-nameserver:
-    - 114.114.115.115
-    - 119.28.28.28
-    - 223.6.6.6
-    - system
+  # 1. 默认解析器：配置为加密 DNS (DoH) 
+  # 当域名匹配到 Proxy 且需要本地预解析，或非国域且无 policy 匹配时，走这里。
+  # 这里的并发竞速确保了国外域名的解析安全。
   nameserver:
-    - https://223.5.5.5/dns-query
-    - https://223.6.6.6/dns-query
-    - https://1.12.12.12/dns-query
-    - https://120.53.53.53/dns-query
+    - 'https://sky.rethinkdns.com/dns-query'
+    - 'https://1.1.1.1/dns-query'
+    - 'https://dns.google/dns-query'
 
-  # 修正后的 nameserver-policy 格式
+  # 2. 分流策略：强制国内域名走明文
+  # 这里的优先级最高，能够覆盖上面的 nameserver。
   nameserver-policy:
+    # 使用 GeoSite 预设，让大部分国内知名网站直接走阿里/腾讯明文
     "geosite:cn": [223.5.5.5, 119.29.29.29]
+    # 手动补齐您刚才关心的、容易被误伤的 .com 域名
+    "*.apple.com,*.qq.com,*.tencent.com,*.myqcloud.com,*.tencentmusic.com": [223.5.5.5, 119.29.29.29]
+    "*.snssdk.com,*.amemv.com,*.pstatp.com,*.douyinvod.com": [223.5.5.5, 119.29.29.29]
+    "*.autonavi.com,*.amap.com": [223.5.5.5, 119.29.29.29]
+    # 广告过滤
     "geosite:category-ads-all": "rcode://name_error"
+
+  # 3. 基础 DNS：仅用于解析 DoH 域名（如 sky.rethinkdns.com）的 IP
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
 
   fake-ip-filter:
     - "*.lan"
     - "*.local"
     - "dler.cloud"
     - "+.dler.cloud"
+    - "stun.*"
+    - "ntp.*"
 
 
 profile:
@@ -115,6 +125,7 @@ rules:
   - RULE-SET,Apple,自动最快
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
+
 
 
 
