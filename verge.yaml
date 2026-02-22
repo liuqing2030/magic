@@ -53,7 +53,7 @@ dns:
     # 手动补齐您刚才关心的、容易被误伤的 .com 域名
     "*.apple.com,*.qq.com,*.tencent.com,*.myqcloud.com,*.tencentmusic.com": [223.5.5.5, 119.29.29.29]
     "*.snssdk.com,*.amemv.com,*.pstatp.com,*.douyinvod.com": [223.5.5.5, 119.29.29.29]
-    "*.autonavi.com,*.amap.com": [223.5.5.5, 119.29.29.29]
+    “*.abchina.com","*.autonavi.com,*.amap.com": [223.5.5.5, 119.29.29.29]
     # 广告过滤
     "geosite:category-ads-all": "rcode://name_error"
 
