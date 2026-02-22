@@ -68,6 +68,8 @@ dns:
     - "dler.cloud"
     - "+.dler.cloud"
     - "stun.*"
+    - "*.abchina.com"
+    - "*.95599.cn"
 
 
 profile:
