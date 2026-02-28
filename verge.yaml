@@ -78,7 +78,7 @@ profile:
 proxy-groups:
   - name: AI
     type: url-test
-    filter: "(US|英|UK|加拿|美|日|JP)"
+    filter: "(US|英|UK|加拿|美|日|JP|支持AI|法|德|澳)"
     include-all: true
     url: http://www.gstatic.com/generate_204
     interval: 300
@@ -116,6 +116,7 @@ rules:
   - RULE-SET,Apple,自动最快
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
+
 
 
 
