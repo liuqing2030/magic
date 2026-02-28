@@ -108,21 +108,7 @@ rule-providers:
   Gemini: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Gemini', path: ./Rules/Gemini, interval: 86400 }
 
 rules:
-  - DOMAIN-suffix, basicex.com, direct
-  - DOMAIN-suffix, agilenavi.com, direct
-  - DOMAIN-suffix, ddgksf2013.top, direct
-  - DOMAIN-suffix, egcvi.com, direct
-  - DOMAIN-suffix, bzz956.com, direct
   - RULE-SET,AdBlock,REJECT
-  - DOMAIN-KEYWORD,douyin,DIRECT
-  - DOMAIN-KEYWORD,snssdk,DIRECT
-  - DOMAIN-KEYWORD,amemv,DIRECT
-  - DOMAIN-KEYWORD,pstatp,DIRECT
-  - DOMAIN-KEYWORD,byteimg,DIRECT
-  - DOMAIN-KEYWORD,bytegecko,DIRECT
-  - DOMAIN-KEYWORD,volcwsccb,DIRECT
-  - DOMAIN-KEYWORD,douyinvod,DIRECT
-  - DOMAIN-KEYWORD,zijieapi,DIRECT
   - RULE-SET,China,DIRECT
   - RULE-SET,Microsoft,DIRECT
   - RULE-SET,Gemini,Gemini
@@ -130,6 +116,7 @@ rules:
   - RULE-SET,Apple,自动最快
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
+
 
 
 
