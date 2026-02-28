@@ -18,13 +18,12 @@ payload:
   - DOMAIN-KEYWORD,volcwsccb
   - DOMAIN-KEYWORD,douyinvod
   - DOMAIN-KEYWORD,zijieapi
-  - DOMAIN-suffix, basicex.com
-  - DOMAIN-suffix, agilenavi.com
-  - DOMAIN-suffix, ddgksf2013.top
-  - DOMAIN-suffix, egcvi.com
-  - DOMAIN-suffix, bzz956.com,
+  - DOMAIN-suffix,basicex.com
+  - DOMAIN-suffix,agilenavi.com
+  - DOMAIN-suffix,ddgksf2013.top
+  - DOMAIN-suffix,egcvi.com
+  - DOMAIN-suffix,bzz956.com
   - DOMAIN-SUFFIX,hawkingparty.com
-  - DOMAIN-KEYWORD,zijieapi
   - DOMAIN-KEYWORD,tmall
   - DOMAIN-KEYWORD,alicdn
   - DOMAIN-KEYWORD,alipay
@@ -33,10 +32,6 @@ payload:
   - DOMAIN-KEYWORD,beplay
   - DOMAIN-KEYWORD,officecdn
   - DOMAIN-KEYWORD,taobao
-  - DOMAIN-KEYWORD,douyin
-  - DOMAIN-KEYWORD,byteimg
-  - DOMAIN-KEYWORD,snssdk
-  - DOMAIN-KEYWORD,pstatp
   - IP-CIDR,1.255.62.0/24
   - IP-CIDR,101.32.104.0/21
   - IP-CIDR,101.32.118.0/23
@@ -123,7 +118,6 @@ payload:
   - DOMAIN,v.streaming.qq.com
   - DOMAIN,apd-pcdnwxlogin.teg.tencent-cloud.net
   - DOMAIN,btrace.qq.com
-  - DOMAIN,dldir1.qq.com
   - DOMAIN,slife.xy-asia.com
   - DOMAIN,soup.v.qq.com
   - DOMAIN,vweixinf.tc.qq.com
@@ -172,22 +166,8 @@ payload:
   - DOMAIN-SUFFIX,bili33.cn
   - DOMAIN-SUFFIX,biliapi.com
   - DOMAIN-SUFFIX,biliapi.net
-  - DOMAIN-SUFFIX,bilibili.cc
-  - DOMAIN-SUFFIX,bilibili.cn
-  - DOMAIN-SUFFIX,bilibili.co
-  - DOMAIN-SUFFIX,bilibili.com
-  - DOMAIN-SUFFIX,bilibili.net
-  - DOMAIN-SUFFIX,bilibili.tv
-  - DOMAIN-SUFFIX,bilibiligame.cn
-  - DOMAIN-SUFFIX,bilibiligame.co
-  - DOMAIN-SUFFIX,bilibiligame.net
-  - DOMAIN-SUFFIX,bilibilipay.cn
-  - DOMAIN-SUFFIX,bilibilipay.com
-  - DOMAIN-SUFFIX,bilicdn1.com
-  - DOMAIN-SUFFIX,bilicdn2.com
-  - DOMAIN-SUFFIX,bilicdn3.com
-  - DOMAIN-SUFFIX,bilicdn4.com
-  - DOMAIN-SUFFIX,bilicdn5.com
+  - DOMAIN-KEYWORD,bilibili
+  - DOMAIN-KEYWORD,bilicdn
   - DOMAIN-SUFFIX,bilicomics.com
   - DOMAIN-SUFFIX,biligame.cn
   - DOMAIN-SUFFIX,biligame.co
@@ -365,11 +345,9 @@ payload:
   - DOMAIN-SUFFIX,qy.net
   - DOMAIN-SUFFIX,s.zampdsp.com
   - DOMAIN-SUFFIX,sk2cdsnw.cn
-  - DOMAIN-SUFFIX,snssdk.com
   - DOMAIN-SUFFIX,sogoodtech1.cn
   - DOMAIN-SUFFIX,sohu.com
   - DOMAIN-SUFFIX,sohu.com.cn
-  - DOMAIN-SUFFIX,soku.com
   - DOMAIN-SUFFIX,suike.cn
   - DOMAIN-SUFFIX,taihe.com
   - DOMAIN-SUFFIX,tazai.com
