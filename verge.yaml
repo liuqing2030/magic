@@ -116,7 +116,7 @@ rule-providers:
   AI: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AI.yaml', path: ./Rules/AI, interval: 86400 }
   Microsoft: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Microsoft.yaml', path: ./Rules/Microsoft, interval: 86400 }
   China: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/China.yaml', path: ./Rules/China, interval: 86400 }
-  Gemini: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Gemini', path: ./Rules/Gemini, interval: 86400 }
+  Gemini: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Gemini.yaml', path: ./Rules/Gemini, interval: 86400 }
 
 rules:
   - RULE-SET,AdBlock,REJECT
