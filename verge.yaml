@@ -38,29 +38,39 @@ dns:
   fake-ip-range: 198.18.0.1/16
   ipv6: false
   
-  # 1. 默认解析器：配置为加密 DNS (DoH) 
-  # 当域名匹配到 Proxy 且需要本地预解析，或非国域且无 policy 匹配时，走这里。
-  # 这里的并发竞速确保了国外域名的解析安全。
-  nameserver:
-    - 'https://sky.rethinkdns.com/dns-query'
-    - 'https://dns.alidns.com/dns-query'
-
-  # 2. 分流策略：强制国内域名走明文
-  # 这里的优先级最高，能够覆盖上面的 nameserver。
-  nameserver-policy:
-    # 使用 GeoSite 预设，让大部分国内知名网站直接走阿里/腾讯明文
-    "geosite:cn": [223.5.5.5, 119.29.29.29]
-    # 手动补齐您刚才关心的、容易被误伤的 .com 域名
-    "*.apple.com,*.qq.com,*.tencent.com,*.myqcloud.com,*.tencentmusic.com": [223.5.5.5, 119.29.29.29]
-    "*.snssdk.com,*.amemv.com,*.pstatp.com,*.douyinvod.com": [223.5.5.5, 119.29.29.29]
-    “*.abchina.com,*.autonavi.com,*.amap.com": [223.5.5.5, 119.29.29.29]
-    # 广告过滤
-    "geosite:category-ads-all": "rcode://name_error"
-
-  # 3. 基础 DNS：仅用于解析 DoH 域名（如 sky.rethinkdns.com）的 IP
+  # 1. 基础 DNS：仅用于解析 DOH 域名
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
+
+  # 2. 国内解析器：Stash 会优先尝试这里的服务器
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+
+  # 3. 国外/加密解析器：放在 fallback 中
+  fallback:
+    - 'https://sky.rethinkdns.com/dns-query'
+    - 'https://dns.alidns.com/dns-query'
+
+  # 4. 关键逻辑：Stash 通过这个过滤器决定何时切换到 fallback
+  # 如果解析结果是国内 IP，则信任 nameserver；如果是国外 IP 或被污染，则使用 fallback。
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcount-range: [223.5.5.5, 119.29.29.29]
+    # 强制让广告域名失效
+    geosite:
+      - category-ads-all
+
+  # 5. 针对容易误伤的 .com 域名，在 hosts 中强制指定解析（替代 policy 的功能）
+  # Stash 对 hosts 的支持非常完美
+  hosts:
+    '*.qq.com': 223.5.5.5
+    '*.tencent.com': 223.5.5.5
+    '*.apple.com': 223.5.5.5
+    '*.abchina.com': 223.5.5.5
+    '*.autonavi.com': 223.5.5.5
 
   fake-ip-filter:
     - "*.lan"
@@ -70,6 +80,7 @@ dns:
     - "stun.*"
     - "*.abchina.com"
     - "*.95599.cn"
+
 
 
 profile:
