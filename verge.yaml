@@ -51,7 +51,7 @@ dns:
   # 3. 国外/加密解析器：放在 fallback 中
   fallback:
     - 'https://sky.rethinkdns.com/dns-query'
-    - 'https://dns.alidns.com/dns-query'
+    - 'https://223.5.5.5/dns-query'
 
   # 4. 关键逻辑：Stash 通过这个过滤器决定何时切换到 fallback
   # 如果解析结果是国内 IP，则信任 nameserver；如果是国外 IP 或被污染，则使用 fallback。
