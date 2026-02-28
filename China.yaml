@@ -9,7 +9,20 @@
 # IP-CIDR6: 4
 # TOTAL: 3728
 payload:
-
+  - DOMAIN-KEYWORD,douyin
+  - DOMAIN-KEYWORD,snssdk
+  - DOMAIN-KEYWORD,amemv
+  - DOMAIN-KEYWORD,pstatp
+  - DOMAIN-KEYWORD,byteimg
+  - DOMAIN-KEYWORD,bytegecko
+  - DOMAIN-KEYWORD,volcwsccb
+  - DOMAIN-KEYWORD,douyinvod
+  - DOMAIN-KEYWORD,zijieapi
+  - DOMAIN-suffix, basicex.com
+  - DOMAIN-suffix, agilenavi.com
+  - DOMAIN-suffix, ddgksf2013.top
+  - DOMAIN-suffix, egcvi.com
+  - DOMAIN-suffix, bzz956.com,
   - DOMAIN-SUFFIX,hawkingparty.com
   - DOMAIN-KEYWORD,zijieapi
   - DOMAIN-KEYWORD,tmall
