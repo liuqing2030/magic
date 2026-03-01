@@ -59,9 +59,13 @@ dns:
     geoip: true
     geoip-code: CN
     ipcount-range: [223.5.5.5, 119.29.29.29]
-    # 强制让广告域名失效
+    ipcidr:                                   # 加这个，防污染私有段
+      - 240.0.0.0/4                           # 常见污染段
+      - 224.0.0.0/4
+# 强制让广告域名失效
     geosite:
       - category-ads-all
+      - gfw
 
   # 5. 针对容易误伤的 .com 域名，在 hosts 中强制指定解析（替代 policy 的功能）
   # Stash 对 hosts 的支持非常完美
@@ -75,11 +79,19 @@ dns:
   fake-ip-filter:
     - "*.lan"
     - "*.local"
+    - "*.localdomain"
     - "dler.cloud"
     - "+.dler.cloud"
     - "stun.*"
     - "*.abchina.com"
     - "*.95599.cn"
+    - "+.in-addr.arpa"
+    - "+.arpa"
+    - "localhost"
+    - "127.*"
+    - "10.*"
+    - "172.16.*"
+    - "192.168.*"
 
 
 
