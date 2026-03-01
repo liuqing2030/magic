@@ -95,6 +95,9 @@ proxy-groups:
     interval: 1000
     tolerance: 50   # 延迟差 <50ms 不换（默认无 tolerance 就 0ms，很敏感）
     lazy: true
+    timeout: 5
+    max-failed-times: 3
+
   - name: Gemini
     type: url-test
     filter: "(105 日本|211 日本|316 英国|325 台湾|326 台湾|327 台湾|328 台湾|329 日本|香港0|支持AI)"
@@ -103,6 +106,8 @@ proxy-groups:
     interval: 1000
     tolerance: 50
     lazy: true
+    timeout: 5
+    max-failed-times: 3
   - name: 自动最快
     type: url-test
     include-all: true
@@ -110,6 +115,9 @@ proxy-groups:
     interval: 1000
     tolerance: 50
     lazy: true
+    timeout: 5
+    max-failed-times: 3
+
   - name: Direct
     type: select
     proxies:
@@ -119,7 +127,7 @@ proxy-groups:
 rule-providers:
   AdBlock: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AdBlock.yaml', path: ./Rules/AdBlock, interval: 864000 }
   Apple: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Apple.yaml', path: ./Rules/Apple, interval: 864000 }
-  AI: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AI.yaml', path: ./Rules/AI, interval: 86400 }
+  AI: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AI.yaml', path: ./Rules/AI, interval: 864000 }
   Microsoft: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Microsoft.yaml', path: ./Rules/Microsoft, interval: 864000 }
   China: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/China.yaml', path: ./Rules/China, interval: 864000 }
   Gemini: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Gemini.yaml', path: ./Rules/Gemini, interval: 864000 }
