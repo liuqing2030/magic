@@ -1,16 +1,24 @@
 mixed-port: 7890
 allow-lan: true
 mode: rule
-log-level: info
+log-level: warning
 ipv6: false
-
+sniffing:
+  enable: true
+  dest-ip: true
+  route-only: false
 tun:
   enable: true
   stack: gvisor
   auto-route: true
+  auto-detect-interface: true
   bypass-lan-addresses: true
+  dns-hijack:                  # 强制劫持系统 DNS 到 Clash，防泄漏
+    - any:53
+    - tcp://any:53
   routing-mark: 666
   strict-route: true
+  mtu: 1420
 
 proxy-providers:
   Provider_A:
@@ -34,10 +42,11 @@ proxy-providers:
 
 dns:
   enable: true
+  listen: 0.0.0.0:1053
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   ipv6: false
-  
+  use-hosts: true
   # 1. 基础 DNS：仅用于解析 DOH 域名
   default-nameserver:
     - 223.5.5.5
