@@ -117,7 +117,7 @@ rule-providers:
   Microsoft: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Microsoft.yaml', path: ./Rules/Microsoft, interval: 86400 }
   China: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/China.yaml', path: ./Rules/China, interval: 86400 }
   Gemini: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Gemini.yaml', path: ./Rules/Gemini, interval: 86400 }
-  AD2: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/REIJI007/AdBlock_Rule_For_Clash/main/adblock_reject.yaml', path: ./Rules/AD2, interval: 86400 }
+  AD2: { type: http, behavior: domain, url: 'https://raw.githubusercontent.com/REIJI007/AdBlock_Rule_For_Clash/main/adblock_reject.yaml', path: ./Rules/AD2, interval: 86400 }
 
 rules:
   - RULE-SET,AdBlock,REJECT
