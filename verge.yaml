@@ -117,13 +117,13 @@ proxy-groups:
       - 自动最快
 
 rule-providers:
-  AdBlock: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AdBlock.yaml', path: ./Rules/AdBlock, interval: 86400 }
-  Apple: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Apple.yaml', path: ./Rules/Apple, interval: 86400 }
+  AdBlock: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AdBlock.yaml', path: ./Rules/AdBlock, interval: 864000 }
+  Apple: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Apple.yaml', path: ./Rules/Apple, interval: 864000 }
   AI: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AI.yaml', path: ./Rules/AI, interval: 86400 }
-  Microsoft: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Microsoft.yaml', path: ./Rules/Microsoft, interval: 86400 }
-  China: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/China.yaml', path: ./Rules/China, interval: 86400 }
-  Gemini: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Gemini.yaml', path: ./Rules/Gemini, interval: 86400 }
-  AD2: { type: http, behavior: domain, url: 'https://raw.githubusercontent.com/REIJI007/AdBlock_Rule_For_Clash/main/adblock_reject.yaml', path: ./Rules/AD2, interval: 86400 }
+  Microsoft: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Microsoft.yaml', path: ./Rules/Microsoft, interval: 864000 }
+  China: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/China.yaml', path: ./Rules/China, interval: 864000 }
+  Gemini: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Gemini.yaml', path: ./Rules/Gemini, interval: 864000 }
+  AD2: { type: http, behavior: domain, url: 'https://raw.githubusercontent.com/REIJI007/AdBlock_Rule_For_Clash/main/adblock_reject.yaml', path: ./Rules/AD2, interval: 864000 }
 
 rules:
   - RULE-SET,AdBlock,REJECT,no-resolve
