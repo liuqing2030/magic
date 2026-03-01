@@ -124,7 +124,7 @@ rules:
   - RULE-SET,Microsoft,DIRECT
   - RULE-SET,Gemini,Gemini
   - RULE-SET,AI,AI
-  - RULE-SET,Apple,自动最快
+  - RULE-SET,Apple,DIRECT
   - GEOIP,CN,DIRECT
   - MATCH,自动最快
 
