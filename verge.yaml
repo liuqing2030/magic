@@ -27,7 +27,7 @@ proxy-providers:
     health-check: {enable: true, interval: 600, url: http://www.gstatic.com/generate_204}
   Provider_C:
     type: http
-    url: "https://dler.cloud/api/v3/download.getFile/80615782-a0f9-4dd6-9767-e1fca7decd6b?clash=smart&lv=2.png"
+    url: "https://oics.net/api/v3/download.getFile/c883b0f3-3195-4d4e-9e38-a51f897290e0?clash=smart&lv=2%7C3.wav"
     interval: 3600
     path: ./provider_c.yaml
     health-check: {enable: true, interval: 600, url: http://www.gstatic.com/generate_204}
