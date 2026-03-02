@@ -140,6 +140,7 @@ rule-providers:
   AdBlock2: { type: http, behavior: domain, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AdBlock_Rule2.yaml', path: ./Rules/AD2, interval: 864000 }
 
 rules:
+  - DOMAIN-suffix,*.cn,DIRECT,no-resolve
   - PROCESS-NAME,XFRHTXEx.exe,DIRECT
   # 广告拦截最优先
   - RULE-SET,AdBlock,REJECT,no-resolve
@@ -162,6 +163,7 @@ rules:
 
   # 最终兜底
   - MATCH,自动最快
+
 
 
 
