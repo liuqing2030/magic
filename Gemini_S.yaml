@@ -1,0 +1,40 @@
+
+  # Gemini / Bard / Makersuite / AI Studio 主域名
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,generativelanguage.googleapis.com
+DOMAIN-SUFFIX,ai.google.dev
+DOMAIN-SUFFIX,makersuite.google.com
+DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,aistudio.google.com               # Gemini API key 生成与测试页面
+DOMAIN-SUFFIX,vertexai.google.com               # Vertex AI 平台，Gemini 企业级集成
+DOMAIN-SUFFIX,vertexai-pa.googleapis.com        # Vertex AI 私有端点
+DOMAIN-SUFFIX,cloudaicomposer.googleapis.com    # 部分 AI 工作流相关
+
+  # Google 核心服务（Gemini 强依赖，CDN、静态资源、搜索入口等）
+DOMAIN-SUFFIX,google.com
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,googleusercontent.com
+DOMAIN-SUFFIX,gstatic.com
+DOMAIN-SUFFIX,ggpht.com
+DOMAIN-SUFFIX,www.googleapis.com                # 大部分 API 入口
+DOMAIN-SUFFIX,www.gstatic.com                   # 静态资源备选
+DOMAIN-SUFFIX,lh*.googleusercontent.com         # 用户内容/图片（lh3, lh5 等）
+DOMAIN-SUFFIX,ssl.gstatic.com                   # 安全静态资源
+DOMAIN-SUFFIX,fonts.googleapis.com              # Google Fonts
+DOMAIN-SUFFIX,fonts.gstatic.com                 # 字体静态文件
+DOMAIN-SUFFIX,cloud.google.com                  # Google Cloud 控制台/文档
+DOMAIN-SUFFIX,storage.googleapis.com            # GCS 对象存储（Gemini 可能上传文件）
+DOMAIN-SUFFIX,firebasestorage.googleapis.com    # Firebase Storage
+
+  # Google 账号认证与登录（Gemini 必须登录 Google 账号）
+DOMAIN-SUFFIX,accounts.google.com
+DOMAIN-SUFFIX,accounts.youtube.com
+DOMAIN-SUFFIX,accounts.google.co                # 区域变体
+DOMAIN-SUFFIX,accounts.google.com.tw            # 台湾专用认证
+DOMAIN-SUFFIX,signin.google.com                 # 登录页面
+
+  # Firebase / Google API / 分析 / 跟踪（Gemini 后台依赖）
+DOMAIN-SUFFIX,firebaseapp.com
+DOMAIN-SUFFIX,firebase.googleapis.com           # Firebase 核心
+DOMAIN-SUFFIX,googleapis.cn                     # 国内镜像（视情况保留或 DIRECT）
+DOMAIN-SUFFIX,play.google.com                   # Google Play 服务集成
