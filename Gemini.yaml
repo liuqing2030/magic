@@ -5,7 +5,7 @@ payload:
   - DOMAIN-SUFFIX,ai.google.dev
   - DOMAIN-SUFFIX,makersuite.google.com
   - DOMAIN-SUFFIX,bard.google.com
-  - DOMAIN-SUFFIX,aistudio.google.com               # Gemini API key 生成与测试页面
+#  - DOMAIN-SUFFIX,aistudio.google.com               # Gemini API key 生成与测试页面
   - DOMAIN-SUFFIX,vertexai.google.com               # Vertex AI 平台，Gemini 企业级集成
   - DOMAIN-SUFFIX,vertexai-pa.googleapis.com        # Vertex AI 私有端点
   - DOMAIN-SUFFIX,cloudaicomposer.googleapis.com    # 部分 AI 工作流相关
