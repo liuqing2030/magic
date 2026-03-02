@@ -24,24 +24,24 @@ proxy-providers:
     url: "https://sub.iplcsub20241025.top/qC8zV8qS1kB1lX2u/NXy2N9NFBWZrEcio?clash=1"
     interval: 36000
     path: ./provider_a.yaml
-    health-check: {enable: false, interval: 36000, url: https://www.gstatic.com/generate_204}
+    health-check: {enable: true, interval: 3600, url: https://www.gstatic.com/generate_204}
   Provider_B:
     type: http
     url: "https://subscription.riolu.link/RioLU/system/api/v1/client/subscribe?token=a5dbbf3cfc45326d3f7721c095fcc0d8"
     interval: 36000
     path: ./provider_b.yaml
-    health-check: {enable: false, interval: 36000, url: https://www.gstatic.com/generate_204}
+    health-check: {enable: true, interval: 3600, url: https://www.gstatic.com/generate_204}
   Provider_C:
     type: http
     url: "https://oics.net/api/v3/download.getFile/c883b0f3-3195-4d4e-9e38-a51f897290e0?clash=smart&lv=2%7C3.wav"
     interval: 36000
     path: ./provider_c.yaml
-    health-check: {enable: false, interval: 36000, url: https://www.gstatic.com/generate_204}
+    health-check: {enable: true, interval: 3600, url: https://www.gstatic.com/generate_204}
 
 dns:
   enable: true
   listen: 0.0.0.0:1053
-  enhanced-mode: redir-host
+  enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   ipv6: false
   use-hosts: true
@@ -52,13 +52,15 @@ dns:
 
   # 2. 国内解析器：Stash 会优先尝试这里的服务器
   nameserver:
+    - https://dns.alidns.com/dns-query # 优化：加入加密 DNS，防止劫持
+    - https://doh.pub/dns-query
     - 223.5.5.5
-    - 119.29.29.29
 
   # 3. 国外/加密解析器：放在 fallback 中
   fallback:
     - 'https://sky.rethinkdns.com/dns-query'
     - 'https://223.5.5.5/dns-query'
+    - 'https://1.1.1.1/dns-query'
 
   # 4. 关键逻辑：Stash 通过这个过滤器决定何时切换到 fallback
   # 如果解析结果是国内 IP，则信任 nameserver；如果是国外 IP 或被污染，则使用 fallback。
@@ -93,8 +95,8 @@ profile:
 
 proxy-groups:
   - name: AI
-    type: select
-    filter: "(US|英|UK|加拿|美|日|JP|支持AI|法|德|澳)"
+    type: url-test
+    filter: "(?i)(US|英|UK|加拿|美|日|JP|支持AI|法|德|澳)"
     include-all: true
     url: https://www.gstatic.com/generate_204
     interval: 1800
@@ -104,8 +106,8 @@ proxy-groups:
     max-failed-times: 3
 
   - name: Gemini
-    type: select
-    filter: "(105 日本|211 日本|316 英国|325 台湾|326 台湾|327 台湾|328 台湾|329 日本|香港0|支持AI)"
+    type: url-test
+    filter: "(?i)(105 日本|211 日本|316 英国|325 台湾|326 台湾|327 台湾|328 台湾|329 日本|香港0|支持AI)"
     include-all: true
     url: https://www.gstatic.com/generate_204
     interval: 1800
@@ -115,10 +117,10 @@ proxy-groups:
     max-failed-times: 3
     
   - name: 自动最快
-    type: select
+    type: url-test
     include-all: true
     url: https://www.gstatic.com/generate_204
-    interval: 3600
+    interval: 1800
     tolerance: 50
     lazy: true
     timeout: 5
@@ -147,15 +149,15 @@ rules:
   - RULE-SET,AdBlock2,REJECT,no-resolve
 
   # 重要厂商直连（避免延迟/功能异常）
-  - RULE-SET,Apple,DIRECT,no-resolve
-  - RULE-SET,Microsoft,DIRECT,no-resolve
+  - RULE-SET,Apple,DIRECT
+  - RULE-SET,Microsoft,DIRECT
 
   # AI / 特定服务强制走代理（即使国内）
   - RULE-SET,Gemini,Gemini
   - RULE-SET,AI,AI
 
   # 中国大陆域名直连
-  - RULE-SET,China,DIRECT,no-resolve
+  - RULE-SET,China,DIRECT
 
   # 中国大陆 IP 直连（兜底地理规则）
   - GEOIP,CN,DIRECT,no-resolve
@@ -163,6 +165,7 @@ rules:
 
   # 最终兜底
   - MATCH,自动最快
+
 
 
 
