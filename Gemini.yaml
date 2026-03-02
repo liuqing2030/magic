@@ -38,4 +38,3 @@ payload:
   - DOMAIN-SUFFIX,firebase.googleapis.com           # Firebase 核心
   - DOMAIN-SUFFIX,googleapis.cn                     # 国内镜像（视情况保留或 DIRECT）
   - DOMAIN-SUFFIX,play.google.com                   # Google Play 服务集成
-  - DOMAIN-SUFFIX,
