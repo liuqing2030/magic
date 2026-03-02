@@ -1,14 +1,9 @@
-# NAME: China
-# AUTHOR: blackmatrix7
-# REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2025-12-08 02:08:15
-# DOMAIN: 20
-# DOMAIN-KEYWORD: 9
-# DOMAIN-SUFFIX: 3678
-# IP-CIDR: 17
-# IP-CIDR6: 4
-# TOTAL: 3728
 payload:
+  # > Apple API (原注释保留，但本集无 Apple，此处为示例)
+  # > Apple News
+  # > Apple Maps
+
+  # 抖音/字节跳动相关
   - DOMAIN-KEYWORD,douyin
   - DOMAIN-KEYWORD,snssdk
   - DOMAIN-KEYWORD,amemv
@@ -18,41 +13,30 @@ payload:
   - DOMAIN-KEYWORD,volcwsccb
   - DOMAIN-KEYWORD,douyinvod
   - DOMAIN-KEYWORD,zijieapi
+
+  # 杂项域名
   - DOMAIN-suffix,basicex.com
   - DOMAIN-suffix,agilenavi.com
   - DOMAIN-suffix,ddgksf2013.top
   - DOMAIN-suffix,egcvi.com
   - DOMAIN-suffix,bzz956.com
   - DOMAIN-SUFFIX,hawkingparty.com
+
+  # 阿里/淘宝/天猫
   - DOMAIN-KEYWORD,tmall
   - DOMAIN-KEYWORD,alicdn
   - DOMAIN-KEYWORD,alipay
   - DOMAIN-KEYWORD,aliyun
+  - DOMAIN-KEYWORD,taobao
+
+  # 百度相关
   - DOMAIN-KEYWORD,baidu
+
+  # 其他关键词
   - DOMAIN-KEYWORD,beplay
   - DOMAIN-KEYWORD,officecdn
-  - DOMAIN-KEYWORD,taobao
-  - IP-CIDR,1.255.62.0/24
-  - IP-CIDR,101.32.104.0/21
-  - IP-CIDR,101.32.118.0/23
-  - IP-CIDR,101.32.96.0/20
-  - IP-CIDR,119.28.28.28/32
-  - IP-CIDR,120.195.181.180/32
-  - IP-CIDR,129.226.0.0/16
-  - IP-CIDR,182.254.116.0/24
-  - IP-CIDR,183.128.0.0/11
-  - IP-CIDR,183.131.48.0/20
-  - IP-CIDR,185.188.32.0/22
-  - IP-CIDR,185.188.32.0/24
-  - IP-CIDR,185.188.33.0/24
-  - IP-CIDR,185.188.34.0/24
-  - IP-CIDR,185.188.35.0/24
-  - IP-CIDR,203.205.238.0/23
-  - IP-CIDR,203.205.254.0/23
-  - IP-CIDR6,2a0b:b580::/48
-  - IP-CIDR6,2a0b:b581::/48
-  - IP-CIDR6,2a0b:b582::/48
-  - IP-CIDR6,2a0b:b583::/48
+
+  # 特定域名（疑似 CDN 或测试域名）
   - DOMAIN,0gr4uqmtt8y41hcjsgrzdrc31.ourdvsss.com
   - DOMAIN,0gr4uqmtt8y41hcjsgrzdrc3s.ourdvsss.com
   - DOMAIN,0gr4uqmtt8y41hcjsgrzdrc3z.ourdvsss.com
@@ -104,9 +88,13 @@ payload:
   - DOMAIN,4go41hcjtgazdoctqge4o.ourdvsss.com
   - DOMAIN,00713915daab0be43def5c338c02c80b.dlied1.cdntips.net
   - DOMAIN,17caa75e77d31e1f5a7841e0b3374569.dlied1.cdntips.net
+
+  # 腾讯相关
   - DOMAIN,apd-pcdnvodstat.teg.tencent-cloud.net
+  - DOMAIN,apd-pcdnwxlogin.teg.tencent-cloud.net
   - DOMAIN,api.iplay.163.com
   - DOMAIN,aqqmusic.tc.qq.com
+  - DOMAIN,btrace.qq.com
   - DOMAIN,dldir1.qq.com
   - DOMAIN,iacc.qq.com
   - DOMAIN,ins-eeww7kom.ias.tencent-cloud.net
@@ -114,15 +102,17 @@ payload:
   - DOMAIN,mam.netease.com
   - DOMAIN,moo.qq.com
   - DOMAIN,rdelivery.qq.com
-  - DOMAIN,ts.qq.com
-  - DOMAIN,v.streaming.qq.com
-  - DOMAIN,apd-pcdnwxlogin.teg.tencent-cloud.net
-  - DOMAIN,btrace.qq.com
   - DOMAIN,slife.xy-asia.com
   - DOMAIN,soup.v.qq.com
+  - DOMAIN,ts.qq.com
+  - DOMAIN,v.streaming.qq.com
   - DOMAIN,vweixinf.tc.qq.com
   - DOMAIN,weixin110.qq.com
   - DOMAIN,wup.imtt.qq.com
+  - DOMAIN,video-public-1258344701.shiply-cdn.qq.com
+  - DOMAIN,video-search-1258344701.shiply-cdn.qq.com
+  - DOMAIN,video-vip-1258344701.shiply-cdn.qq.com
+  - DOMAIN,yoo.gtimg.com
   - DOMAIN-SUFFIX,iot-tencent.com
   - DOMAIN-SUFFIX,lbs.gtimg.com
   - DOMAIN-SUFFIX,map.qq.com
@@ -145,11 +135,11 @@ payload:
   - DOMAIN-SUFFIX,wxapp.tc.qq.com
   - DOMAIN-SUFFIX,wxs.qq.com
   - DOMAIN-SUFFIX,yun-hl.3g.qq.com
+
+  # IP-ASN
   - IP-ASN,132203
-  - DOMAIN,video-public-1258344701.shiply-cdn.qq.com
-  - DOMAIN,video-search-1258344701.shiply-cdn.qq.com
-  - DOMAIN,video-vip-1258344701.shiply-cdn.qq.com
-  - DOMAIN,yoo.gtimg.com
+
+  # Bilibili 相关
   - DOMAIN-SUFFIX,acg.tv
   - DOMAIN-SUFFIX,acgvideo.com
   - DOMAIN-SUFFIX,animetamashi.cn
@@ -166,7 +156,6 @@ payload:
   - DOMAIN-SUFFIX,bili33.cn
   - DOMAIN-SUFFIX,biliapi.com
   - DOMAIN-SUFFIX,biliapi.net
-  - DOMAIN-KEYWORD,bilibili
   - DOMAIN-KEYWORD,bilicdn
   - DOMAIN-SUFFIX,bilicomics.com
   - DOMAIN-SUFFIX,biligame.cn
@@ -198,6 +187,9 @@ payload:
   - DOMAIN-SUFFIX,upos-hz-mirrorakam.akamaized.net
   - DOMAIN-SUFFIX,uposdash-302-bilivideo.yfcdn.net
   - DOMAIN-SUFFIX,yo9.com
+  - DOMAIN-KEYWORD,bilibili
+
+  # CCTV / 央视相关
   - DOMAIN-SUFFIX,cctv.cn
   - DOMAIN-SUFFIX,cctv.com
   - DOMAIN-SUFFIX,cctvlib.cn
@@ -235,6 +227,8 @@ payload:
   - DOMAIN-SUFFIX,zggbdszt.com.cn
   - DOMAIN-SUFFIX,zggbdszt.net.cn
   - DOMAIN-SUFFIX,zygbdszt.net.cn
+
+  # 视频/直播平台通用
   - DOMAIN-SUFFIX,0co3geye.cn
   - DOMAIN-SUFFIX,1.letvlive.com
   - DOMAIN-SUFFIX,2.letvlive.com
@@ -385,9 +379,14 @@ payload:
   - DOMAIN-SUFFIX,zmzapi.com
   - DOMAIN-SUFFIX,zmzapi.net
   - DOMAIN-SUFFIX,zmzfile.com
-  - DOMAIN-KEYWORD,bilibili
   - DOMAIN-KEYWORD,qiyi
+
+  # IP 段（大陆常见直连 CIDR）
+  - IP-CIDR,1.255.62.0/24
   - IP-CIDR,101.224.0.0/13
+  - IP-CIDR,101.32.104.0/21
+  - IP-CIDR,101.32.118.0/23
+  - IP-CIDR,101.32.96.0/20
   - IP-CIDR,101.71.154.241/32
   - IP-CIDR,103.126.92.132/31
   - IP-CIDR,103.44.56.0/22
@@ -405,17 +404,30 @@ payload:
   - IP-CIDR,118.26.120.0/24
   - IP-CIDR,118.26.32.0/23
   - IP-CIDR,119.176.0.0/12
+  - IP-CIDR,119.28.28.28/32
   - IP-CIDR,119.29.29.29/32
   - IP-CIDR,119.3.238.64/32
+  - IP-CIDR,120.195.181.180/32
   - IP-CIDR,120.92.108.182/32
   - IP-CIDR,120.92.113.99/32
   - IP-CIDR,120.92.153.217/32
   - IP-CIDR,128.1.62.200/31
+  - IP-CIDR,129.226.0.0/16
   - IP-CIDR,134.175.207.130/32
   - IP-CIDR,150.116.92.250/32
   - IP-CIDR,164.52.76.18/32
+  - IP-CIDR,182.254.116.0/24
+  - IP-CIDR,183.128.0.0/11
+  - IP-CIDR,183.131.48.0/20
+  - IP-CIDR,185.188.32.0/22
+  - IP-CIDR,185.188.32.0/24
+  - IP-CIDR,185.188.33.0/24
+  - IP-CIDR,185.188.34.0/24
+  - IP-CIDR,185.188.35.0/24
   - IP-CIDR,193.112.159.225/32
   - IP-CIDR,203.107.1.0/24
+  - IP-CIDR,203.205.238.0/23
+  - IP-CIDR,203.205.254.0/23
   - IP-CIDR,203.211.4.169/32
   - IP-CIDR,203.211.4.193/32
   - IP-CIDR,203.74.95.131/32
@@ -442,6 +454,12 @@ payload:
   - IP-CIDR,59.111.181.35/32
   - IP-CIDR,59.111.181.38/32
   - IP-CIDR,59.111.181.60/32
+
+  # IPv6 段
+  - IP-CIDR6,2a0b:b580::/48
+  - IP-CIDR6,2a0b:b581::/48
+  - IP-CIDR6,2a0b:b582::/48
+  - IP-CIDR6,2a0b:b583::/48
   - IP-CIDR6,::ffff:113.248.172.245/128
   - IP-CIDR6,::ffff:114.235.96.186/128
   - IP-CIDR6,::ffff:115.236.128.112/128
@@ -471,6 +489,8 @@ payload:
   - IP-CIDR6,::ffff:60.171.183.161/128
   - IP-CIDR6,::ffff:60.171.183.186/128
   - IP-CIDR6,::ffff:60.171.183.98/128
+
+  # Bilibili App 进程名（Windows/macOS/Android 直连）
   - PROCESS-NAME,com.bilibili.app.blue
   - PROCESS-NAME,com.bilibili.app.in
   - PROCESS-NAME,com.bilibili.comic
