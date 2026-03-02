@@ -8,15 +8,15 @@ sniffing:
   dest-ip: true
   route-only: true
 tun:
-  enable: true
-  stack: system
-  auto-route: true
-  auto-detect-interface: true
-  bypass-lan-addresses: true
-  dns-hijack: []              
-  routing-mark: 666
-  strict-route: true
-  mtu: 1420
+  enable: false
+#  stack: system
+#  auto-route: true
+#  auto-detect-interface: true
+#  bypass-lan-addresses: true
+#  dns-hijack: []              
+#  routing-mark: 666
+#  strict-route: true
+#  mtu: 1420
 
 proxy-providers:
   Provider_A:
@@ -163,6 +163,7 @@ rules:
 
   # 最终兜底
   - MATCH,自动最快
+
 
 
 
