@@ -96,7 +96,7 @@ profile:
 proxy-groups:
   - name: AI
     type: url-test
-    filter: "(?i)(US|英|UK|加拿|美|支持AI|法|德|澳)"
+    filter: "(?i)(US|英|UK|加拿|美|法|德|澳)"
     include-all: true
     url: https://www.gstatic.com/generate_204
     interval: 1800
@@ -165,6 +165,7 @@ rules:
 
   # 最终兜底
   - MATCH,自动最快
+
 
 
 
