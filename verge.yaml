@@ -165,7 +165,7 @@ rules:
   - RULE-SET,Microsoft,DIRECT
 
   # AI / 特定服务强制走代理（即使国内）
-  - RULE-SET,Gemini,AI
+  - RULE-SET,Gemini,Gemini
   - RULE-SET,AI,AI  
   - RULE-SET,Claude,Claude
 
