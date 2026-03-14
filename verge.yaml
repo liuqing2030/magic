@@ -105,16 +105,27 @@ proxy-groups:
     timeout: 5
     max-failed-times: 3
 
-#  - name: Gemini
-#    type: url-test
-#    filter: "(?i)(105 日本|211 日本|316 英国|325 台湾|326 台湾|327 台湾|328 台湾|329 日本|香港0|支持AI)"
-#    include-all: true
-#    url: https://www.gstatic.com/generate_204
-#    interval: 1800
-#    tolerance: 50
-#    lazy: true
-#    timeout: 5
-#    max-failed-times: 3
+  - name: Gemini
+    type: url-test
+    filter: "(?i)(US|英|UK|加拿|美|法|德|澳|德|韩|墨|巴|日|台|港|HK)"
+    include-all: true
+    url: https://www.gstatic.com/generate_204
+    interval: 1800
+    tolerance: 50
+    lazy: true
+    timeout: 5
+    max-failed-times: 3
+
+  - name: Claude
+    type: url-test
+    filter: "(?i)(US|英|UK|加拿|美|法|德|澳|德|韩|墨|巴|日|台)"
+    include-all: true
+    url: https://www.gstatic.com/generate_204
+    interval: 1800
+    tolerance: 50
+    lazy: true
+    timeout: 5
+    max-failed-times: 3
     
   - name: 自动最快
     type: url-test
@@ -140,6 +151,7 @@ rule-providers:
   China: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/China.yaml', path: ./Rules/China, interval: 864000 }
   Gemini: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Gemini.yaml', path: ./Rules/Gemini, interval: 864000 }
   AdBlock2: { type: http, behavior: domain, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AdBlock_Rule2.yaml', path: ./Rules/AD2, interval: 864000 }
+  Claude: { type: http, behavior: domain, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Claude.yaml', path: ./Rules/Claude, interval: 864000 }
 
 rules:
   - DOMAIN-suffix,cn,DIRECT,no-resolve
@@ -154,7 +166,8 @@ rules:
 
   # AI / 特定服务强制走代理（即使国内）
   - RULE-SET,Gemini,AI
-  - RULE-SET,AI,AI
+  - RULE-SET,AI,AI  
+  - RULE-SET,Claude,Claude
 
   # 中国大陆域名直连
   - RULE-SET,China,DIRECT
