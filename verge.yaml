@@ -19,18 +19,21 @@ tun:
   mtu: 1420
 
 proxy-providers:
+#花云
   Provider_A:
     type: http
-    url: "https://sub.iplcsub20241025.top/qC8zV8qS1kB1lX2u/NXy2N9NFBWZrEcio?clash=1"
+    url: "https://api-huacloud.net/sub?target=clash&insert=true&emoji=true&udp=true&clash.doh=true&new_name=true&filename=Flower_Trojan.yaml&url=https%3A%2F%2Fapi.xmancdn.net%2Fosubscribe.php%3Ftoken2%3Dqem4z7rq-425d51bf0botcrpa5qt6gb"   
     interval: 36000
     path: ./provider_a.yaml
     health-check: {enable: true, interval: 3600, url: https://www.gstatic.com/generate_204}
+    
   Provider_B:
     type: http
     url: "https://subscription.riolu.link/RioLU/system/api/v1/client/subscribe?token=a5dbbf3cfc45326d3f7721c095fcc0d8"
     interval: 36000
     path: ./provider_b.yaml
     health-check: {enable: true, interval: 3600, url: https://www.gstatic.com/generate_204}
+    
   Provider_C:
     type: http
     url: "https://oics.net/api/v3/download.getFile/c883b0f3-3195-4d4e-9e38-a51f897290e0?clash=smart&lv=2%7C3.wav"
