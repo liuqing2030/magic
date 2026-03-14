@@ -78,17 +78,17 @@ dns:
 
   # 5. 针对容易误伤的 .com 域名，在 hosts 中强制指定解析（替代 policy 的功能）
   # Stash 对 hosts 的支持非常完美
-  hosts:
-    '*.qq.com': 223.5.5.5
-    '*.tencent.com': 223.5.5.5
-    '*.apple.com': 223.5.5.5
-    '*.abchina.com': 223.5.5.5           # 农行
-    '*.95599.cn': 223.5.5.5              # 农行
-    '*.95599.com.cn': 223.5.5.5
-    '*.icbc.com.cn': 223.5.5.5           # 工行
-    '*.boc.cn': 223.5.5.5                # 中行
-    '*.ccb.com': 223.5.5.5               # 建行
-    '*.cmbchina.com': 223.5.5.5          # 招行
+hosts:
+  '*.qq.com': 223.5.5.5
+  '*.tencent.com': 223.5.5.5
+  '*.apple.com': 223.5.5.5
+  '*.abchina.com': 223.5.5.5           # 农行
+  '*.95599.cn': 223.5.5.5              # 农行
+  '*.95599.com.cn': 223.5.5.5
+  '*.icbc.com.cn': 223.5.5.5           # 工行
+  '*.boc.cn': 223.5.5.5                # 中行
+  '*.ccb.com': 223.5.5.5               # 建行
+  '*.cmbchina.com': 223.5.5.5          # 招行
 
 profile:
   store-selected: true
