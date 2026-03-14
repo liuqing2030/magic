@@ -26,14 +26,14 @@ proxy-providers:
     interval: 36000
     path: ./provider_a.yaml
     health-check: {enable: true, interval: 3600, url: https://www.gstatic.com/generate_204}
-    
+#精灵学院
   Provider_B:
     type: http
     url: "https://subscription.riolu.link/RioLU/system/api/v1/client/subscribe?token=a5dbbf3cfc45326d3f7721c095fcc0d8"
     interval: 36000
     path: ./provider_b.yaml
     health-check: {enable: true, interval: 3600, url: https://www.gstatic.com/generate_204}
-    
+#oixcloud
   Provider_C:
     type: http
     url: "https://oics.net/api/v3/download.getFile/c883b0f3-3195-4d4e-9e38-a51f897290e0?clash=smart&lv=2%7C3.wav"
