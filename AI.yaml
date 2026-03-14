@@ -24,7 +24,6 @@ payload:
 
   # Anthropic / Claude / DeepMind 相关
   - DOMAIN-SUFFIX,anthropic.com
-  - DOMAIN-SUFFIX,claude.ai
   - DOMAIN-SUFFIX,deepmind.com
 
   # 通用 / 第三方服务
