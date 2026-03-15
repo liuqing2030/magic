@@ -60,16 +60,37 @@ dns:
   # 5. 针对容易误伤的 .com 域名，在 hosts 中强制指定解析（替代 policy 的功能）
   # Stash 对 hosts 的支持非常完美
 hosts:
-  '*.qq.com': 223.5.5.5
-  '*.tencent.com': 223.5.5.5
-  '*.apple.com': 223.5.5.5
-  '*.abchina.com': 223.5.5.5           # 农行
-  '*.95599.cn': 223.5.5.5              # 农行
-  '*.95599.com.cn': 223.5.5.5
-  '*.icbc.com.cn': 223.5.5.5           # 工行
-  '*.boc.cn': 223.5.5.5                # 中行
-  '*.ccb.com': 223.5.5.5               # 建行
-  '*.cmbchina.com': 223.5.5.5          # 招行
+  '*.cn': 223.5.5.5
+  'alicdn.com': 223.5.5.5
+  'alipay.com': 223.5.5.5
+  'aliyun.com': 223.5.5.5
+  'taobao.com': 223.5.5.5
+  'tmall.com': 223.5.5.5
+  
+  # 腾讯系
+  'qq.com': 223.5.5.5
+  'tencent.com': 223.5.5.5
+  'weixin.com': 223.5.5.5
+  'qpic.cn': 223.5.5.5
+  'gtimg.com': 223.5.5.5
+  
+  # 字节系
+  'amemv.com': 223.5.5.5
+  'douyin.com': 223.5.5.5
+  'snssdk.com': 223.5.5.5
+  'toutiao.com': 223.5.5.5
+  
+  # 其他
+  'baidu.com': 223.5.5.5
+  'jd.com': 223.5.5.5
+  'meituan.com': 223.5.5.5
+  'bing.com': 223.5.5.5
+  
+  # 苹果加速
+  'apple.com': 223.5.5.5
+  'icloud.com': 223.5.5.5
+  'mzstatic.com': 223.5.5.5
+  'itunes.com': 223.5.5.5
 
 profile:
   store-selected: true
