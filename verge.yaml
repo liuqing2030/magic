@@ -1,24 +1,28 @@
 mixed-port: 7890
 allow-lan: true
 mode: rule
-log-level: warning
+log-level: debug
 ipv6: false
 
 sniffing:
   enable: true
-  dest-ip: true
-  route-only: true
+  sniff:
+    HTTP:
+      ports: [80]
+    TLS:
+      ports: [443, 8443]
+  override-destination: true  # 用嗅探结果替换 Fake-IP 目标
 
 # 通用 TUN 配置：兼顾 Windows 高性能与 Android 稳定性
 tun:
-  enable: true
+  enable: false
   stack: gvisor
   auto-route: true
   auto-detect-interface: true
   bypass-lan-addresses: true
   dns-hijack:
     - 198.18.0.1:53
-  strict-route: true
+  strict-route: false
   mtu: 1420
 
 dns:
@@ -32,11 +36,14 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
   nameserver:
-    - https://dns.alidns.com/dns-query
+    - https://223.5.5.5/dns-query
     - https://doh.pub/dns-query
+  
   fallback:
-    - https://1.1.1.1/dns-query
-    - https://dns.google/dns-query
+    - 223.5.5.5
+    - 119.29.29.29
+    - tls://dot.pub          # 如果你想国内也用加密，换这个
+    - tls://dns.alidns.com
 
   # 关键修复：确保微软/苹果服务不走 Fake-IP 逻辑，直接由系统握手
   fake-ip-filter:
@@ -52,14 +59,35 @@ dns:
     - '+.office.com'
     - '+.onedrive.com'
     - '+.microsoftonline.com'
+    - 'localhost.ptlogin2.qq.com' # 腾讯系某些登录校验
+    - 'mirror.ghproxy.com'        # 常见代理工具地址
+    - 'router.asus.com'           # 华硕路由器
+    - 'router.login'              # 常用通用路由地址
+    - 'tplinkwifi.net'            # TP-Link
+    - '+.lan'                     # 局域网后缀
+    - '+.local'                   # mDNS 常用后缀
+
+  nameserver-policy:
+    # 国内域名 → 明文
+    "geosite:cn":
+      - 223.5.5.5
+      - 119.29.29.29
+
+    "+.cn,+.bing.com,+.qq.com,+.weixin.qq.com,+.baidu.com,+.taobao.com,+.jd.com,+.bilibili.com,+.163.com,+.weibo.com":
+      - 223.5.5.5
+      - 119.29.29.29
+
+    # 国外域名 → 只走加密
+    "geosite:geolocation-!cn":
+      - https://223.5.5.5/dns-query
+      - https://doh.pub/dns-query
 
   fallback-filter:
     geoip: true
     geoip-code: CN
-    ipcount-range: [223.5.5.5, 119.29.29.29]
     ipcidr:
       - 240.0.0.0/4
-      - 224.0.0.0/4
+      - 0.0.0.0/8
 
 # 严禁在 Hosts 里将域名指向 DNS 节点，仅保留基础回环
 hosts:
@@ -74,9 +102,12 @@ proxy-providers:
     url: "https://api-huacloud.net/sub?target=clash&insert=true&emoji=true&udp=true&clash.doh=true&new_name=true&filename=Flower_Trojan.yaml&url=https%3A%2F%2Fapi.xmancdn.net%2Fosubscribe.php%3Ftoken2%3Dqem4z7rq-425d51bf0botcrpa5qt6gb"
     path: ./proxy_list.yaml
     interval: 3600
+    header:
+      User-Agent:
+        - "clash-meta"
     health-check:
       enable: true
-      url: https://www.gstatic.com/generate_204
+      url: https://cp.cloudflare.com/generate_204
       interval: 300
 
 proxy-groups:
@@ -84,7 +115,7 @@ proxy-groups:
     type: url-test
     filter: "(?i)(US|英|UK|加拿|美|法|德|澳|德|韩|墨|巴|日|台|港|HK)"
     use: [my_subscription]
-    url: https://www.gstatic.com/generate_204
+    url: https://cp.cloudflare.com/generate_204
     interval: 1800
     tolerance: 50
     lazy: true
@@ -93,7 +124,7 @@ proxy-groups:
     type: url-test
     filter: "(?i)(US|英|UK|加拿|美|法|德|澳|德|韩|墨|巴|日|台|港|HK)"
     use: [my_subscription]
-    url: https://www.gstatic.com/generate_204
+    url: https://cp.cloudflare.com/generate_204
     interval: 1800
     tolerance: 50
     lazy: true
@@ -102,7 +133,7 @@ proxy-groups:
     type: url-test
     filter: "(?i)(US|英|UK|加拿|美|法|德|澳|德|韩|墨|巴|日|台)"
     use: [my_subscription]
-    url: https://www.gstatic.com/generate_204
+    url: https://cp.cloudflare.com/generate_204
     interval: 1800
     tolerance: 50
     lazy: true
@@ -110,7 +141,7 @@ proxy-groups:
   - name: 自动最快
     type: url-test
     use: [my_subscription]
-    url: https://www.gstatic.com/generate_204
+    url: https://cp.cloudflare.com/generate_204
     interval: 1800
     tolerance: 50
     lazy: true
@@ -132,25 +163,16 @@ rule-providers:
   Claude: { type: http, behavior: domain, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Claude.yaml', path: ./Rules/Claude, interval: 86400 }
 
 rules:
-  # 1. 优先排除与本地直连
   - PROCESS-NAME,XFRHTXEx.exe,DIRECT
+  - RULE-SET,AdBlock,REJECT,no-resolve
+  - RULE-SET,AdBlock2,REJECT,no-resolve
+  - RULE-SET,Gemini,Gemini       # ← AI 相关提前
+  - RULE-SET,Claude,Claude
+  - RULE-SET,AI,AI
   - DOMAIN-SUFFIX,cn,DIRECT,no-resolve
   - RULE-SET,Apple,DIRECT
   - RULE-SET,Microsoft,DIRECT
-
-  # 2. 广告拦截
-  - RULE-SET,AdBlock,REJECT,no-resolve
-  - RULE-SET,AdBlock2,REJECT,no-resolve
-
-  # 3. 核心代理逻辑
-  - RULE-SET,Gemini,Gemini
-  - RULE-SET,Claude,Claude
-  - RULE-SET,AI,AI  
-
-  # 4. 国内流量兜底
   - RULE-SET,China,DIRECT
   - GEOIP,CN,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT,no-resolve
-
-  # 5. 全局兜底
   - MATCH,自动最快
