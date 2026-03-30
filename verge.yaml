@@ -177,6 +177,16 @@ rules:
   - DOMAIN-SUFFIX,spotify.com,spotify
   - DOMAIN-SUFFIX,spoti.fi,spotify
 
+  # 解决安卓登录失败的关键域名
+  - DOMAIN,cdn.branch.io,spotify
+  - DOMAIN,app-measurement.com,spotify
+  - DOMAIN-SUFFIX,branch.io,spotify
+  
+  # 完善 Spotify 官方域名
+  - DOMAIN-KEYWORD,spotify,美国节点
+  - DOMAIN-SUFFIX,scdn.co,美国节点
+  - DOMAIN-SUFFIX,spoti.fi,美国节点
+
   - PROCESS-NAME,XFRHTXEx.exe,DIRECT
   - RULE-SET,AdBlock,REJECT,no-resolve
   - RULE-SET,AdBlock2,REJECT,no-resolve
