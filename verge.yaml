@@ -180,6 +180,12 @@ rules:
   - RULE-SET,AI,AI
   - DOMAIN-SUFFIX,cn,DIRECT,no-resolve
   - DOMAIN-keyword,spotify,spotify
+  - DOMAIN-suffix,scdn.co,spotify
+  - DOMAIN-suffix,spotify.com,spotify
+  - DOMAIN-suffix,spoti.fi,spotify
+
+
+
 
   - RULE-SET,Apple,DIRECT
   - RULE-SET,Microsoft,DIRECT
