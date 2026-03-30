@@ -176,7 +176,7 @@ rules:
   - DOMAIN-SUFFIX,scdn.co,spotify
   - DOMAIN-SUFFIX,spotify.com,spotify
   - DOMAIN-SUFFIX,spoti.fi,spotify
-
+  - DOMAIN-SUFFIX,recaptcha.net,spotify
   # 解决安卓登录失败的关键域名
   - DOMAIN,cdn.branch.io,spotify
   - DOMAIN,app-measurement.com,spotify
