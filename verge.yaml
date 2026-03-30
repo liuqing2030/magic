@@ -172,10 +172,10 @@ rule-providers:
   Claude: { type: http, behavior: domain, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Claude.yaml', path: ./Rules/Claude, interval: 86400 }
 
 rules:
-  - DOMAIN-keyword,spotify,spotify
-  - DOMAIN-suffix,scdn.co,spotify
-  - DOMAIN-suffix,spotify.com,spotify
-  - DOMAIN-suffix,spoti.fi,spotify
+  - DOMAIN-KEYWORD,spotify,spotify
+  - DOMAIN-SUFFIX,scdn.co,spotify
+  - DOMAIN-SUFFIX,spotify.com,spotify
+  - DOMAIN-SUFFIX,spoti.fi,spotify
 
   - PROCESS-NAME,XFRHTXEx.exe,DIRECT
   - RULE-SET,AdBlock,REJECT,no-resolve
