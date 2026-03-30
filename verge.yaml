@@ -111,6 +111,15 @@ proxy-providers:
       interval: 300
 
 proxy-groups:
+  - name: spotify
+    type: url-test
+    filter: "(?i)(US|美)"
+    use: [my_subscription]
+    url: https://cp.cloudflare.com/generate_204
+    interval: 1800
+    tolerance: 50
+    lazy: true
+
   - name: AI
     type: url-test
     filter: "(?i)(US|英|UK|加拿|美|法|德|澳|德|韩|墨|巴|日|台|港|HK)"
@@ -170,6 +179,8 @@ rules:
   - RULE-SET,Claude,Claude
   - RULE-SET,AI,AI
   - DOMAIN-SUFFIX,cn,DIRECT,no-resolve
+  - DOMAIN-keyword,spotify,spotify
+
   - RULE-SET,Apple,DIRECT
   - RULE-SET,Microsoft,DIRECT
   - RULE-SET,China,DIRECT
