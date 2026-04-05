@@ -15,13 +15,14 @@ sniffing:
 
 # 通用 TUN 配置：兼顾 Windows 高性能与 Android 稳定性
 tun:
-  enable: false
-  stack: gvisor
+  enable: true
+  stack: system
   auto-route: true
   auto-detect-interface: true
   bypass-lan-addresses: true
   dns-hijack:
-    - 198.18.0.1:53
+    - 'any:53' # 必须拦截 53 端口
+    - 'tcp://any:53'
   strict-route: false
   mtu: 1420
 
@@ -54,11 +55,14 @@ dns:
     - 'setup.icloud.com'
     - '+.apple.com'
     - '+.icloud.com'
+    - 'log.microsoft.com'
+    - 'login.live.com'
+    - 'login.microsoftonline.com'
+    - '*.msauth.net'
+    - '+.onedrive.com'
     - '+.microsoft.com'
     - '+.live.com'
     - '+.office.com'
-    - '+.onedrive.com'
-    - '+.microsoftonline.com'
     - 'localhost.ptlogin2.qq.com' # 腾讯系某些登录校验
     - 'mirror.ghproxy.com'        # 常见代理工具地址
     - 'router.asus.com'           # 华硕路由器
@@ -172,6 +176,9 @@ rule-providers:
   Claude: { type: http, behavior: domain, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Claude.yaml', path: ./Rules/Claude, interval: 86400 }
 
 rules:
+  - DOMAIN-KEYWORD,microsoft,DIRECT
+  - DOMAIN-SUFFIX,live.com,DIRECT
+  - DOMAIN-SUFFIX,onedrive.com,DIRECT
   - DOMAIN-KEYWORD,spotify,spotify
   - DOMAIN-SUFFIX,scdn.co,spotify
   - DOMAIN-SUFFIX,spotify.com,spotify
