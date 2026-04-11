@@ -205,4 +205,4 @@ rules:
   - RULE-SET,China,DIRECT
   - GEOIP,CN,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT,no-resolve
-  - MATCH,自动最快
+  - MATCH,DIRECT
