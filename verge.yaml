@@ -103,22 +103,21 @@ profile:
 proxy-providers:
   my_subscription:
     type: http
-    url: "https://api-huacloud.net/sub?target=clash&insert=true&emoji=true&udp=true&clash.doh=true&new_name=true&filename=Flower_Trojan.yaml&url=https%3A%2F%2Fapi.xmancdn.net%2Fosubscribe.php%3Ftoken2%3Dqem4z7rq-425d51bf0botcrpa5qt6gb"
-    path: ./proxy_list.yaml
+    url: "https://api-huacloud.net/sub?target=clash&insert=true&emoji=true&udp=true&clash.doh=true&new_name=true&filename=Flower_SS.yaml&url=https%3A%2F%2Fapi.xmancdn.net%2Fosubscribe.php%3Ftoken2%3Dqddz7jxq-4e3c2a1434ijeouy76z7qo%26sip002%3D1"
+    path: ./proxy_list1.yaml
     interval: 3600
-    header:
-      User-Agent:
-        - "clash-meta"
-    health-check:
-      enable: true
-      url: https://cp.cloudflare.com/generate_204
-      interval: 300
+
+  my_subscription_2:
+    type: http
+    url: "https://api-huacloud.net/sub?target=clash&insert=true&emoji=true&udp=true&clash.doh=true&new_name=true&filename=Flower_Trojan.yaml&url=https%3A%2F%2Fapi.xmancdn.net%2Fosubscribe.php%3Ftoken2%3Dqem4z7rq-425d51bf0botcrpa5qt6gb"
+    path: ./proxy_list2.yaml
+    interval: 3600
 
 proxy-groups:
   - name: spotify
     type: url-test
     filter: "(?i)(US|美)"
-    use: [my_subscription]
+    use: [my_subscription, my_subscription_2]
     url: https://cp.cloudflare.com/generate_204
     interval: 1800
     tolerance: 50
@@ -127,7 +126,7 @@ proxy-groups:
   - name: AI
     type: url-test
     filter: "(?i)(US|英|UK|加拿|美|法|德|澳|德|韩|墨|巴|日|台|港|HK)"
-    use: [my_subscription]
+    use: [my_subscription, my_subscription_2]
     url: https://cp.cloudflare.com/generate_204
     interval: 1800
     tolerance: 50
@@ -136,7 +135,7 @@ proxy-groups:
   - name: Gemini
     type: url-test
     filter: "(?i)(US|英|UK|加拿|美|法|德|澳|德|韩|墨|巴|日|台|港|HK)"
-    use: [my_subscription]
+    use: [my_subscription, my_subscription_2]
     url: https://cp.cloudflare.com/generate_204
     interval: 1800
     tolerance: 50
@@ -145,7 +144,7 @@ proxy-groups:
   - name: Claude
     type: url-test
     filter: "(?i)(US|英|UK|加拿|美|法|德|澳|德|韩|墨|巴|日|台)"
-    use: [my_subscription]
+    use: [my_subscription, my_subscription_2]
     url: https://cp.cloudflare.com/generate_204
     interval: 1800
     tolerance: 50
@@ -153,7 +152,7 @@ proxy-groups:
     
   - name: 自动最快
     type: url-test
-    use: [my_subscription]
+    use: [my_subscription, my_subscription_2]
     url: https://cp.cloudflare.com/generate_204
     interval: 1800
     tolerance: 50
