@@ -178,17 +178,7 @@ rules:
   - DOMAIN-KEYWORD,microsoft,DIRECT
   - DOMAIN-SUFFIX,live.com,DIRECT
   - DOMAIN-SUFFIX,onedrive.com,DIRECT
-  - DOMAIN-KEYWORD,spotify,spotify
-  - DOMAIN-SUFFIX,scdn.co,spotify
-  - DOMAIN-SUFFIX,spotify.com,spotify
-  - DOMAIN-SUFFIX,spoti.fi,spotify
-  - DOMAIN-SUFFIX,recaptcha.net,spotify
-  # 解决安卓登录失败的关键域名
-  - DOMAIN,cdn.branch.io,spotify
-  - DOMAIN,app-measurement.com,spotify
-  - DOMAIN-SUFFIX,branch.io,spotify
-  
-
+  - DOMAIN-SUFFIX,github.com,自动最快
   - PROCESS-NAME,XFRHTXEx.exe,DIRECT
   - RULE-SET,AdBlock,REJECT,no-resolve
   - RULE-SET,AdBlock2,REJECT,no-resolve
