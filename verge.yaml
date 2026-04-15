@@ -109,7 +109,7 @@ proxy-providers:
 
   my_subscription_2:
     type: http
-    url: "https://api-huacloud.net/sub?target=clash&insert=true&emoji=true&udp=true&clash.doh=true&new_name=true&filename=Flower_Trojan.yaml&url=https%3A%2F%2Fapi.xmancdn.net%2Fosubscribe.php%3Ftoken2%3Dqem4z7rq-425d51bf0botcrpa5qt6gb"
+    url: "https://client-api.riolu.link/RioLU/system/api/v1/client/subscribe?token=98c5c846ed8d7dc606269e0daaae57a5"
     path: ./proxy_list2.yaml
     interval: 3600
 
