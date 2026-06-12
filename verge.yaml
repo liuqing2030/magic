@@ -1,15 +1,21 @@
 mixed-port: 7890
 allow-lan: true
+bind-address: '*'
 mode: rule
-log-level: debug
+log-level: info
 ipv6: false
+external-controller: 127.0.0.1:9090
+unified-delay: true
+tcp-concurrent: true
 
 sniffing:
-  enable: false
+  enable: true
   sniff:
     HTTP:
-      ports: [80]
+      ports: [80, 8080-8880]
     TLS:
+      ports: [443, 8443]
+    QUIC:
       ports: [443, 8443]
   override-destination: true  # 用嗅探结果替换 Fake-IP 目标
 
@@ -37,22 +43,46 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
   nameserver:
-    - https://223.5.5.5/dns-query
-    - https://doh.pub/dns-query
-  
-  fallback:
     - 223.5.5.5
     - 119.29.29.29
-    - tls://dot.pub          # 如果你想国内也用加密，换这个
+  
+  fallback:
+    - https://223.5.5.5/dns-query
+    - https://doh.pub/dns-query
+    - tls://dot.pub
     - tls://dns.alidns.com
 
   # 关键修复：确保微软/苹果服务不走 Fake-IP 逻辑，直接由系统握手
   fake-ip-filter:
+    - '*.lan'
+    - '*.local'
+    - '*.localhost'
+    - 'localhost'
+    - 'time.*.com'
+    - 'time.*.gov'
+    - 'time.*.edu.cn'
+    - 'time.*.apple.com'
+    - 'time1.*.com'
+    - 'time2.*.com'
+    - 'time3.*.com'
+    - 'time4.*.com'
+    - 'time5.*.com'
+    - 'time6.*.com'
+    - 'time7.*.com'
+    - 'ntp.*.com'
+    - 'ntp1.*.com'
+    - 'ntp2.*.com'
+    - 'ntp3.*.com'
+    - 'ntp4.*.com'
+    - 'ntp5.*.com'
+    - 'ntp6.*.com'
+    - 'ntp7.*.com'
+    - '+.pool.ntp.org'
     - '+.anthropic.com'
     - '+.claude.ai'
+    - '+.syncthing.net'
     - '*.msftncsi.com'
     - 'msftconnecttest.com'
-    - 'workplacejoin.microsoft.com'
     - '*.msftauth.net'
     - '+.apple.com'
     - '+.icloud.com'
@@ -62,6 +92,7 @@ dns:
     - '+.microsoft.com'
     - '+.live.com'
     - '+.office.com'
+    - '+.office365.com'
     - 'localhost.ptlogin2.qq.com' # 腾讯系某些登录校验
     - 'mirror.ghproxy.com'        # 常见代理工具地址
     - 'router.asus.com'           # 华硕路由器
@@ -76,7 +107,7 @@ dns:
       - 223.5.5.5
       - 119.29.29.29
 
-    "+.cn,+.bing.com,+.qq.com,+.weixin.qq.com,+.baidu.com,+.taobao.com,+.jd.com,+.bilibili.com,+.163.com,+.weibo.com":
+    "+.cn,+.bing.com,+.microsoft.com,+.msftauth.net,+.msauth.net,+.onedrive.com,+.office.com,+.office365.com,+.live.com,+.sharepoint.com,+.syncthing.net,+.qq.com,+.weixin.com,+.baidu.com,+.taobao.com,+.jd.com,+.bilibili.com,+.163.com,+.weibo.com":
       - 223.5.5.5
       - 119.29.29.29
 
@@ -85,9 +116,6 @@ dns:
       - https://223.5.5.5/dns-query
       - https://doh.pub/dns-query
       
-    "+.anthropic.com,+.claude.ai":
-      - 223.5.5.5
-      - 119.29.29.29
 
   fallback-filter:
     geoip: true
@@ -106,13 +134,13 @@ profile:
 proxy-providers:
   my_subscription:
     type: http
-    url: "https://api-huacloud.net/sub?target=clash&insert=true&emoji=true&udp=true&clash.doh=true&new_name=true&filename=Flower_SS.yaml&url=https%3A%2F%2Fapi.xmancdn.net%2Fosubscribe.php%3Ftoken2%3Dqddz7jxq-4e3c2a1434ijeouy76z7qo%26sip002%3D1"
+    url: "https://api-huacloud.net/sub?target=clash&insert=true&emoji=true&udp=true&clash.doh=true&new_name=true&filename=Flower_SS.yaml&url=https%3A%2F%2Fapi.xmancdn.net%2Fosubscribe.php%3Ftoken2%3Dqddz7jxq-a2c5fadb1bo0ra3xbs%26sip002%3D1"
     path: ./proxy_list1.yaml
     interval: 3600
 
   my_subscription_2:
     type: http
-    url: "https://client-api.riolu.link/RioLU/system/api/v1/client/subscribe?token=98c5c846ed8d7dc606269e0daaae57a5"
+    url: "https://api2.riolu01.link/RioLU/system/api/v1/client/subscribe?token=98c5c846ed8d7dc606269e0daaae57a5"
     path: ./proxy_list2.yaml
     interval: 3600
 
@@ -137,7 +165,7 @@ proxy-groups:
 
   - name: Claude
     type: url-test
-    filter: "(?i)(US|英|UK|加拿|美|法|德|澳|德|韩|墨|巴|日|台)"
+    filter: "(?i)(US|英|UK|加拿|美|法|德|澳|德|韩|墨|巴|日|台|印尼)"
     use: [my_subscription, my_subscription_2]
     url: https://cp.cloudflare.com/generate_204
     interval: 1800
@@ -158,6 +186,7 @@ proxy-groups:
       - DIRECT
       - 自动最快
 
+
 rule-providers:
   AdBlock: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/AdBlock.yaml', path: ./Rules/AdBlock, interval: 864000 }
   Apple: { type: http, behavior: classical, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Apple.yaml', path: ./Rules/Apple, interval: 864000 }
@@ -169,14 +198,18 @@ rule-providers:
   Claude: { type: http, behavior: domain, url: 'https://raw.githubusercontent.com/liuqing2030/magic/refs/heads/main/Claude.yaml', path: ./Rules/Claude, interval: 864000 }
 
 rules:
-  - DOMAIN-SUFFIX,claude.ai,Claude,no-resolve
-  - DOMAIN-SUFFIX,anthropic.com,Claude,no-resolve
   - RULE-SET,Claude,Claude
+  - DOMAIN-SUFFIX,syncthing.net,DIRECT,no-resolve
   - DOMAIN-SUFFIX,githubusercontent.com,自动最快
   - DOMAIN-SUFFIX,github.com,自动最快
+  - DOMAIN-SUFFIX,api-flowercloud.com,自动最快
+
   - PROCESS-NAME,XFRHTXEx.exe,DIRECT
   - RULE-SET,AdBlock,REJECT,no-resolve
   - RULE-SET,AdBlock2,REJECT,no-resolve
+  - RULE-SET,Reject,REJECT,no-resolve
+  - RULE-SET,WeChat,DIRECT
+  - RULE-SET,Direct,DIRECT
   - RULE-SET,Gemini,Gemini       # ← AI 相关提前
   - RULE-SET,AI,AI
   - DOMAIN-SUFFIX,cn,DIRECT,no-resolve
@@ -184,6 +217,8 @@ rules:
   - RULE-SET,Apple,DIRECT
   - RULE-SET,Microsoft,DIRECT
   - RULE-SET,China,DIRECT
+  - RULE-SET,Proxy,自动最快
   - GEOIP,CN,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT,no-resolve
   - MATCH,DIRECT
+
